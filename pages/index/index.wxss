@@ -1,0 +1,243 @@
+/**index.wxss**/
+page {
+  background-color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* 固定状态栏 */
+.fixed-status-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: #ffffff;
+}
+
+/* 内容容器 - 为了让内容在固定状态栏下方正确显示 */
+.content-container {
+  padding-top: 0; /* 将根据状态栏高度动态设置 */
+}
+
+/* 自定义导航栏 */
+.custom-nav {
+  height: 90rpx;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+  padding-top: env(safe-area-inset-top);
+  position: relative;
+}
+
+.custom-nav .title {
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+/* 轮播图样式 */
+.banner-swiper {
+  width: 100%;
+  height: 520rpx; /* 减小高度 */
+}
+
+.banner-header {
+  position: relative;
+  width: 100%;
+  height: 100px;
+}
+
+.swiper-image {
+  width: 100%;
+  height: auto;
+}
+
+.banner-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.logo-text {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.logo-en {
+  font-size: 24rpx;
+  margin-bottom: 30rpx;
+}
+
+.organizations {
+  font-size: 20rpx;
+  line-height: 1.6;
+}
+
+/* 章节标题样式 */
+.section-title {
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+.title-line {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+/* 服务项目网格 */
+.service-grid, .course-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 30rpx;
+}
+
+/* 专门为平台项目设置样式 */
+.platform-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 30rpx;
+}
+
+/* 岗位百科新样式 - 改为两列布局 */
+.position-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 25rpx; /* 减小外边距，给每个项目更多空间 */
+  box-sizing: border-box;
+}
+
+.platform-item {
+  width: 22%; /* 四列布局 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.service-item, .course-item {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+/* 岗位项目新样式 - 文字在左居中，图标在右侧 */
+.position-item {
+  width: 48%; /* 调整为刚好两列 */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; /* 整体居中 */
+  background-color: #f8f8f8;
+  padding: 25rpx 20rpx; /* 增加内边距使行间距更大 */
+  margin-bottom: 20rpx; /* 增加底部外边距增加行间距 */
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.service-icon, .platform-icon, .course-icon {
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx; /* 方形圆角 */
+  padding: 15rpx;
+  box-sizing: border-box;
+}
+
+/* 岗位图标新样式 */
+.position-icon {
+  width: 60rpx; /* 增大图标尺寸 */
+  height: 60rpx; /* 增大图标尺寸 */
+  margin-left: 15rpx; /* 增加图标和文字之间的间距 */
+  border-radius: 10rpx;
+  padding: 8rpx;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  flex-shrink: 0; /* 防止图标被压缩 */
+}
+
+.service-item text, .platform-item text, .course-item text {
+  font-size: 26rpx;
+  color: #333;
+  text-align: center;
+}
+
+/* 岗位文字新样式 */
+.position-item text {
+  font-size: 30rpx; /* 增大字号以增强可读性 */
+  color: #333;
+  text-align: center; /* 文本居中 */
+  margin: 0 auto; /* 自动外边距辅助居中 */
+  font-weight: 500; /* 稍微加粗 */
+  width: auto; /* 自适应宽度 */
+  flex-grow: 0; /* 不再拉伸 */
+}
+
+/* 服务内容样式 */
+.service-icon {
+  background-color: #eaf6f6;
+}
+
+/* 平台项目样式 */
+.platform-icon {
+  background-color: #0051b4;
+}
+
+/* 课程样式 */
+.course-icon {
+  border: 1rpx solid #e5e5e5;
+  background-color: #f9f9f9;
+}
+
+/* 平台介绍 */
+.platform-intro {
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  text-align: justify;
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.mid-banner-swiper {
+  height: 440rpx;
+  margin: 0 30rpx 30rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+/* 适配不同屏幕尺寸 */
+@media screen and (max-width: 375px) {
+  .service-item, .course-item {
+    width: 45%;
+  }
+  
+  .platform-item {
+    width: 23%;
+  }
+  
+  .position-item {
+    width: 48%; /* 保持两列布局 */
+  }
+}

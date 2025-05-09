@@ -1,0 +1,29 @@
+<!--detail.wxml-->
+<view class="detail-container">
+  <view class="detail-header">
+    <image class="detail-icon" src="{{icon}}" mode="aspectFit"></image>
+    <view class="header-text">
+      <view class="detail-name">{{name}}</view>
+      <view class="detail-type">{{type}}</view>
+    </view>
+  </view>
+  
+  <view class="detail-section">
+    <view class="section-title">详细介绍</view>
+    <view class="detail-description">{{description}}</view>
+  </view>
+  
+  <view class="detail-section">
+    <view class="section-title">详细信息</view>
+    <view class="detail-info-list">
+      <view class="info-item" wx:for="{{details}}" wx:key="title">
+        <view class="info-title">{{item.title}}</view>
+        <view class="info-content">{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="home-button-container">
+    <button class="home-button" bindtap="goToHome">返回首页</button>
+  </view>
+</view> 
