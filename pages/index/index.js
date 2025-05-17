@@ -15,104 +15,117 @@ Page({
     introductionBanners: [], // 平台介绍轮播图数据
     
     // 服务项目数据
-    serviceItems: [
-      { icon: iconUrls.integrated_training, name: '医美综合培训' },
-      { icon: iconUrls.specialized_training, name: '医美专科培训' },
-      { icon: iconUrls.career_planning, name: '职业生涯规划' },
-      { icon: iconUrls.clinical_orientation, name: '临床定向委培' },
-      { icon: iconUrls.job_guidance, name: '临床就业指导' },
-      { icon: iconUrls.talent_exchange, name: '人才交流活动' }
-    ],
+    serviceItems: [],
     
     // 平台项目数据
-    platformItems: [
-      { icon: iconUrls.clinical_hospital, name: '临床院校' },
-      { icon: iconUrls.medical_institution, name: '医美机构' },
-      { icon: iconUrls.medical_position, name: '医美岗位' },
-      { icon: iconUrls.medical_course, name: '医美课程' },
-      { icon: iconUrls.teacher_team, name: '师资队伍' },
-      { icon: iconUrls.student, name: '毕业生' },
-      { icon: iconUrls.excellent_student, name: '优秀学员' },
-      { icon: iconUrls.ability_certification, name: '能力认证' }
-    ],
+    platformItems: [],
     
     // 课程数据
-    courseItems: [
-      { icon: iconUrls.anti_aging, name: '抗衰整形' },
-      { icon: iconUrls.nose_surgery, name: '鼻整形' },
-      { icon: iconUrls.fat_sculpting, name: '脂肪整形' },
-      { icon: iconUrls.consultant, name: '咨询师' },
-      { icon: iconUrls.doctor_ip, name: '医生IP' },
-      { icon: iconUrls.career_guidance, name: '就业指导' }
-    ],
+    courseItems: [],
     
     // 岗位数据
-    positionItems: [
-      { icon: iconUrls.doctor_tech, name: '医生技术岗' },
-      { icon: iconUrls.sales_consultant, name: '销售咨询岗' },
-      { icon: iconUrls.service_support, name: '服务支持岗' },
-      { icon: iconUrls.operations, name: '运营营销岗' },
-      { icon: iconUrls.admin, name: '行政职能类' },
-      { icon: iconUrls.other, name: '其他延伸岗' }
-    ]
+    positionItems: []
   },
   
   onLoad() {
-    // 获取状态栏高度
-    const systemInfo = wx.getSystemInfoSync();
-    this.setData({
-      statusBarHeight: systemInfo.statusBarHeight
-    });
+    // 获取状态栏高度 - 使用新的API替代已弃用的wx.getSystemInfoSync
+    try {
+      const windowInfo = wx.getWindowInfo();
+      this.setData({
+        statusBarHeight: windowInfo.statusBarHeight
+      });
+    } catch (e) {
+      console.error('获取窗口信息失败', e);
+    }
     
-    // 获取轮播图数据
-    this.fetchBanners();
-    this.fetchIntroductionBanners();
+    // 获取首页所有数据
+    this.fetchAllData();
     
     console.log('首页加载完成');
   },
   
-  // 获取顶部轮播图数据
-  fetchBanners() {
-    wx.request({
-      url: 'http://localhost:8080/index/banners',
-      method: 'GET',
-      success: (res) => {
-        if (res.data && res.data.code === 200) {
-          this.setData({
-            banners: res.data.data
-          });
-        }
-      },
-      fail: (err) => {
-        console.error('获取顶部轮播图失败', err);
-      }
+  // 获取首页所有数据
+  fetchAllData() {
+    wx.showLoading({
+      title: '加载中...',
     });
-  },
-  
-  // 获取平台介绍轮播图数据
-  fetchIntroductionBanners() {
+    
     wx.request({
-      url: 'http://localhost:8080/index/introduction-banners',
+      url: 'http://localhost:8080/index/all',
       method: 'GET',
       success: (res) => {
-        if (res.data && res.data.code === 200) {
-          this.setData({
-            introductionBanners: res.data.data
+        wx.hideLoading();
+        
+        if (res.data && res.data.code === '00000' && res.data.data) {
+          const data = res.data.data;
+          
+          // 设置顶部轮播图数据
+          if (Array.isArray(data.topBanners)) {
+            this.setData({
+              banners: data.topBanners
+            });
+          }
+          
+          // 设置平台介绍轮播图数据
+          if (Array.isArray(data.introductionBanners)) {
+            this.setData({
+              introductionBanners: data.introductionBanners
+            });
+          }
+          
+          // 设置服务项目数据
+          if (Array.isArray(data.services)) {
+            this.setData({
+              serviceItems: data.services
+            });
+          }
+          
+          // 设置平台项目数据
+          if (Array.isArray(data.platforms)) {
+            this.setData({
+              platformItems: data.platforms
+            });
+          }
+          
+          // 设置课程数据
+          if (Array.isArray(data.courses)) {
+            this.setData({
+              courseItems: data.courses
+            });
+          }
+          
+          // 设置岗位数据
+          if (Array.isArray(data.jobs)) {
+            this.setData({
+              positionItems: data.jobs
+            });
+          }
+        } else {
+          wx.showToast({
+            title: '数据加载失败',
+            icon: 'none'
           });
         }
       },
       fail: (err) => {
-        console.error('获取平台介绍轮播图失败', err);
+        wx.hideLoading();
+        console.error('获取首页数据失败', err);
+        wx.showToast({
+          title: '网络请求失败',
+          icon: 'none'
+        });
       }
     });
   },
   
   // 轮播图切换事件
   swiperChange(e) {
-    const { current } = e.detail;
-    this.setData({
-      currentSwiper: current
-    });
+    if (e && e.detail) {
+      const { current } = e.detail;
+      this.setData({
+        currentSwiper: current || 0
+      });
+    }
   },
   
   // 导航到详情页
@@ -152,8 +165,15 @@ Page({
         break;
     }
     
+    // 处理icon路径，如果是相对路径，需要转换为完整路径
+    let iconUrl = itemData.icon;
+    if (iconUrl && !iconUrl.startsWith('http')) {
+      // 假设图标存储在服务器的/images/目录下
+      iconUrl = `http://localhost:8080/images/${iconUrl}`;
+    }
+    
     wx.navigateTo({
-      url: `/pages/detail/detail?type=${typeText}&name=${itemData.name}&icon=${encodeURIComponent(itemData.icon)}`
+      url: `/pages/detail/detail?type=${typeText}&name=${itemData.name}&icon=${encodeURIComponent(iconUrl)}`
     });
   }
 })

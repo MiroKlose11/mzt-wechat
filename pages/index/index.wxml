@@ -2,8 +2,8 @@
 <view class="fixed-status-bar" style="height: {{statusBarHeight}}px;"></view>
 <view class="content-container">
 
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="banner-swiper" bindchange="swiperChange">
-  <swiper-item wx:for="{{banners}}" wx:key="id">
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="banner-swiper" bindchange="swiperChange" circular="{{true}}">
+  <swiper-item wx:for="{{banners}}" wx:key="index">
     <image src="{{item.imageUrl}}" mode="widthFix" class="swiper-image" style="position: relative; left: 0rpx; top: 98rpx; height: 430rpx; display: inline-block; box-sizing: border-box"></image>
   </swiper-item>
 </swiper>
@@ -13,8 +13,8 @@
 </view>
 
 <view class="service-grid">
-  <view class="service-item" wx:for="{{serviceItems}}" wx:key="name" bindtap="navigateToDetail" data-type="service" data-index="{{index}}">
-    <image src="{{item.icon}}" class="service-icon"></image>
+  <view class="service-item" wx:for="{{serviceItems}}" wx:key="id" bindtap="navigateToDetail" data-type="service" data-index="{{index}}">
+    <image src="{{item.icon.startsWith('http') ? item.icon : 'http://localhost:8080/images/' + item.icon}}" class="service-icon"></image>
     <text>{{item.name}}</text>
   </view>
 </view>
@@ -24,8 +24,8 @@
 </view>
 
 <view class="platform-grid">
-  <view class="platform-item" wx:for="{{platformItems}}" wx:key="name" bindtap="navigateToDetail" data-type="platform" data-index="{{index}}">
-    <image src="{{item.icon}}" class="platform-icon"></image>
+  <view class="platform-item" wx:for="{{platformItems}}" wx:key="id" bindtap="navigateToDetail" data-type="platform" data-index="{{index}}">
+    <image src="{{item.icon.startsWith('http') ? item.icon : 'http://localhost:8080/images/' + item.icon}}" class="platform-icon"></image>
     <text>{{item.name}}</text>
   </view>
 </view>
@@ -35,8 +35,8 @@
 </view>
 
 <view class="course-grid">
-  <view class="course-item" wx:for="{{courseItems}}" wx:key="name" bindtap="navigateToDetail" data-type="course" data-index="{{index}}">
-    <image src="{{item.icon}}" class="course-icon"></image>
+  <view class="course-item" wx:for="{{courseItems}}" wx:key="id" bindtap="navigateToDetail" data-type="course" data-index="{{index}}">
+    <image src="{{item.icon.startsWith('http') ? item.icon : 'http://localhost:8080/images/' + item.icon}}" class="course-icon"></image>
     <text>{{item.name}}</text>
   </view>
 </view>
@@ -49,8 +49,8 @@
   <text>美职通，作为首个全国医美执业规范与职业发展平台，主要致力于医美行业职业发展，包括人才测评、能力认证、职业转型、职业生涯规划、IP打造、教育培训、就业指导、定向委培、劳务派遣等业务。</text>
 </view>
 
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="mid-banner-swiper" bindchange="swiperChange">
-  <swiper-item wx:for="{{introductionBanners}}" wx:key="id">
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="mid-banner-swiper" bindchange="swiperChange" circular="{{true}}">
+  <swiper-item wx:for="{{introductionBanners}}" wx:key="index">
     <image src="{{item.imageUrl}}" mode="widthFix" class="swiper-image"></image>
   </swiper-item>
 </swiper>
@@ -60,9 +60,9 @@
 </view>
 
 <view class="position-grid">
-  <view class="position-item" wx:for="{{positionItems}}" wx:key="name" bindtap="navigateToDetail" data-type="position" data-index="{{index}}">
+  <view class="position-item" wx:for="{{positionItems}}" wx:key="id" bindtap="navigateToDetail" data-type="position" data-index="{{index}}">
     <text>{{item.name}}</text>
-    <image src="{{item.icon}}" class="position-icon"></image>
+    <image src="{{item.icon.startsWith('http') ? item.icon : 'http://localhost:8080/images/' + item.icon}}" class="position-icon"></image>
   </view>
 </view>
 
