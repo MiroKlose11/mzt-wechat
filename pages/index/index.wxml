@@ -14,7 +14,7 @@
 
 <view class="service-grid">
   <view class="service-item" wx:for="{{serviceItems}}" wx:key="id" bindtap="navigateToDetail" data-type="service" data-index="{{index}}">
-    <image src="{{item.icon.startsWith('http') ? item.icon : 'http://localhost:8080/images/' + item.icon}}" class="service-icon"></image>
+    <image src="{{item.icon}}" class="service-icon"></image>
     <text>{{item.name}}</text>
   </view>
 </view>
@@ -25,7 +25,7 @@
 
 <view class="platform-grid">
   <view class="platform-item" wx:for="{{platformItems}}" wx:key="id" bindtap="navigateToDetail" data-type="platform" data-index="{{index}}">
-    <image src="{{item.icon.startsWith('http') ? item.icon : 'http://localhost:8080/images/' + item.icon}}" class="platform-icon"></image>
+    <image src="{{item.icon}}" class="platform-icon"></image>
     <text>{{item.name}}</text>
   </view>
 </view>
@@ -36,7 +36,7 @@
 
 <view class="course-grid">
   <view class="course-item" wx:for="{{courseItems}}" wx:key="id" bindtap="navigateToDetail" data-type="course" data-index="{{index}}">
-    <image src="{{item.icon.startsWith('http') ? item.icon : 'http://localhost:8080/images/' + item.icon}}" class="course-icon"></image>
+    <image src="{{item.icon}}" class="course-icon"></image>
     <text>{{item.name}}</text>
   </view>
 </view>
@@ -62,7 +62,7 @@
 <view class="position-grid">
   <view class="position-item" wx:for="{{positionItems}}" wx:key="id" bindtap="navigateToDetail" data-type="position" data-index="{{index}}">
     <text>{{item.name}}</text>
-    <image src="{{item.icon.startsWith('http') ? item.icon : 'http://localhost:8080/images/' + item.icon}}" class="position-icon"></image>
+    <image src="{{item.icon}}" class="position-icon"></image>
   </view>
 </view>
 
