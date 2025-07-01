@@ -1,5 +1,8 @@
 {
-  "usingComponents": {
-  },
-  "navigationStyle": "custom"
+  "navigationBarTitleText": "美链体",
+  "navigationBarBackgroundColor": "#4B99FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {},
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#4b99ff"
 }

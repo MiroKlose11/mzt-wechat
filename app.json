@@ -5,8 +5,12 @@
     "pages/logs/logs"
   ],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarBackgroundColor": "#ffffff"
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4b99ff",
+    "navigationBarTitleText": "美链体",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#4b99ff"
   },
   "style": "v2",
   "componentFramework": "glass-easel",

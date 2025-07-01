@@ -1,69 +1,587 @@
 <!--index.wxml-->
-<view class="fixed-status-bar" style="height: {{statusBarHeight}}px;"></view>
-<view class="content-container">
+<view class="page-container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-left">
+      <text>人员</text>
+      <text class="arrow">▼</text>
+    </view>
+    <view class="search-input">
+      <icon type="search" size="14" color="#999999"></icon>
+      <text class="placeholder">请输入关键词</text>
+    </view>
+    <view class="search-btn">搜索</view>
+  </view>
 
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="banner-swiper" bindchange="swiperChange" circular="{{true}}">
-  <swiper-item wx:for="{{banners}}" wx:key="index">
-    <image src="{{item.imageUrl}}" mode="widthFix" class="swiper-image" style="position: relative; left: 0rpx; top: 98rpx; height: 430rpx; display: inline-block; box-sizing: border-box"></image>
+  <!-- 主导航和图标区域 -->
+  <view class="main-nav">
+    <view class="nav-item {{currentNav === 'home' ? 'active' : ''}}" data-nav="home" bindtap="switchMainNav">首页</view>
+    <view class="nav-item {{currentNav === 'news' ? 'active' : ''}}" data-nav="news" bindtap="switchMainNav">新闻资讯</view>
+    <view class="nav-item {{currentNav === 'about' ? 'active' : ''}}" data-nav="about" bindtap="switchMainNav">了解研究院</view>
+    <view class="nav-item {{currentNav === 'business' ? 'active' : ''}}" data-nav="business" bindtap="switchMainNav">商务合作</view>
+  </view>
+  <view class="nav-divider"></view>
+  <view class="white-container">
+    <!-- 功能图标区域 -->
+    <view class="icon-grid">
+      <view class="icon-row">
+        <view class="icon-item">
+          <image class="grid-icon" src="/images/icons/person.png"></image>
+          <text>人员链</text>
+        </view>
+        <view class="icon-item">
+          <image class="grid-icon" src="/images/icons/position.png"></image>
+          <text>岗位链</text>
+        </view>
+        <view class="icon-item">
+          <image class="grid-icon" src="/images/icons/machine.png"></image>
+          <text>械科链</text>
+        </view>
+        <view class="icon-item">
+          <image class="grid-icon" src="/images/icons/academic.png"></image>
+          <text>学术链</text>
+        </view>
+        <view class="icon-item">
+          <image class="grid-icon" src="/images/icons/tech.png"></image>
+          <text>技术链</text>
+        </view>
+      </view>
+      <view class="icon-row">
+        <view class="icon-item">
+          <image class="grid-icon" src="/images/icons/course.png"></image>
+          <text>课程链</text>
+        </view>
+        <view class="icon-item">
+          <image class="grid-icon" src="/images/icons/org.png"></image>
+          <text>机构链</text>
+        </view>
+        <view class="icon-item">
+          <image class="grid-icon" src="/images/icons/research.png"></image>
+          <text>科研链</text>
+        </view>
+        <view class="icon-item">
+          <image class="grid-icon" src="/images/icons/project.png"></image>
+          <text>品项链</text>
+        </view>
+        <view class="icon-item">
+          <image class="grid-icon" src="/images/icons/smart.png"></image>
+          <text>智库链</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <block wx:if="{{currentNav === 'home'}}">
+    <!-- 公司活动横幅 -->
+    <swiper class="banner" indicator-dots="{{false}}" autoplay="{{true}}" interval="3000" duration="500" circular="{{true}}" bindchange="onSwiperChange">
+      <swiper-item>
+        <view class="banner-content">
+          <view class="banner-text">
+            <text class="banner-title">公司成立5周年庆祝大典</text>
+            <text class="banner-date">活动时间: 09-01 10:00</text>
+          </view>
+          <view class="banner-btn">了解更多</view>
+        </view>
+        <image class="banner-building" src="/images/banner/building.png"></image>
+        <image class="banner-number" src="/images/banner/number5.png"></image>
+      </swiper-item>
+      
+      <swiper-item>
+        <view class="banner-content">
+          <view class="banner-text">
+            <text class="banner-title">美链体高级研修会</text>
+            <text class="banner-date">活动时间: 09-15 14:30</text>
+          </view>
+          <view class="banner-btn">立即报名</view>
+        </view>
+      </swiper-item>
+      
+      <swiper-item>
+        <view class="banner-content">
+          <view class="banner-text">
+            <text class="banner-title">2023医学美容技术峰会</text>
+            <text class="banner-date">活动时间: 10-05 09:00</text>
+          </view>
+          <view class="banner-btn">查看详情</view>
+        </view>
   </swiper-item>
 </swiper>
 
+    <!-- 轮播指示点 -->
+    <view class="banner-indicator">
+      <view class="dot {{currentBanner === 0 ? 'active' : ''}}"></view>
+      <view class="dot {{currentBanner === 1 ? 'active' : ''}}"></view>
+      <view class="dot {{currentBanner === 2 ? 'active' : ''}}"></view>
+    </view>
+
+    <!-- 快捷功能区 -->
+    <view class="quick-functions">
+      <view class="function-item">
+        <view class="function-icon-bg red">
+          <image class="function-icon" src="/images/functions/job.png"></image>
+        </view>
+        <text>美职通</text>
+      </view>
+      <view class="function-item">
+        <view class="function-icon-bg blue">
+          <image class="function-icon" src="/images/functions/doctor.png"></image>
+        </view>
+        <text>鼻大师</text>
+      </view>
+      <view class="function-item">
+        <view class="function-icon-bg green">
+          <image class="function-icon" src="/images/functions/beauty.png"></image>
+        </view>
+        <text>针美大师</text>
+      </view>
+      <view class="function-item">
+        <view class="function-icon-bg purple">
+          <image class="function-icon" src="/images/functions/agent.png"></image>
+        </view>
+        <text>美鼻时代</text>
+      </view>
+      <view class="function-item">
+        <view class="function-icon-bg green-dark">
+          <image class="function-icon" src="/images/functions/lab.png"></image>
+        </view>
+        <text>奥秘龄</text>
+      </view>
+    </view>
+
+    <!-- 精品课程区域 -->
+    <view class="section">
+      <view class="section-header">
 <view class="section-title">
-  <view class="title-line">- 我们的服务项目 -</view>
+          <image class="section-icon" src="/images/icons/course_blue.png"></image>
+          <text>精品课程</text>
+        </view>
+        <view class="more">更多</view>
 </view>
 
-<view class="service-grid">
-  <view class="service-item" wx:for="{{serviceItems}}" wx:key="id" bindtap="navigateToDetail" data-type="service" data-index="{{index}}">
-    <image src="{{item.icon}}" class="service-icon"></image>
-    <text>{{item.name}}</text>
+      <view class="course-grid">
+        <view class="course-item">
+          <view class="course-label">通用内训课</view>
+          <view class="course-info">
+            <view class="course-name">营养保健师</view>
+            <view class="course-desc">健康服务专业资格证培训课程</view>
+            <view class="course-level-tags">
+              <view class="level-tag">初级</view>
+              <view class="level-tag">中级</view>
+              <view class="level-tag">高级</view>
+            </view>
   </view>
 </view>
 
+        <view class="course-item">
+          <view class="course-label">专业认证课</view>
+          <view class="course-info">
+            <view class="course-name">心理咨询师·初级</view>
+            <view class="course-desc">专业技能授权培训课程</view>
+            <view class="course-level-tags">
+              <view class="level-tag">初级</view>
+              <view class="level-tag">中级</view>
+              <view class="level-tag">高级</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 精英风采区域 -->
+    <view class="section">
+      <view class="section-header">
 <view class="section-title">
-  <view class="title-line">- 执业规范与专科化发展平台 -</view>
+          <image class="section-icon" src="/images/icons/elite_blue.png"></image>
+          <text>精英风采</text>
+        </view>
+        <view class="more">更多</view>
 </view>
 
-<view class="platform-grid">
-  <view class="platform-item" wx:for="{{platformItems}}" wx:key="id" bindtap="navigateToDetail" data-type="platform" data-index="{{index}}">
-    <image src="{{item.icon}}" class="platform-icon"></image>
-    <text>{{item.name}}</text>
+      <view class="elite-filter">
+        <view class="filter-item active">医生</view>
+        <view class="filter-item">咨询师</view>
+        <view class="filter-item">麻醉师</view>
+        <view class="filter-item">企划运营</view>
+        <view class="filter-item">更多职业</view>
+      </view>
+
+      <view class="elite-list">
+        <view class="elite-row">
+          <view class="elite-item">
+            <image class="elite-avatar" src="/images/avatars/doctor1.png"></image>
+            <text class="elite-name">曾高</text>
+          </view>
+          <view class="elite-item">
+            <image class="elite-avatar" src="/images/avatars/doctor2.png"></image>
+            <text class="elite-name">罗德丰</text>
+          </view>
+          <view class="elite-item">
+            <image class="elite-avatar" src="/images/avatars/doctor3.png"></image>
+            <text class="elite-name">周柯</text>
+          </view>
+          <view class="elite-item">
+            <image class="elite-avatar" src="/images/avatars/doctor4.png"></image>
+            <text class="elite-name">王旭明</text>
+          </view>
+        </view>
+        <view class="elite-row">
+          <view class="elite-item">
+            <image class="elite-avatar" src="/images/avatars/doctor5.png"></image>
+            <text class="elite-name">戴传昌</text>
+          </view>
+          <view class="elite-item">
+            <image class="elite-avatar" src="/images/avatars/doctor6.png"></image>
+            <text class="elite-name">白向有</text>
+          </view>
+          <view class="elite-item">
+            <image class="elite-avatar" src="/images/avatars/doctor7.png"></image>
+            <text class="elite-name">谭书友</text>
+          </view>
+          <view class="elite-item">
+            <image class="elite-avatar" src="/images/avatars/doctor8.png"></image>
+            <text class="elite-name">杜亚东</text>
+          </view>
+        </view>
   </view>
 </view>
 
+    <!-- 学术活动区域 -->
+    <view class="section">
+      <view class="section-header">
 <view class="section-title">
-  <view class="title-line">- 主推课程 -</view>
+          <image class="section-icon" src="/images/icons/academic_blue.png"></image>
+          <text>学术活动</text>
+        </view>
+        <view class="more">更多</view>
+      </view>
+
+      <view class="news-list">
+        <view class="news-item">
+          <image class="news-image" src="/images/news/conference.jpg"></image>
+          <view class="news-content">
+            <text class="news-title">第二届长安美调西部医学整形美容高峰论坛将于11月22日在西安召开</text>
+            <text class="news-time">09-06 14:36</text>
+          </view>
 </view>
 
-<view class="course-grid">
-  <view class="course-item" wx:for="{{courseItems}}" wx:key="id" bindtap="navigateToDetail" data-type="course" data-index="{{index}}">
-    <image src="{{item.icon}}" class="course-icon"></image>
-    <text>{{item.name}}</text>
+        <view class="news-item">
+          <image class="news-image" src="/images/news/midautumn.jpg"></image>
+          <view class="news-content">
+            <text class="news-title">世界内镜医师协会中国整形美容西部联盟年会将于12月在成都召开</text>
+            <text class="news-time">09-06 13:58</text>
+          </view>
+        </view>
   </view>
 </view>
 
+    <!-- 好碰优品区域 -->
+    <view class="section">
+      <view class="section-header">
 <view class="section-title">
-  <view class="title-line">- 美职通平台介绍 -</view>
+          <image class="section-icon" src="/images/icons/goods_blue.png"></image>
+          <text>好碰优品</text>
+        </view>
+        <view class="more">更多</view>
 </view>
 
-<view class="platform-intro">
-  <text>美职通，作为首个全国医美执业规范与职业发展平台，主要致力于医美行业职业发展，包括人才测评、能力认证、职业转型、职业生涯规划、IP打造、教育培训、就业指导、定向委培、劳务派遣等业务。</text>
+      <view class="goods-grid">
+        <view class="goods-item large">
+          <view class="new-tag">新</view>
+          <text class="goods-title">VR展示</text>
+          <text class="goods-subtitle">预览效果图</text>
+          <image class="goods-image" src="/images/goods/vr.png"></image>
 </view>
 
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="mid-banner-swiper" bindchange="swiperChange" circular="{{true}}">
-  <swiper-item wx:for="{{introductionBanners}}" wx:key="index">
-    <image src="{{item.imageUrl}}" mode="widthFix" class="swiper-image"></image>
-  </swiper-item>
-</swiper>
+        <view class="goods-column">
+          <view class="goods-item small">
+            <text class="goods-title">今日爆品</text>
+            <text class="goods-subtitle">每日惊喜享不停</text>
+            <image class="goods-image" src="/images/goods/daily.png"></image>
+          </view>
 
+          <view class="goods-row">
+            <view class="goods-item mini">
+              <text class="goods-title">金融服务</text>
+              <image class="goods-image" src="/images/goods/finance.png"></image>
+            </view>
+
+            <view class="goods-item mini">
+              <text class="goods-title">工地直播</text>
+              <image class="goods-image" src="/images/goods/site.png"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="banner-row">
+        <image class="banner-ad" src="/images/goods/ad1.jpg"></image>
+        <image class="banner-ad" src="/images/goods/ad2.jpg"></image>
+      </view>
+    </view>
+
+    <!-- 合作机构区域 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">
+          <image class="section-icon" src="/images/icons/partner_blue.png"></image>
+          <text>合作机构</text>
+        </view>
+        <view class="more">更多</view>
+      </view>
+
+      <view class="live-banner">
+        <view class="live-tag">开播：</view>
+        <image class="live-image" src="/images/partners/live.jpg"></image>
+      </view>
+
+      <view class="partner-products">
+        <view class="product-item">
+          <image class="product-image" src="/images/products/fruit.jpg"></image>
+          <text class="product-name">山东烟台黄金奶油油桃</text>
+        </view>
+        <view class="product-item">
+          <image class="product-image" src="/images/products/mask.jpg"></image>
+          <text class="product-name">【10支装】日式马</text>
+        </view>
+        <view class="product-item">
+          <image class="product-image" src="/images/products/cream.jpg"></image>
+          <text class="product-name">祛黑眼圈！淡化细纹</text>
+        </view>
+        <view class="product-item action">
+          <text class="action-text">我要</text>
+          <text class="action-text">上榜</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 医生集团区域 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">
+          <image class="section-icon" src="/images/icons/doctor_group.png"></image>
+          <text>医生集团</text>
+        </view>
+        <view class="more">更多</view>
+      </view>
+
+      <view class="doctor-groups">
+        <view class="doctor-group-item">
+          <image class="doctor-group-image" src="/images/doctor-groups/group1.png"></image>
+          <view class="doctor-group-name">
+            <text class="group-name-main">鱼脂道</text>
+            <text class="group-name-sub">医生集团</text>
+          </view>
+        </view>
+        <view class="doctor-group-item">
+          <image class="doctor-group-image" src="/images/doctor-groups/group2.png"></image>
+          <view class="doctor-group-name">
+            <text class="group-name-main">美鼻时代</text>
+            <text class="group-name-sub">医生集团</text>
+          </view>
+        </view>
+        <view class="doctor-group-item">
+          <image class="doctor-group-image" src="/images/doctor-groups/group3.png"></image>
+          <view class="doctor-group-name">
+            <text class="group-name-main">美云联</text>
+            <text class="group-name-sub">医生集团</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 医学院校区域 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">
+          <image class="section-icon" src="/images/icons/medical_school.png"></image>
+          <text>医学院校</text>
+        </view>
+        <view class="more">更多</view>
+      </view>
+
+      <view class="schools-grid">
+        <view class="school-row">
+          <view class="school-item">
+            <image class="school-image" src="/images/schools/school1.jpg"></image>
+            <text class="school-name">宜春学院美容医学院</text>
+          </view>
+          <view class="school-item">
+            <image class="school-image" src="/images/schools/school2.jpg"></image>
+            <text class="school-name">锦州医科大学</text>
+          </view>
+          <view class="school-item">
+            <image class="school-image" src="/images/schools/school3.jpg"></image>
+            <text class="school-name">大连医科大学</text>
+          </view>
+        </view>
+        <view class="school-row">
+          <view class="school-item">
+            <image class="school-image" src="/images/schools/school4.jpg"></image>
+            <text class="school-name">宜春学院美容医学院</text>
+          </view>
+          <view class="school-item">
+            <image class="school-image" src="/images/schools/school5.jpg"></image>
+            <text class="school-name">宜春学院美容医学院</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="education-buttons">
+        <view class="edu-button">
+          <image class="edu-icon" src="/images/icons/education.png"></image>
+          <text>继续教育</text>
+        </view>
+        <view class="edu-button">
+          <image class="edu-icon" src="/images/icons/training.png"></image>
+          <text>委培岗位</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 技术成果区域 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">
+          <image class="section-icon" src="/images/icons/tech_achievement.png"></image>
+          <text>技术成果</text>
+        </view>
+        <view class="more">更多</view>
+      </view>
+
+      <view class="tech-tabs">
+        <view class="tech-tab active">专利技术</view>
+        <view class="tech-tab">特色技术</view>
+        <view class="tech-tab">学术论文</view>
+        <view class="tech-tab">著作编译</view>
+      </view>
+      
+      <view class="tech-grid">
+        <view class="tech-row">
+          <view class="tech-item">
+            <image class="tech-image" src="/images/tech/tech1.png"></image>
+            <text class="tech-name">鼻整形</text>
+          </view>
+          <view class="tech-item">
+            <image class="tech-image" src="/images/tech/tech2.png"></image>
+            <text class="tech-name">脂肪整形</text>
+          </view>
+          <view class="tech-item">
+            <image class="tech-image" src="/images/tech/tech3.png"></image>
+            <text class="tech-name">注射美容</text>
+          </view>
+          <view class="tech-item">
+            <image class="tech-image" src="/images/tech/tech4.png"></image>
+            <text class="tech-name">乳房整形</text>
+          </view>
+          <view class="tech-item">
+            <image class="tech-image" src="/images/tech/tech5.png"></image>
+            <text class="tech-name">眼整形</text>
+          </view>
+        </view>
+        <view class="tech-row">
+          <view class="tech-item">
+            <image class="tech-image" src="/images/tech/tech6.png"></image>
+            <text class="tech-name">私密整形</text>
+          </view>
+          <view class="tech-item">
+            <image class="tech-image" src="/images/tech/tech7.png"></image>
+            <text class="tech-name">皮肤美容</text>
+          </view>
+          <view class="tech-item">
+            <image class="tech-image" src="/images/tech/tech8.png"></image>
+            <text class="tech-name">颌面整形</text>
+          </view>
+          <view class="tech-item">
+            <image class="tech-image" src="/images/tech/tech9.png"></image>
+            <text class="tech-name">口腔美容</text>
+          </view>
+          <view class="tech-item">
+            <image class="tech-image" src="/images/tech/tech10.png"></image>
+            <text class="tech-name">毛发整形</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 美链智库区域 -->
+    <view class="section">
+      <view class="section-header">
 <view class="section-title">
-  <view class="title-line">- 医美行业岗位百科 -</view>
+          <image class="section-icon" src="/images/icons/smart_library.png"></image>
+          <text>美链智库</text>
+        </view>
+        <view class="more">更多</view>
+      </view>
+      
+      <view class="smart-tabs">
+        <view class="smart-tab active">法律法规</view>
+        <view class="smart-tab">研究报告</view>
+        <view class="smart-tab">产业数据</view>
+        <view class="smart-tab">大咖专栏</view>
+      </view>
+      
+      <view class="smart-grid">
+        <view class="smart-item large">
+          <text class="smart-title">个人征信查询</text>
+          <text class="smart-subtitle">在线查询便捷贴心</text>
+          <view class="smart-link">去查看 ></view>
+          <image class="smart-image" src="/images/smart/credit.png"></image>
 </view>
 
-<view class="position-grid">
-  <view class="position-item" wx:for="{{positionItems}}" wx:key="id" bindtap="navigateToDetail" data-type="position" data-index="{{index}}">
-    <text>{{item.name}}</text>
-    <image src="{{item.icon}}" class="position-icon"></image>
+        <view class="smart-row">
+          <view class="smart-item small">
+            <text class="smart-title">医保凭证</text>
+            <text class="smart-subtitle">购物就医免带卡</text>
+            <image class="smart-icon" src="/images/smart/medical.png"></image>
+          </view>
+
+          <view class="smart-item small">
+            <text class="smart-title">法律援助</text>
+            <text class="smart-subtitle">免费法律咨询</text>
+            <image class="smart-icon" src="/images/smart/law.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 页面底部提示 -->
+    <view class="page-end">
+      <view class="end-line"></view>
+      <text class="end-text">亲，已经到底啦</text>
+      <view class="end-line"></view>
+    </view>
+
+    <!-- 返回顶部按钮 -->
+    <view class="back-to-top">
+      <image class="top-icon" src="/images/icons/top.png"></image>
+      <text>返回顶部</text>
+    </view>
+  </block>
+  
+  <!-- 底部导航 -->
+  <view class="tab-bar">
+    <view class="tab-item active">
+      <image class="tab-icon" src="/images/tabs/home_active.png"></image>
+      <text>首页</text>
+    </view>
+    <view class="tab-item">
+      <image class="tab-icon" src="/images/tabs/course.png"></image>
+      <text>课程</text>
+    </view>
+    <view class="tab-item">
+      <view class="tab-badge"></view>
+      <image class="tab-icon" src="/images/tabs/message.png"></image>
+      <text>消息</text>
+    </view>
+    <view class="tab-item">
+      <image class="tab-icon" src="/images/tabs/consult.png"></image>
+      <text>委培</text>
+    </view>
+    <view class="tab-item">
+      <image class="tab-icon" src="/images/tabs/mine.png"></image>
+      <text>我的</text>
+    </view>
   </view>
 </view>
 
-</view>
