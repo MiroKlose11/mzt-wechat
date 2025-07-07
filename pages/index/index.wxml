@@ -8,11 +8,11 @@
     </view>
     <view class="search-input">
       <icon type="search" size="14" color="#999999"></icon>
-      <text class="placeholder">请输入关键词</text>
+      <text class="placeholder">请输入关键词  </text>
     </view>
     <view class="search-btn">搜索</view>
   </view>
-
+  
   <!-- 主导航和图标区域 -->
   <view class="main-nav">
     <view class="nav-item {{currentNav === 'home' ? 'active' : ''}}" data-nav="home" bindtap="switchMainNav">首页</view>
@@ -24,167 +24,70 @@
   <view class="white-container">
     <!-- 功能图标区域 -->
     <view class="icon-grid">
-      <view class="icon-row">
-        <view class="icon-item">
-          <image class="grid-icon" src="/images/icons/person.png"></image>
-          <text>人员链</text>
+      <block wx:for="{{iconRows}}" wx:key="row">
+        <view class="icon-row">
+          <block wx:for="{{item}}" wx:key="id">
+            <view class="icon-item">
+              <image class="grid-icon" src="{{item.icon}}"></image>
+              <text>{{item.name}}</text>
+            </view>
+          </block>
         </view>
-        <view class="icon-item">
-          <image class="grid-icon" src="/images/icons/position.png"></image>
-          <text>岗位链</text>
-        </view>
-        <view class="icon-item">
-          <image class="grid-icon" src="/images/icons/machine.png"></image>
-          <text>械科链</text>
-        </view>
-        <view class="icon-item">
-          <image class="grid-icon" src="/images/icons/academic.png"></image>
-          <text>学术链</text>
-        </view>
-        <view class="icon-item">
-          <image class="grid-icon" src="/images/icons/tech.png"></image>
-          <text>技术链</text>
-        </view>
-      </view>
-      <view class="icon-row">
-        <view class="icon-item">
-          <image class="grid-icon" src="/images/icons/course.png"></image>
-          <text>课程链</text>
-        </view>
-        <view class="icon-item">
-          <image class="grid-icon" src="/images/icons/org.png"></image>
-          <text>机构链</text>
-        </view>
-        <view class="icon-item">
-          <image class="grid-icon" src="/images/icons/research.png"></image>
-          <text>科研链</text>
-        </view>
-        <view class="icon-item">
-          <image class="grid-icon" src="/images/icons/project.png"></image>
-          <text>品项链</text>
-        </view>
-        <view class="icon-item">
-          <image class="grid-icon" src="/images/icons/smart.png"></image>
-          <text>智库链</text>
-        </view>
-      </view>
+      </block>
     </view>
   </view>
 
   <!-- 内容区域 -->
   <block wx:if="{{currentNav === 'home'}}">
-    <!-- 公司活动横幅 -->
+    <!-- 轮播图 -->
     <swiper class="banner" indicator-dots="{{false}}" autoplay="{{true}}" interval="3000" duration="500" circular="{{true}}" bindchange="onSwiperChange">
-      <swiper-item>
-        <view class="banner-content">
-          <view class="banner-text">
-            <text class="banner-title">公司成立5周年庆祝大典</text>
-            <text class="banner-date">活动时间: 09-01 10:00</text>
-          </view>
-          <view class="banner-btn">了解更多</view>
-        </view>
-        <image class="banner-building" src="/images/banner/building.png"></image>
-        <image class="banner-number" src="/images/banner/number5.png"></image>
-      </swiper-item>
+      <block wx:for="{{banners}}" wx:key="id">
+        <swiper-item>
+          <image class="banner-img" src="{{item.imageUrl}}" mode="aspectFill"></image>
       
-      <swiper-item>
-        <view class="banner-content">
-          <view class="banner-text">
-            <text class="banner-title">美链体高级研修会</text>
-            <text class="banner-date">活动时间: 09-15 14:30</text>
-          </view>
-          <view class="banner-btn">立即报名</view>
-        </view>
-      </swiper-item>
-      
-      <swiper-item>
-        <view class="banner-content">
-          <view class="banner-text">
-            <text class="banner-title">2023医学美容技术峰会</text>
-            <text class="banner-date">活动时间: 10-05 09:00</text>
-          </view>
-          <view class="banner-btn">查看详情</view>
-        </view>
   </swiper-item>
+      </block>
 </swiper>
 
     <!-- 轮播指示点 -->
     <view class="banner-indicator">
-      <view class="dot {{currentBanner === 0 ? 'active' : ''}}"></view>
-      <view class="dot {{currentBanner === 1 ? 'active' : ''}}"></view>
-      <view class="dot {{currentBanner === 2 ? 'active' : ''}}"></view>
+      <block wx:for="{{banners}}" wx:key="id">
+        <view class="dot {{currentBanner === index ? 'active' : ''}}"></view>
+      </block>
     </view>
 
     <!-- 快捷功能区 -->
     <view class="quick-functions">
-      <view class="function-item">
-        <view class="function-icon-bg red">
-          <image class="function-icon" src="/images/functions/job.png"></image>
+      <block wx:for="{{quickCategories}}" wx:key="id">
+        <view class="function-item">
+          <view class="function-icon-bg" style="background:{{item.iconBgColor || '#4b99ff'}}">
+            <image class="function-icon" src="{{item.icon}}"></image>
+          </view>
+          <text>{{item.name}}</text>
         </view>
-        <text>美职通</text>
-      </view>
-      <view class="function-item">
-        <view class="function-icon-bg blue">
-          <image class="function-icon" src="/images/functions/doctor.png"></image>
-        </view>
-        <text>鼻大师</text>
-      </view>
-      <view class="function-item">
-        <view class="function-icon-bg green">
-          <image class="function-icon" src="/images/functions/beauty.png"></image>
-        </view>
-        <text>针美大师</text>
-      </view>
-      <view class="function-item">
-        <view class="function-icon-bg purple">
-          <image class="function-icon" src="/images/functions/agent.png"></image>
-        </view>
-        <text>美鼻时代</text>
-      </view>
-      <view class="function-item">
-        <view class="function-icon-bg green-dark">
-          <image class="function-icon" src="/images/functions/lab.png"></image>
-        </view>
-        <text>奥秘龄</text>
-      </view>
+      </block>
     </view>
 
     <!-- 精品课程区域 -->
     <view class="section">
       <view class="section-header">
-<view class="section-title">
-          <image class="section-icon" src="/images/icons/course_blue.png"></image>
+        <view class="section-title">
           <text>精品课程</text>
         </view>
         <view class="more">更多</view>
-</view>
-
+      </view>
       <view class="course-grid">
-        <view class="course-item">
-          <view class="course-label">通用内训课</view>
-          <view class="course-info">
-            <view class="course-name">营养保健师</view>
-            <view class="course-desc">健康服务专业资格证培训课程</view>
-            <view class="course-level-tags">
-              <view class="level-tag">初级</view>
-              <view class="level-tag">中级</view>
-              <view class="level-tag">高级</view>
+        <block wx:for="{{courses}}" wx:key="id">
+          <view class="course-item" style="padding:0; box-shadow:none; border:none; background:#f8f9fa;">
+            <view style="width:100%; height:180rpx; border-radius:16rpx 16rpx 0 0; background:#e5e5e5; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+              <image wx:if="{{item.coverUrl}}" src="{{item.coverUrl}}" style="width:92%; height:92%; object-fit:cover; border-radius:12rpx;"></image>
             </view>
-  </view>
-</view>
-
-        <view class="course-item">
-          <view class="course-label">专业认证课</view>
-          <view class="course-info">
-            <view class="course-name">心理咨询师·初级</view>
-            <view class="course-desc">专业技能授权培训课程</view>
-            <view class="course-level-tags">
-              <view class="level-tag">初级</view>
-              <view class="level-tag">中级</view>
-              <view class="level-tag">高级</view>
+            <view style="padding:18rpx 16rpx 10rpx 16rpx; background:#fff; border-radius:0 0 16rpx 16rpx; min-height:80rpx; display:flex; flex-direction:column; align-items:flex-start; justify-content:center;">
+              <text style="font-size:30rpx; color:#222; font-weight:500; text-align:left; margin-bottom:8rpx;">{{item.title}}</text>
+              <text style="font-size:24rpx; color:#666; text-align:left; line-height:1.5;">{{item.description}}</text>
             </view>
           </view>
-        </view>
+        </block>
       </view>
     </view>
 
@@ -199,52 +102,24 @@
 </view>
 
       <view class="elite-filter">
-        <view class="filter-item active">医生</view>
-        <view class="filter-item">咨询师</view>
-        <view class="filter-item">麻醉师</view>
-        <view class="filter-item">企划运营</view>
-        <view class="filter-item">更多职业</view>
+        <block wx:for="{{eliteCategories}}" wx:key="id">
+          <view class="filter-item {{activeEliteCategory == item.name ? 'active' : ''}}" data-name="{{item.name}}" bindtap="onEliteCategoryTab">{{item.name}}</view>
+        </block>
       </view>
 
-      <view class="elite-list">
-        <view class="elite-row">
-          <view class="elite-item">
-            <image class="elite-avatar" src="/images/avatars/doctor1.png"></image>
-            <text class="elite-name">曾高</text>
+      <!-- 精英风采成员区只显示前8个，整体下移20rpx -->
+      <view style="display: flex; flex-wrap: wrap; margin-top: 20rpx;">
+        <block wx:for="{{eliteMembersTop8}}" wx:key="id">
+          <view style="width: 25%; display: flex; flex-direction: column; align-items: center; margin-bottom: 8rpx;">
+            <view style="width: 100rpx; height: 100rpx; border-radius: 12rpx; margin-bottom: 12rpx; background: #eee; display: flex; align-items: center; justify-content: center;">
+              <image wx:if="{{item.avatar}}" src="{{item.avatar}}" style="width: 100rpx; height: 100rpx; border-radius: 12rpx; object-fit: cover; background: #eee;"></image>
+            </view>
+            <text style="font-size: 28rpx; color: #222; margin-top: 0; text-align: center;">{{item.name}}</text>
           </view>
-          <view class="elite-item">
-            <image class="elite-avatar" src="/images/avatars/doctor2.png"></image>
-            <text class="elite-name">罗德丰</text>
-          </view>
-          <view class="elite-item">
-            <image class="elite-avatar" src="/images/avatars/doctor3.png"></image>
-            <text class="elite-name">周柯</text>
-          </view>
-          <view class="elite-item">
-            <image class="elite-avatar" src="/images/avatars/doctor4.png"></image>
-            <text class="elite-name">王旭明</text>
-          </view>
-        </view>
-        <view class="elite-row">
-          <view class="elite-item">
-            <image class="elite-avatar" src="/images/avatars/doctor5.png"></image>
-            <text class="elite-name">戴传昌</text>
-          </view>
-          <view class="elite-item">
-            <image class="elite-avatar" src="/images/avatars/doctor6.png"></image>
-            <text class="elite-name">白向有</text>
-          </view>
-          <view class="elite-item">
-            <image class="elite-avatar" src="/images/avatars/doctor7.png"></image>
-            <text class="elite-name">谭书友</text>
-          </view>
-          <view class="elite-item">
-            <image class="elite-avatar" src="/images/avatars/doctor8.png"></image>
-            <text class="elite-name">杜亚东</text>
-          </view>
-        </view>
-  </view>
-</view>
+        </block>
+      </view>
+
+    </view>
 
     <!-- 学术活动区域 -->
     <view class="section">
@@ -394,36 +269,30 @@
     <view class="section">
       <view class="section-header">
         <view class="section-title">
-          <image class="section-icon" src="/images/icons/medical_school.png"></image>
           <text>医学院校</text>
         </view>
         <view class="more">更多</view>
       </view>
-
       <view class="schools-grid">
+        <!-- 第一行3列正方形 -->
         <view class="school-row">
-          <view class="school-item">
-            <image class="school-image" src="/images/schools/school1.jpg"></image>
-            <text class="school-name">宜春学院美容医学院</text>
-          </view>
-          <view class="school-item">
-            <image class="school-image" src="/images/schools/school2.jpg"></image>
-            <text class="school-name">锦州医科大学</text>
-          </view>
-          <view class="school-item">
-            <image class="school-image" src="/images/schools/school3.jpg"></image>
-            <text class="school-name">大连医科大学</text>
-          </view>
+          <block wx:for="{{schoolsFirstRow}}" wx:key="id">
+            <view class="school-item {{index < 2 ? 'mr12' : ''}}">
+              <image wx:if="{{item.avatar}}" src="{{item.avatar}}" class="school-img-square"></image>
+              <view wx:else class="school-img-square"></view>
+              <text class="school-name">{{item.name}}</text>
+            </view>
+          </block>
         </view>
+        <!-- 第二行2列长方形 -->
         <view class="school-row">
-          <view class="school-item">
-            <image class="school-image" src="/images/schools/school4.jpg"></image>
-            <text class="school-name">宜春学院美容医学院</text>
-          </view>
-          <view class="school-item">
-            <image class="school-image" src="/images/schools/school5.jpg"></image>
-            <text class="school-name">宜春学院美容医学院</text>
-          </view>
+          <block wx:for="{{schoolsSecondRow}}" wx:key="id">
+            <view class="school-item {{index === 0 ? 'mr18' : ''}}">
+              <image wx:if="{{item.avatar}}" src="{{item.avatar}}" class="school-img-rect"></image>
+              <view wx:else class="school-img-rect"></view>
+              <text class="school-name">{{item.name}}</text>
+            </view>
+          </block>
         </view>
       </view>
 
@@ -443,64 +312,27 @@
     <view class="section">
       <view class="section-header">
         <view class="section-title">
-          <image class="section-icon" src="/images/icons/tech_achievement.png"></image>
           <text>技术成果</text>
         </view>
         <view class="more">更多</view>
       </view>
 
       <view class="tech-tabs">
-        <view class="tech-tab active">专利技术</view>
-        <view class="tech-tab">特色技术</view>
-        <view class="tech-tab">学术论文</view>
-        <view class="tech-tab">著作编译</view>
+        <block wx:for="{{techCategories}}" wx:key="id">
+          <view class="tech-tab {{index === 0 ? 'active' : ''}}">{{item.name}}</view>
+        </block>
       </view>
-      
-      <view class="tech-grid">
-        <view class="tech-row">
-          <view class="tech-item">
-            <image class="tech-image" src="/images/tech/tech1.png"></image>
-            <text class="tech-name">鼻整形</text>
+
+      <!-- 技术成果下红框区域：每行5列，显示icon图片和名称 -->
+      <view style="display: flex; flex-wrap: wrap; margin: 30rpx 0 0 0;">
+        <block wx:for="{{positionCategories}}" wx:key="id">
+          <view style="width: 20%; display: flex; flex-direction: column; align-items: center; margin-bottom: 24rpx;">
+            <view style="width: 90rpx; height: 90rpx; border-radius: 18rpx; background: #eee; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 10rpx;">
+              <image wx:if="{{item.icon}}" src="{{item.icon}}" style="width: 100%; height: 100%; object-fit: cover;"></image>
+            </view>
+            <text style="font-size: 26rpx; color: #222; text-align: center;">{{item.name}}</text>
           </view>
-          <view class="tech-item">
-            <image class="tech-image" src="/images/tech/tech2.png"></image>
-            <text class="tech-name">脂肪整形</text>
-          </view>
-          <view class="tech-item">
-            <image class="tech-image" src="/images/tech/tech3.png"></image>
-            <text class="tech-name">注射美容</text>
-          </view>
-          <view class="tech-item">
-            <image class="tech-image" src="/images/tech/tech4.png"></image>
-            <text class="tech-name">乳房整形</text>
-          </view>
-          <view class="tech-item">
-            <image class="tech-image" src="/images/tech/tech5.png"></image>
-            <text class="tech-name">眼整形</text>
-          </view>
-        </view>
-        <view class="tech-row">
-          <view class="tech-item">
-            <image class="tech-image" src="/images/tech/tech6.png"></image>
-            <text class="tech-name">私密整形</text>
-          </view>
-          <view class="tech-item">
-            <image class="tech-image" src="/images/tech/tech7.png"></image>
-            <text class="tech-name">皮肤美容</text>
-          </view>
-          <view class="tech-item">
-            <image class="tech-image" src="/images/tech/tech8.png"></image>
-            <text class="tech-name">颌面整形</text>
-          </view>
-          <view class="tech-item">
-            <image class="tech-image" src="/images/tech/tech9.png"></image>
-            <text class="tech-name">口腔美容</text>
-          </view>
-          <view class="tech-item">
-            <image class="tech-image" src="/images/tech/tech10.png"></image>
-            <text class="tech-name">毛发整形</text>
-          </view>
-        </view>
+        </block>
       </view>
     </view>
 
@@ -515,10 +347,9 @@
       </view>
       
       <view class="smart-tabs">
-        <view class="smart-tab active">法律法规</view>
-        <view class="smart-tab">研究报告</view>
-        <view class="smart-tab">产业数据</view>
-        <view class="smart-tab">大咖专栏</view>
+        <block wx:for="{{smartCategories}}" wx:key="id">
+          <view class="smart-tab {{index === 0 ? 'active' : ''}}">{{item.name}}</view>
+        </block>
       </view>
       
       <view class="smart-grid">
@@ -553,9 +384,9 @@
     </view>
 
     <!-- 返回顶部按钮 -->
-    <view class="back-to-top">
-      <image class="top-icon" src="/images/icons/top.png"></image>
-      <text>返回顶部</text>
+    <view wx:if="{{showBackToTop}}" class="back-to-top-new" bindtap="backToTop">
+      <view class="back-arrow"></view>
+      <text class="back-text">顶部</text>
     </view>
   </block>
   
@@ -570,7 +401,6 @@
       <text>课程</text>
     </view>
     <view class="tab-item">
-      <view class="tab-badge"></view>
       <image class="tab-icon" src="/images/tabs/message.png"></image>
       <text>消息</text>
     </view>

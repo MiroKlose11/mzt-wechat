@@ -184,38 +184,46 @@ page {
   color: #333;
 }
 
-/* 公司活动横幅 */
+/* 轮播图 */
 .banner {
   margin: 20rpx 30rpx 0 30rpx;
-  background: linear-gradient(135deg, #4b99ff 0%, #3f87ff 100%);
   border-radius: 20rpx;
-  padding: 30rpx;
   color: #fff;
   position: relative;
   overflow: hidden;
-  height: 280rpx;
+  height: 320rpx;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 }
 
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
 .banner-content {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  position: relative;
-  z-index: 2;
   height: 100%;
-  justify-content: space-between;
-}
-
-.banner-text {
-  flex: 1;
+  justify-content: flex-end;
+  padding-bottom: 30rpx;
+  padding-left: 30rpx;
+  background: linear-gradient(0deg,rgba(0,0,0,0.18) 40%,rgba(0,0,0,0) 100%);
 }
 
 .banner-title {
-  font-size: 40rpx;
+  font-size: 36rpx;
   font-weight: 500;
-  margin-bottom: 15rpx;
-  display: block;
+  color: #fff;
+  text-shadow: 0 2rpx 8rpx rgba(0,0,0,0.18);
 }
 
 .banner-date {
@@ -472,32 +480,43 @@ page {
 }
 
 .elite-list {
-  padding: 20rpx;
+  margin-top: 32rpx;
 }
-
 .elite-row {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 30rpx;
+  margin-bottom: 24rpx;
 }
-
 .elite-item {
+  width: 22%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 25%;
+  margin-bottom: 0;
 }
-
 .elite-avatar {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 10rpx;
-  margin-bottom: 15rpx;
-  background-color: #f5f5f5;
+  width: 100rpx;
+  height: 100rpx;
+  background: #eee;
+  border-radius: 12rpx;
+  margin-bottom: 12rpx;
+  object-fit: cover;
+}
+.elite-name {
+  font-size: 28rpx;
+  color: #222;
+  margin-top: 0;
+  text-align: center;
+  word-break: break-all;
 }
 
-.elite-name {
-  font-size: 26rpx;
+.elite-avatar-empty {
+  width: 100rpx;
+  height: 100rpx;
+  background: #eee;
+  border-radius: 12rpx;
+  margin-bottom: 12rpx;
 }
 
 /* 底部导航 */
@@ -814,36 +833,43 @@ page {
 
 /* 医学院校区域 */
 .schools-grid {
-  padding: 20rpx;
+  padding: 20rpx 24rpx 0 24rpx;
 }
-
 .school-row {
   display: flex;
-  margin-bottom: 20rpx;
+  flex-direction: row;
+  margin-bottom: 24rpx;
 }
-
 .school-item {
   flex: 1;
-  margin-right: 20rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.school-item:last-child {
-  margin-right: 0;
+.mr12 { margin-right: 12rpx; }
+.mr18 { margin-right: 18rpx; }
+.school-img-square,
+.school-img-rect {
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.08);
+  background: linear-gradient(135deg, #f6f8fa 60%, #e9eef3 100%);
+  border-radius: 20rpx;
 }
-
-.school-image {
-  width: 100%;
-  height: 160rpx;
-  border-radius: 10rpx;
+.school-img-square {
+  width: 200rpx;
+  height: 200rpx;
   margin-bottom: 10rpx;
 }
-
+.school-img-rect {
+  width: 100%;
+  height: 200rpx;
+  margin-bottom: 10rpx;
+}
 .school-name {
-  font-size: 26rpx;
+  font-size: 28rpx;
+  color: #222;
+  margin-top: 10rpx;
   text-align: center;
+  width: 100%;
 }
 
 .education-buttons {
@@ -1127,4 +1153,37 @@ page {
   padding-bottom: 30rpx;
   z-index: 1;
   margin-top: 0;
+}
+
+.back-to-top-new {
+  position: fixed;
+  right: 36rpx;
+  bottom: 180rpx;
+  width: 90rpx;
+  height: 90rpx;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  transition: opacity 0.2s;
+}
+
+.back-arrow {
+  width: 0;
+  height: 0;
+  border-left: 18rpx solid transparent;
+  border-right: 18rpx solid transparent;
+  border-bottom: 18rpx solid #333;
+  margin-bottom: 2rpx;
+}
+
+.back-text {
+  font-size: 22rpx;
+  color: #333;
+  margin-top: 2rpx;
+  font-weight: 500;
 }
