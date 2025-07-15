@@ -2,7 +2,10 @@
   "pages": [
     "pages/index/index",
     "pages/detail/detail",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/personnel/index",
+    "pages/my/index",
+    "pages/position/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -11,6 +14,34 @@
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true,
     "backgroundColor": "#4b99ff"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4b99ff",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "课程"
+      },
+      {
+        "pagePath": "pages/position/index",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/personnel/index",
+        "text": "案例"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的"
+      }
+    ]
   },
   "style": "v2",
   "componentFramework": "glass-easel",

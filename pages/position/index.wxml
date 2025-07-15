@@ -1,0 +1,191 @@
+<!-- 顶部导航栏和背景图 -->
+<view class="custom-header">
+  <!-- 背景图 -->
+  <image class="nav-bg" src="/images/nav/nav-bg.png" mode="widthFix"></image>
+  
+  <!-- 导航栏 -->
+  <view class="custom-nav-bar" style="padding-top: {{statusBarHeight}}px; background-color: rgba(75, 153, 255, {{navOpacity}});">
+    <view class="nav-left">
+      <image class="back-btn" src="/images/nav/back.png" bindtap="goBack"></image>
+      <text class="page-title">岗位链</text>
+    </view>
+    <view class="nav-right">
+      <image class="share-btn" src="/images/nav/share.png"></image>
+      <image class="more-btn" src="/images/nav/more.png"></image>
+    </view>
+  </view>
+</view>
+
+<!-- 整合的顶部浮起模块 -->
+<view class="floating-module">
+  <!-- 顶部分类标签页 -->
+  <view class="tab-header">
+    <view class="tab-item {{currentTab === 'position' ? 'active' : ''}}" bindtap="switchTab" data-tab="position">岗位</view>
+    <view class="tab-item {{currentTab === 'department' ? 'active' : ''}}" bindtap="switchTab" data-tab="department">部门</view>
+    <view class="tab-item {{currentTab === 'course' ? 'active' : ''}}" bindtap="switchTab" data-tab="course">课程</view>
+  </view>
+
+  <!-- 专科图标区 -->
+  <view class="icon-grid">
+    <view class="icon-row">
+      <view class="icon-item" bindtap="onIconTap" data-id="1">
+        <image class="icon-image" src="/images/icons/icon1.png"></image>
+        <text class="icon-text">整形外科</text>
+      </view>
+      <view class="icon-item" bindtap="onIconTap" data-id="2">
+        <image class="icon-image" src="/images/icons/icon2.png"></image>
+        <text class="icon-text">皮肤美容科</text>
+      </view>
+      <view class="icon-item" bindtap="onIconTap" data-id="3">
+        <image class="icon-image" src="/images/icons/icon3.png"></image>
+        <text class="icon-text">口腔美容科</text>
+      </view>
+      <view class="icon-item" bindtap="onIconTap" data-id="4">
+        <image class="icon-image" src="/images/icons/icon4.png"></image>
+        <text class="icon-text">医务科</text>
+      </view>
+      <view class="icon-item" bindtap="onIconTap" data-id="5">
+        <image class="icon-image" src="/images/icons/icon5.png"></image>
+        <text class="icon-text">护理部</text>
+      </view>
+    </view>
+    <view class="icon-row">
+      <view class="icon-item" bindtap="onIconTap" data-id="6">
+        <image class="icon-image" src="/images/icons/icon6.png"></image>
+        <text class="icon-text">住院部</text>
+      </view>
+      <view class="icon-item" bindtap="onIconTap" data-id="7">
+        <image class="icon-image" src="/images/icons/icon7.png"></image>
+        <text class="icon-text">手术室</text>
+      </view>
+      <view class="icon-item" bindtap="onIconTap" data-id="8">
+        <image class="icon-image" src="/images/icons/icon8.png"></image>
+        <text class="icon-text">麻醉科</text>
+      </view>
+      <view class="icon-item" bindtap="onIconTap" data-id="9">
+        <image class="icon-image" src="/images/icons/icon9.png"></image>
+        <text class="icon-text">行政部</text>
+      </view>
+      <view class="icon-item" bindtap="onIconTap" data-id="10">
+        <image class="icon-image" src="/images/icons/icon10.png"></image>
+        <text class="icon-text">所有部门</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索栏 -->
+  <view class="search-section">
+    <view class="search-bar">
+      <icon type="search" size="14" color="#999999"></icon>
+      <input class="search-input" placeholder="搜输入关键词搜索" confirm-type="search" bindconfirm="onSearch"/>
+      <view class="search-filter">
+        <text>高级筛选</text>
+        <image class="filter-icon" src="/images/icons/filter.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 功能快捷图标 - 第一个红框 -->
+<view class="category-icons">
+  <view class="category-icon-item">
+    <image class="category-icon" src="/images/icons/quick1.png"></image>
+    <text>实时政策</text>
+  </view>
+  <view class="category-icon-item">
+    <image class="category-icon" src="/images/icons/quick2.png"></image>
+    <text>热度看板</text>
+  </view>
+  <view class="category-icon-item">
+    <image class="category-icon" src="/images/icons/quick3.png"></image>
+    <text>精品课程</text>
+  </view>
+  <view class="category-icon-item">
+    <image class="category-icon" src="/images/icons/quick4.png"></image>
+    <text>委培岗位</text>
+  </view>
+</view>
+
+<!-- Banner模块 - 包含轮播图和双图 -->
+<view class="banner-module">
+  <!-- 大图banner轮播 -->
+  <view class="banner-container">
+    <image class="banner-image" src="/images/banner/building.jpg" mode="aspectFill"></image>
+  </view>
+
+  <!-- 双图banner -->
+  <view class="double-banner">
+    <view class="banner-item">
+      <image class="banner-item-image" src="/images/banner/consult.jpg" mode="aspectFill"></image>
+      <view class="banner-item-label">咨询师系列</view>
+    </view>
+    <view class="banner-item">
+      <image class="banner-item-image" src="/images/banner/course.jpg" mode="aspectFill"></image>
+      <view class="banner-item-label">鼻整形课程</view>
+    </view>
+  </view>
+</view>
+
+<!-- 专科分类 - 第二个红框 -->
+<view class="specialty-categories">
+  <view class="specialty-category-item">
+    <image class="specialty-icon" src="/images/icons/specialty1.png"></image>
+    <text>整形外科</text>
+  </view>
+  <view class="specialty-category-item">
+    <image class="specialty-icon" src="/images/icons/specialty2.png"></image>
+    <text>美容皮肤科</text>
+  </view>
+  <view class="specialty-category-item">
+    <image class="specialty-icon" src="/images/icons/specialty3.png"></image>
+    <text>美容牙科</text>
+  </view>
+  <view class="specialty-category-item">
+    <image class="specialty-icon" src="/images/icons/specialty4.png"></image>
+    <text>中医美容科</text>
+  </view>
+  <view class="specialty-category-item">
+    <image class="specialty-icon" src="/images/icons/specialty5.png"></image>
+    <text>微整抗衰</text>
+  </view>
+</view>
+
+<!-- 岗位卡片 -->
+<block wx:for="{{positionList}}" wx:key="id">
+  <view class="doctor-card" data-id="{{item.id}}" bindtap="viewPositionDetail">
+    <view class="doctor-card-main">
+      <view class="doctor-card-img">
+        <image class="doctor-avatar" src="{{item.avatar || '/images/avatar-placeholder.png'}}" mode="aspectFill"></image>
+      </view>
+      <view class="doctor-card-info">
+        <view class="doctor-header">
+          <view class="doctor-header-left">
+            <text class="doctor-title">{{item.name || '美容咨询师'}}</text>
+            <text class="doctor-job">技术型医疗岗位</text>
+          </view>
+          <view class="doctor-header-right">
+            <text class="detail-btn-text">查看详情</text>
+          </view>
+        </view>
+        <view class="doctor-info-container">
+          <view class="doctor-info">
+            <text class="doctor-label">专业要求：</text>
+            <text class="doctor-value">{{item.requirement || '临床医学'}}</text>
+          </view>
+          <view class="doctor-info doctor-stars-row">
+            <text class="doctor-label">发展指数：</text>
+            <view class="stars">
+              <block wx:for="{{5}}" wx:key="*this" wx:for-item="star">
+                <image class="star-icon" src="/images/icons/{{star < 4 ? 'star-active' : 'star'}}.png"></image>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="doctor-action-container">
+      <button class="doctor-btn collect-btn" catchtap="collectPosition" data-id="{{item.id}}">收藏</button>
+      <button class="doctor-btn apply-btn" catchtap="applyPosition" data-id="{{item.id}}">委培</button>
+    </view>
+  </view>
+</block> 

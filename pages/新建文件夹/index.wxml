@@ -1,0 +1,57 @@
+<view class="custom-nav" style="height:{{navBarHeight+100}}rpx;">
+  <image class="custom-nav-bg" src="/images/nav/nav-bg.png" mode="aspectFill"></image>
+  <view class="custom-nav-bar" style="padding-top:{{navBarTop}}rpx;">
+    <view class="nav-back" bindtap="navBack">
+      <image src="/images/nav/back.png" class="nav-back-icon"></image>
+    </view>
+    <text class="nav-title">人员链</text>
+    <view class="nav-right" style="right:{{capsuleRight}}rpx;">
+      <image src="/images/nav/more.png" class="nav-more-icon"></image>
+    </view>
+  </view>
+  <view class="search-card">
+    <view class="personnel-search-bar">
+      <icon type="search" size="18" color="#999"></icon>
+      <input class="personnel-search-input" placeholder="输入人员关键词搜索" />
+      <view class="personnel-search-btn">搜索</view>
+    </view>
+    <view class="personnel-tabs-wrap">
+      <block wx:for="{{tabs}}" wx:key="id">
+        <view class="personnel-tab {{item.active ? 'active' : ''}} {{index === 0 ? 'hot' : ''}}">{{item.name}}</view>
+      </block>
+    </view>
+  </view>
+</view>
+<view class="personnel-bg">
+  <scroll-view class="personnel-img-list" scroll-x="true">
+    <block wx:for="{{bannerList}}" wx:key="id">
+      <image class="personnel-img" src="{{item.img}}"></image>
+    </block>
+  </scroll-view>
+  <view class="personnel-card-list">
+    <block wx:for="{{personList}}" wx:key="id">
+      <view class="person-card">
+        <image class="person-avatar" src="{{item.avatar}}"></image>
+        <view class="person-info">
+          <view class="person-row">
+            <text class="person-name">{{item.name}}</text>
+            <text class="person-title">{{item.title}}</text>
+            <image wx:if="{{item.verified}}" class="person-v" src="/images/icons/v.png"></image>
+          </view>
+          <text class="person-hospital">{{item.hospital}}</text>
+          <text class="person-major">{{item.major}}</text>
+          <view class="person-tags">
+            <block wx:for="{{item.tags}}" wx:key="index">
+              <text class="person-tag">{{tag}}</text>
+            </block>
+          </view>
+          <view class="person-actions">
+            <view class="person-btn follow">关注</view>
+            <view class="person-btn msg">私信</view>
+            <view class="person-btn detail">查看详情</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view> 

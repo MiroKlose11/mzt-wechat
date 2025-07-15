@@ -1,0 +1,129 @@
+<!-- 顶部导航栏和背景图 -->
+<view class="custom-header">
+  <!-- 背景图 -->
+  <image class="nav-bg" src="/images/nav/nav-bg.png" mode="widthFix"></image>
+  
+  <!-- 导航栏 -->
+  <view class="custom-nav-bar" style="padding-top: {{statusBarHeight}}px; background-color: rgba(75, 153, 255, {{navOpacity}});">
+    <view class="nav-left">
+      <image class="back-btn" src="/images/nav/back.png" bindtap="goBack"></image>
+      <text class="page-title">人员链</text>
+    </view>
+  </view>
+</view>
+
+<!-- 搜索栏 -->
+<view class="search-section">
+  <view class="search-bar">
+    <icon type="search" size="14" color="#999999"></icon>
+    <input class="search-input" placeholder="请输入关键词搜索" confirm-type="search" bindconfirm="onSearch"/>
+    <view class="search-btn" bindtap="onSearch">搜索</view>
+  </view>
+</view>
+
+<!-- 页面内容区域 -->
+<view class="page-content">
+  <!-- 分类导航 - 卡片式 -->
+  <view class="card-container category-container">
+  <view class="category-row1">
+    <view class="nav-item {{currentCategory === 1 ? 'active hot' : 'hot'}}" data-id="1" bindtap="switchCategory">热搜榜</view>
+    <view class="nav-item {{currentCategory === 2 ? 'active' : ''}}" data-id="2" bindtap="switchCategory">地区榜</view>
+    <view class="nav-item {{currentCategory === 3 ? 'active' : ''}}" data-id="3" bindtap="switchCategory">学科榜</view>
+    <view class="nav-item {{currentCategory === 4 ? 'active' : ''}}" data-id="4" bindtap="switchCategory">岗位榜</view>
+    <view class="nav-item {{currentCategory === 5 ? 'active' : ''}}" data-id="5" bindtap="switchCategory">专利榜</view>
+  </view>
+  <view class="category-row2">
+    <view class="nav-item {{currentCategory === 6 ? 'active' : ''}}" data-id="6" bindtap="switchCategory">职称榜</view>
+    <view class="nav-item {{currentCategory === 7 ? 'active' : ''}}" data-id="7" bindtap="switchCategory">课程榜</view>
+    <view class="nav-item {{currentCategory === 8 ? 'active' : ''}}" data-id="8" bindtap="switchCategory">技术榜</view>
+    <view class="nav-item {{currentCategory === 9 ? 'active' : ''}}" data-id="9" bindtap="switchCategory">姓氏榜</view>
+    <view class="nav-item {{currentCategory === 10 ? 'active' : ''}}" data-id="10" bindtap="switchCategory">高级筛选</view>
+  </view>
+</view>
+
+  <!-- 顶部大图卡片 -->
+  <view class="card-container banner-card">
+    <view class="banner-placeholder"></view>
+  </view>
+
+  <!-- 医生图片展示区 - 第一行（大图3个） -->
+  <view class="card-container doctor-grid">
+    <view class="doctor-row doctor-row-big">
+      <view class="doctor-item doctor-item-big" bindtap="viewDoctorDetail" data-id="1">
+        <view class="doctor-img-placeholder doctor-img-big"></view>
+        <text class="doctor-name">曾高</text>
+      </view>
+      <view class="doctor-item doctor-item-big" bindtap="viewDoctorDetail" data-id="2">
+        <view class="doctor-img-placeholder doctor-img-big"></view>
+        <text class="doctor-name">曾高</text>
+      </view>
+      <view class="doctor-item doctor-item-big" bindtap="viewDoctorDetail" data-id="3">
+        <view class="doctor-img-placeholder doctor-img-big"></view>
+        <text class="doctor-name">曾高</text>
+      </view>
+    </view>
+
+    <!-- 医生图片展示区 - 第二行（小图4个） -->
+    <view class="doctor-row doctor-row-small">
+      <view class="doctor-item doctor-item-small" bindtap="viewDoctorDetail" data-id="4">
+        <view class="doctor-img-placeholder doctor-img-small"></view>
+        <text class="doctor-name">谭书兵</text>
+      </view>
+      <view class="doctor-item doctor-item-small" bindtap="viewDoctorDetail" data-id="5">
+        <view class="doctor-img-placeholder doctor-img-small"></view>
+        <text class="doctor-name">肖战</text>
+      </view>
+      <view class="doctor-item doctor-item-small" bindtap="viewDoctorDetail" data-id="6">
+        <view class="doctor-img-placeholder doctor-img-small"></view>
+        <text class="doctor-name">廖连平</text>
+      </view>
+      <view class="doctor-item doctor-item-small" bindtap="viewDoctorDetail" data-id="7">
+        <view class="doctor-img-placeholder doctor-img-small"></view>
+        <text class="doctor-name">张红林</text>
+      </view>
+    </view>
+</view>
+
+  <!-- 人员卡片 - 新样式 -->
+  <block wx:for="{{personnelList}}" wx:key="id">
+    <view class="card-container personnel-card" data-id="{{item.id}}" bindtap="viewPersonnelDetail">
+      <view class="personnel-header">
+        <view class="avatar-circle">
+          <view class="avatar-placeholder-round"></view>
+        </view>
+        <view class="personnel-basic-info">
+          <view class="personnel-title-row">
+            <text class="personnel-name">{{item.name}}</text>
+            <text class="personnel-position">{{item.position}}</text>
+          </view>
+          <text class="personnel-hospital">{{item.hospital}}</text>
+          <text class="personnel-specialty" wx:if="{{item.specialty}}">擅长学科：{{item.specialty}}</text>
+        </view>
+      </view>
+      
+      <view class="personnel-tags">
+        <text class="personnel-tag">核心专家</text>
+        <text class="personnel-tag">核心专家</text>
+        </view>
+        
+      <view class="personnel-actions">
+        <view class="action-btn action-follow" catchtap="contactPersonnel" data-id="{{item.id}}">关注</view>
+        <view class="action-btn action-message" catchtap="messagePersonnel" data-id="{{item.id}}">
+            <image class="message-icon" src="/images/icons/message.png"></image>
+        </view>
+      </view>
+    </view>
+  </block>
+
+<!-- 加载更多 -->
+<view class="load-more" wx:if="{{hasMore}}">
+  <text>加载更多...</text>
+</view>
+
+<!-- 到底提示 -->
+<view class="page-end" wx:else>
+  <view class="end-line"></view>
+  <text class="end-text">已经到底啦</text>
+  <view class="end-line"></view>
+  </view>
+</view> 

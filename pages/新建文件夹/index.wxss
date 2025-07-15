@@ -1,0 +1,225 @@
+.custom-nav {
+  position: relative;
+  width: 100vw;
+  height: 360rpx;
+}
+.custom-nav-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 360rpx;
+  z-index: 1;
+}
+.custom-nav-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-top: 40rpx;
+  background: transparent;
+}
+.nav-back {
+  width: 60rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+}
+.nav-back-icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+.nav-title {
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: 700;
+  margin-left: 10rpx;
+  margin-top: 10rpx;
+}
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+}
+.nav-more-icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+.search-card {
+  position: absolute;
+  left: 24rpx;
+  right: 24rpx;
+  top: 140rpx;
+  z-index: 3;
+  background: #fff;
+  border-radius: 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.08);
+  padding: 24rpx 20rpx 18rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.personnel-search-bar {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-radius: 100rpx;
+  margin: 0;
+  padding: 0 0 24rpx 0;
+  box-shadow: none;
+  position: static;
+}
+.personnel-tabs-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  min-height: 0;
+  padding: 0;
+}
+.personnel-tab {
+  width: 18%;
+  min-width: 90rpx;
+  text-align: center;
+  padding: 10rpx 0;
+  font-size: 26rpx;
+  color: #666;
+  background: #f5f7fa;
+  border-radius: 40rpx;
+  margin-right: 2%;
+  margin-bottom: 14rpx;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.personnel-tab.active {
+  color: #fff;
+  background: #2176ff;
+  font-weight: 600;
+}
+.personnel-tab.hot {
+  background: #fff0f0;
+  color: #e53935;
+  border: 2rpx solid #e53935;
+  font-weight: 700;
+}
+.personnel-img-list {
+  display: flex;
+  flex-direction: row;
+  padding: 10rpx 30rpx 10rpx 30rpx;
+  margin-bottom: 20rpx;
+  white-space: nowrap;
+}
+.personnel-img {
+  width: 180rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+  object-fit: cover;
+  margin-right: 18rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
+  background: linear-gradient(135deg, #f6f8fa 60%, #e9eef3 100%);
+}
+.personnel-card-list {
+  padding: 0 30rpx;
+}
+.person-card {
+  display: flex;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.08);
+  margin-bottom: 28rpx;
+  padding: 24rpx 20rpx;
+  align-items: flex-start;
+}
+.person-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+  object-fit: cover;
+  margin-right: 20rpx;
+}
+.person-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.person-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6rpx;
+}
+.person-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #222;
+  margin-right: 12rpx;
+}
+.person-title {
+  font-size: 26rpx;
+  color: #888;
+  margin-right: 8rpx;
+}
+.person-v {
+  width: 32rpx;
+  height: 32rpx;
+}
+.person-hospital {
+  font-size: 26rpx;
+  color: #2176ff;
+  margin-bottom: 4rpx;
+}
+.person-major {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+.person-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10rpx;
+}
+.person-tag {
+  background: #b71c1c;
+  color: #fff;
+  font-size: 22rpx;
+  border-radius: 8rpx;
+  padding: 4rpx 16rpx;
+  margin-right: 10rpx;
+  margin-bottom: 6rpx;
+}
+.person-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+.person-btn {
+  font-size: 26rpx;
+  border-radius: 100rpx;
+  padding: 8rpx 28rpx;
+  margin-right: 16rpx;
+  background: #f5f7fa;
+  color: #2176ff;
+}
+.person-btn.follow {
+  background: #2176ff;
+  color: #fff;
+}
+.person-btn.msg {
+  background: #e3f2fd;
+  color: #2176ff;
+}
+.person-btn.detail {
+  background: #fff3e0;
+  color: #e67c23;
+} 
+.personnel-bg {
+  padding-top: 220rpx;
+} 

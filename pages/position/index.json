@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "岗位链",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": false,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {}
+}

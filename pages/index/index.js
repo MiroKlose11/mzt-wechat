@@ -387,5 +387,15 @@ Page({
         }
       }
     });
+  },
+
+  goToPersonnel() {
+    console.log('点击了消息按钮，准备跳转到人员链页面');
+    wx.navigateTo({
+      url: '/pages/personnel/index',
+      fail: function(err) {
+        console.error('跳转失败', err);
+      }
+    });
   }
 })
