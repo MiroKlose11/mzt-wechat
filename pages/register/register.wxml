@@ -1,0 +1,44 @@
+<view class="register-container">
+  <!-- 返回按钮 -->
+  <view class="back-btn" bindtap="goBack">
+    <image class="back-icon" src="/images/back-arrow.png"></image>
+  </view>
+
+  <!-- 标题 -->
+  <view class="title">
+    <text class="title-text">手机号快速注册</text>
+  </view>
+
+  <!-- 注册表单 -->
+  <view class="register-form">
+    <!-- 手机号输入 -->
+    <view class="input-group">
+      <view class="phone-input">
+        <text class="country-code">+86</text>
+        <input class="phone-field" type="number" placeholder="输入手机号" value="{{phone}}" bindinput="onPhoneInput" maxlength="11" />
+      </view>
+    </view>
+
+    <!-- 验证码输入 -->
+    <view class="input-group">
+      <view class="code-input">
+        <input class="code-field" type="number" placeholder="输入验证码" value="{{smsCode}}" bindinput="onSmsCodeInput" maxlength="6" />
+        <view class="get-code-btn {{canGetCode ? '' : 'disabled'}}" bindtap="getSmsCode">
+          {{codeText}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 密码输入 -->
+    <view class="input-group">
+      <view class="password-input">
+        <input class="password-field" type="{{showPassword ? 'text' : 'password'}}" placeholder="输入密码" value="{{password}}" bindinput="onPasswordInput" />
+      </view>
+    </view>
+
+    <!-- 注册按钮 -->
+    <view class="register-btn {{canRegister ? '' : 'disabled'}}" bindtap="doRegister">
+      注册
+    </view>
+  </view>
+</view>

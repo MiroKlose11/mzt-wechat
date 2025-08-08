@@ -1,0 +1,74 @@
+<view class="login-container">
+  <!-- 顶部背景区域 -->
+  <view class="header-bg">
+    <text class="welcome-text">欢迎登录</text>
+    <image class="logo-bg" src="/images/logo-bg.png" mode="aspectFit"></image>
+  </view>
+
+  <!-- 登录表单区域 -->
+  <view class="login-form">
+    <!-- 微信授权登录 -->
+    <view class="wechat-login">
+      <text class="wechat-title">微信授权登录</text>
+      <view class="wechat-btn" bindtap="wechatLogin">
+        <image class="wechat-icon" src="/images/wechat-icon.png"></image>
+      </view>
+    </view>
+
+    <!-- 登录方式切换 -->
+    <view class="login-tabs">
+      <view class="tab-item {{loginType === 'sms' ? 'active' : ''}}" data-type="sms" bindtap="switchLoginType">
+        验证码登录
+      </view>
+      <view class="tab-item {{loginType === 'password' ? 'active' : ''}}" data-type="password" bindtap="switchLoginType">
+        密码登录
+      </view>
+    </view>
+
+    <!-- 手机号输入 -->
+    <view class="input-group">
+      <view class="phone-input">
+        <text class="country-code">+86</text>
+        <input class="phone-field" type="number" placeholder="输入手机号" value="{{phone}}" bindinput="onPhoneInput" maxlength="11" />
+      </view>
+    </view>
+
+    <!-- 验证码/密码输入 -->
+    <view class="input-group" wx:if="{{loginType === 'sms'}}">
+      <view class="code-input">
+        <input class="code-field" type="number" placeholder="输入密码" value="{{smsCode}}" bindinput="onSmsCodeInput" maxlength="6" />
+        <view class="get-code-btn {{canGetCode ? '' : 'disabled'}}" bindtap="getSmsCode">
+          {{codeText}}
+        </view>
+      </view>
+    </view>
+
+    <view class="input-group" wx:if="{{loginType === 'password'}}">
+      <view class="password-input">
+        <input class="password-field" type="{{showPassword ? 'text' : 'password'}}" placeholder="输入密码" value="{{password}}" bindinput="onPasswordInput" />
+        <view class="forgot-password" bindtap="forgotPassword">忘记密码</view>
+      </view>
+    </view>
+
+    <!-- 用户协议 -->
+    <view class="agreement">
+      <view class="checkbox {{agreed ? 'checked' : ''}}" bindtap="toggleAgreement">
+        <image wx:if="{{agreed}}" class="check-icon" src="/images/check.png"></image>
+      </view>
+      <text class="agreement-text">我已阅读并同意</text>
+      <text class="link-text" bindtap="showUserAgreement">用户手册</text>
+      <text class="agreement-text">和</text>
+      <text class="link-text" bindtap="showPrivacyPolicy">隐私政策</text>
+    </view>
+
+    <!-- 登录按钮 -->
+    <view class="login-btn {{canLogin ? '' : 'disabled'}}" bindtap="doLogin">
+      登录
+    </view>
+
+    <!-- 注册链接 -->
+    <view class="register-link" wx:if="{{loginType === 'password'}}" bindtap="goRegister">
+      没有账号？<text class="link-text">注册</text>
+    </view>
+  </view>
+</view>

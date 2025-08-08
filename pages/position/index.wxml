@@ -1,8 +1,7 @@
 <!-- 顶部导航栏和背景图 -->
 <view class="custom-header">
   <!-- 背景图 -->
-  <image class="nav-bg" src="/images/nav/nav-bg.png" mode="widthFix"></image>
-  
+  <image class="nav-bg" src="/images/nav/position-bg.png" mode="widthFix"></image>
   <!-- 导航栏 -->
   <view class="custom-nav-bar" style="padding-top: {{statusBarHeight}}px; background-color: rgba(75, 153, 255, {{navOpacity}});">
     <view class="nav-left">
@@ -10,7 +9,6 @@
       <text class="page-title">岗位链</text>
     </view>
     <view class="nav-right">
-      <image class="share-btn" src="/images/nav/share.png"></image>
       <image class="more-btn" src="/images/nav/more.png"></image>
     </view>
   </view>

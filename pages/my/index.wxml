@@ -1,39 +1,19 @@
-<!-- 顶部导航栏 -->
-<view class="custom-nav-bar" style="padding-top: {{statusBarHeight}}px;">
-  <view class="nav-left">
-    <image class="back-btn" src="/images/nav/back.png" bindtap="goBack"></image>
-  </view>
-  <view class="nav-right">
-    <image class="more-btn" src="/images/nav/more.png"></image>
+<!-- 顶部导航栏和背景图 -->
+<view class="custom-header">
+  <!-- 背景图 -->
+  <image class="nav-bg" src="/images/nav/nav-bg.png" mode="widthFix"></image>
+  <!-- 导航栏 -->
+  <view class="custom-nav-bar" style="padding-top: {{statusBarHeight}}px; background-color: rgba(75, 153, 255, {{navOpacity}});">
+    <view class="nav-left">
+      <image class="back-btn" src="/images/nav/back.png" bindtap="goBack"></image>
+    </view>
+    <view class="nav-right">
+      <image class="more-btn" src="/images/nav/more.png"></image>
+    </view>
   </view>
 </view>
 
-<!-- 用户头像区域 -->
-<view class="user-avatar-section">
-  <!-- 主要头像 -->
-  <view class="main-avatar">
-    <image class="avatar-img" src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
-  </view>
-  
-  <!-- 在线状态 -->
-  <view class="online-status">
-    <view class="online-dot"></view>
-    <text class="online-text">Online</text>
-  </view>
-  
-  <!-- 小图片展示 -->
-  <view class="small-images">
-    <view class="small-img-item"></view>
-    <view class="small-img-item"></view>
-    <view class="small-img-item"></view>
-    <view class="small-img-item"></view>
-  </view>
-  
-  <!-- 右侧小头像 -->
-  <view class="small-avatar">
-    <image class="small-avatar-img" src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
-  </view>
-</view>
+<!-- 其余内容区域 -->
 
 <!-- 用户信息区域 -->
 <view class="user-info-section">
