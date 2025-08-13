@@ -1,18 +1,19 @@
 page {
-  background: #f5f5f5;
+  background: #ffffff;
   min-height: 100vh;
 }
 
 .register-container {
   min-height: 100vh;
-  padding: 40rpx 60rpx;
+  padding: 120rpx 60rpx 40rpx 60rpx;
   position: relative;
+  background: #ffffff;
 }
 
 /* 返回按钮 */
 .back-btn {
   position: absolute;
-  top: 40rpx;
+  top: 100rpx;
   left: 60rpx;
   width: 60rpx;
   height: 60rpx;
@@ -30,22 +31,20 @@ page {
 /* 标题 */
 .title {
   margin-top: 120rpx;
-  margin-bottom: 80rpx;
+  margin-bottom: 120rpx;
   text-align: center;
 }
 
 .title-text {
-  font-size: 48rpx;
-  font-weight: 600;
-  color: #333;
+  font-size: 52rpx;
+  font-weight: 500;
+  color: #333333;
 }
 
 /* 注册表单 */
 .register-form {
-  background: #fff;
-  border-radius: 24rpx;
-  padding: 60rpx;
-  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.08);
+  background: transparent;
+  padding: 0;
 }
 
 /* 输入框组 */
@@ -58,18 +57,18 @@ page {
 .password-input {
   display: flex;
   align-items: center;
-  background: #f8f9fa;
-  border-radius: 16rpx;
-  padding: 0 30rpx;
-  height: 100rpx;
+  background: #f5f5f5;
+  border-radius: 50rpx;
+  padding: 0 40rpx;
+  height: 106rpx;
 }
 
 .country-code {
   font-size: 32rpx;
-  color: #333;
+  color: #333333;
   margin-right: 20rpx;
   padding-right: 20rpx;
-  border-right: 2rpx solid #e9ecef;
+  border-right: 1rpx solid #e0e0e0;
 }
 
 .phone-field,
@@ -77,7 +76,7 @@ page {
 .password-field {
   flex: 1;
   font-size: 32rpx;
-  color: #333;
+  color: #333333;
   background: transparent;
   border: none;
   outline: none;
@@ -86,40 +85,40 @@ page {
 .phone-field::placeholder,
 .code-field::placeholder,
 .password-field::placeholder {
-  color: #999;
+  color: #999999;
 }
 
 .get-code-btn {
   font-size: 28rpx;
-  color: #287BFF;
-  padding: 16rpx 24rpx;
-  border-radius: 8rpx;
-  background: rgba(40, 123, 255, 0.1);
+  color: #007AFF;
+  padding: 0;
+  background: transparent;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .get-code-btn.disabled {
-  color: #999;
-  background: #f0f0f0;
+  color: #cccccc;
+  background: transparent;
 }
 
 /* 注册按钮 */
 .register-btn {
   width: 100%;
-  height: 100rpx;
-  background: #287BFF;
+  height: 106rpx;
+  background: #007AFF;
   border-radius: 50rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 36rpx;
-  font-weight: 500;
-  color: #fff;
-  margin-top: 60rpx;
-  box-shadow: 0 8rpx 24rpx rgba(40, 123, 255, 0.3);
+  font-weight: 400;
+  color: #ffffff;
+  margin-top: 80rpx;
+  box-shadow: none;
 }
 
 .register-btn.disabled {
-  background: #ccc;
+  background: #266EFE;
   box-shadow: none;
 }

@@ -1,0 +1,24 @@
+<view class="cropper-container">
+  
+  <view class="cropper-content">
+    <!-- 图片显示区域 -->
+    <view class="image-wrapper" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" bindtouchcancel="touchEnd">
+      <image class="crop-image" src="{{src}}" style="width: {{imageWidth}}px; height: {{imageHeight}}px; left: {{imageLeft}}px; top: {{imageTop}}px;" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" bindtouchcancel="touchEnd"></image>
+      
+      <!-- 裁剪框 -->
+      <view class="crop-frame" style="width: {{width}}px; height: {{height}}px; left: {{cut.x}}px; top: {{cut.y}}px;"></view>
+      
+      <!-- 用于裁剪的canvas，隐藏 -->
+      <canvas type="2d" id="cropCanvas" style="position: absolute; left: -9999px; width: {{width}}px; height: {{height}}px;"></canvas>
+    </view>
+    
+    <!-- 操作说明 -->
+    <view class="crop-tips">拖动图片调整位置，双指缩放调整大小</view>
+    
+    <!-- 操作按钮 -->
+    <view class="btn-group">
+      <view class="cancel-btn" bindtap="cancelCrop">取消</view>
+      <view class="confirm-btn" bindtap="confirmCrop">确定</view>
+    </view>
+  </view>
+</view>

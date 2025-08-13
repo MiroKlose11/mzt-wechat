@@ -1,0 +1,170 @@
+<view class="certification-container">
+
+  <!-- 认证类型切换 -->
+  <view class="cert-tabs">
+    <view class="tab-item {{currentTab === 'personal' ? 'active' : ''}}" bindtap="switchTab" data-tab="personal">
+      个人认证
+    </view>
+    <view class="tab-item {{currentTab === 'enterprise' ? 'active' : ''}}" bindtap="switchTab" data-tab="enterprise">
+      企业认证
+    </view>
+  </view>
+
+  <!-- 个人认证内容 -->
+  <view class="personal-cert" wx:if="{{currentTab === 'personal'}}">
+    <!-- 认证步骤 -->
+    <view class="cert-steps">
+      <view class="step-item {{currentStep === 'photo' ? 'active' : ''}}" bindtap="goToStep" data-step="photo">
+        <view class="step-content-wrapper">
+          <view class="step-icon">📷</view>
+          <text class="step-text">形象照片</text>
+        </view>
+      </view>
+      <view class="step-line"></view>
+      <view class="step-item {{currentStep === 'basic' ? 'active' : ''}}" bindtap="goToStep" data-step="basic">
+        <view class="step-content-wrapper">
+          <view class="step-icon">📋</view>
+          <text class="step-text">基础信息</text>
+        </view>
+      </view>
+      <view class="step-line"></view>
+      <view class="step-item {{currentStep === 'identity' ? 'active' : ''}}" bindtap="goToStep" data-step="identity">
+        <view class="step-content-wrapper">
+          <view class="step-icon">🆔</view>
+          <text class="step-text">身份认证</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 步骤1: 形象照片 -->
+    <view class="step-content" wx:if="{{currentStep === 'photo'}}">
+      <view class="upload-section">
+        <text class="section-title">上传形象照片</text>
+        <view class="main-upload-area" bindtap="uploadPhoto">
+          <image wx:if="{{photoImage}}" class="main-uploaded-image" src="{{photoImage}}"></image>
+          <view wx:else class="main-upload-placeholder">
+            <image class="placeholder-avatar" src="/images/avatars/default-avatar.svg"></image>
+          </view>
+          <view wx:if="{{photoImage}}" class="delete-main-photo" catchtap="deleteMainPhoto">×</view>
+        </view>
+        <view class="thumbnail-grid">
+          <view class="thumbnail-item" wx:for="{{uploadedImages}}" wx:key="index">
+            <image class="thumbnail-image" src="{{item}}" bindtap="previewThumbnail" data-index="{{index}}"></image>
+            <view class="delete-icon" catchtap="deleteThumbnail" data-index="{{index}}">×</view>
+          </view>
+          <view class="thumbnail-item add-thumbnail" bindtap="addMoreImages">
+            <text class="add-icon">+</text>
+          </view>
+        </view>
+        <text class="upload-tip">支持格式：.jpg .png .svg .gif，单个文件不超过5MB</text>
+      </view>
+      <view class="next-btn" bindtap="goToNextStep">
+        提交并下一步
+      </view>
+    </view>
+    
+    <!-- 步骤2: 基础信息 -->
+    <view class="step-content" wx:if="{{currentStep === 'basic'}}">
+      <view class="form-section">
+        
+        <view class="name-gender-row">
+          <view class="form-item name-item">
+            <text class="form-label">姓名</text>
+            <input class="form-input" placeholder="请输入真实姓名" data-field="name" bindinput="inputChange" value="{{certData.name}}" />
+          </view>
+          
+          <view class="form-item gender-item">
+            <text class="form-label">性别</text>
+            <view class="gender-selector">
+              <view class="gender-option {{certData.gender === '男' ? 'selected' : ''}}" bindtap="selectGender" data-gender="男">男</view>
+              <view class="gender-option {{certData.gender === '女' ? 'selected' : ''}}" bindtap="selectGender" data-gender="女">女</view>
+            </view>
+          </view>
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">所在地区</text>
+          <picker mode="region" bindchange="regionChange" value="{{region}}">
+            <view class="picker-input {{!region[0] ? 'placeholder' : ''}}">
+              {{region[0] ? region[0] + ' ' + region[1] + ' ' + region[2] : '请选择所在地区'}}
+              <view class="picker-arrow">▾</view>
+            </view>
+          </picker>
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">身份选择</text>
+          <picker bindchange="identityTypeChange" value="{{identityTypeIndex}}" range="{{identityTypes}}">
+            <view class="picker-input {{!identityTypes[identityTypeIndex] ? 'placeholder' : ''}}">
+              {{identityTypes[identityTypeIndex] || '请选择身份类型'}}
+              <view class="picker-arrow">▾</view>
+            </view>
+          </picker>
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">职称职务</text>
+          <input class="form-input search-input" placeholder="输入关键词搜索" data-field="jobTitle" bindinput="inputChange" value="{{certData.jobTitle}}" />
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">擅长领域</text>
+          <input class="form-input search-input" placeholder="输入关键词搜索" data-field="expertise" bindinput="inputChange" value="{{certData.expertise}}" />
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">所在企业</text>
+          <input class="form-input search-input" placeholder="输入关键词搜索机构名称" data-field="company" bindinput="inputChange" value="{{certData.company}}" />
+        </view>
+        
+        <view class="form-item" wx:if="{{!certData.company}}">
+          <view class="company-not-found">未搜索到机构请填写企业名称</view>
+        </view>
+      </view>
+      
+      <view class="next-btn" bindtap="goToNextStep">
+        提交并下一步
+      </view>
+    </view>
+    
+    <!-- 步骤3: 身份认证 -->
+    <view class="step-content" wx:if="{{currentStep === 'identity'}}">
+      <view class="form-section">
+        <text class="section-title">身份认证</text>
+        
+        <view class="identity-upload">
+          <text class="upload-label">上传身份证正面照片</text>
+          <view class="id-upload-area" bindtap="uploadIdFront">
+            <image wx:if="{{certData.idFrontImage}}" class="id-uploaded-image" src="{{certData.idFrontImage}}"></image>
+            <view wx:else class="id-upload-placeholder">
+              <text class="upload-icon">+</text>
+              <text class="upload-text">点击上传</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class="identity-upload">
+          <text class="upload-label">上传身份证背面照片</text>
+          <view class="id-upload-area" bindtap="uploadIdBack">
+            <image wx:if="{{certData.idBackImage}}" class="id-uploaded-image" src="{{certData.idBackImage}}"></image>
+            <view wx:else class="id-upload-placeholder">
+              <text class="upload-icon">+</text>
+              <text class="upload-text">点击上传</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="next-btn" bindtap="goToNextStep">
+        提交认证
+      </view>
+    </view>
+  </view>
+
+  <!-- 企业认证内容 (暂时占位) -->
+  <view class="enterprise-cert" wx:if="{{currentTab === 'enterprise'}}">
+    <view class="coming-soon">
+      <text>企业认证功能即将上线</text>
+    </view>
+  </view>
+</view>

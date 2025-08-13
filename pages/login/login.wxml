@@ -2,7 +2,7 @@
   <!-- 顶部背景区域 -->
   <view class="header-bg">
     <text class="welcome-text">欢迎登录</text>
-    <image class="logo-bg" src="/images/logo-bg.png" mode="aspectFit"></image>
+    <image class="logo-bg" src="/images/nav/注册页面背景.png" mode="aspectFit"></image>
   </view>
 
   <!-- 登录表单区域 -->
@@ -52,9 +52,7 @@
 
     <!-- 用户协议 -->
     <view class="agreement">
-      <view class="checkbox {{agreed ? 'checked' : ''}}" bindtap="toggleAgreement">
-        <image wx:if="{{agreed}}" class="check-icon" src="/images/check.png"></image>
-      </view>
+      <view class="checkbox {{agreed ? 'checked' : ''}}" bindtap="toggleAgreement"></view>
       <text class="agreement-text">我已阅读并同意</text>
       <text class="link-text" bindtap="showUserAgreement">用户手册</text>
       <text class="agreement-text">和</text>

@@ -1,7 +1,7 @@
 <view class="register-container">
   <!-- 返回按钮 -->
   <view class="back-btn" bindtap="goBack">
-    <image class="back-icon" src="/images/back-arrow.png"></image>
+    <image class="back-icon" src="/images/nav/back.png"></image>
   </view>
 
   <!-- 标题 -->

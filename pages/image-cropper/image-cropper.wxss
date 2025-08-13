@@ -1,0 +1,78 @@
+page {
+  background: #000;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.cropper-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: #fff;
+}
+
+.cropper-title {
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 32rpx;
+  font-weight: 500;
+  background: #000;
+}
+
+.cropper-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.image-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.crop-image {
+  position: absolute;
+  touch-action: none;
+}
+
+.crop-frame {
+  position: absolute;
+  border: 2rpx solid #fff;
+  box-sizing: border-box;
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+}
+
+.crop-tips {
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 24rpx;
+  color: #ccc;
+}
+
+.btn-group {
+  display: flex;
+  padding: 30rpx;
+  justify-content: space-between;
+}
+
+.cancel-btn, .confirm-btn {
+  width: 45%;
+  height: 80rpx;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+
+.cancel-btn {
+  background: #333;
+  color: #fff;
+}
+
+.confirm-btn {
+  background: #4A90E2;
+  color: #fff;
+}
