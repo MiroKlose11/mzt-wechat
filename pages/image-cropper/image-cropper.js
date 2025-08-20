@@ -25,18 +25,26 @@ Page({
     const windowInfo = wx.getWindowInfo();
     const windowWidth = windowInfo.windowWidth;
     
-    // 计算裁剪框大小，保持正方形，宽度占满屏幕
-    const size = windowWidth;
+    // 获取裁剪比例参数，默认为1:1
+    const aspectRatio = options.aspectRatio || '1:1';
+    let width = windowWidth;
+    let height = windowWidth;
+    
+    // 根据比例设置裁剪框高度
+    if (aspectRatio === '16:9') {
+      height = windowWidth * 9 / 16;
+    }
     
     this.setData({
       src: options.src,
-      width: size,
-      height: size,
+      width: width,
+      height: height,
+      aspectRatio: aspectRatio, // 保存裁剪比例，供后续使用
       cut: {
         x: 0,
         y: 60,
-        width: size,
-        height: size
+        width: width,
+        height: height
       }
     });
     
@@ -47,14 +55,49 @@ Page({
         // 计算图片初始位置和大小
         const imgWidth = res.width;
         const imgHeight = res.height;
-        // 修改缩放逻辑，确保图片填满裁剪区域
-        const scale = size / Math.min(imgWidth, imgHeight);
+        const width = this.data.width;
+        const height = this.data.height;
+        
+        // 判断图片是横图还是竖图
+        const isLandscape = imgWidth > imgHeight;
+        
+        // 计算适合的缩放比例，保持原始比例
+        let scale = 1.0;
+        
+        // 根据裁剪框比例和图片方向决定缩放策略
+        if (this.data.aspectRatio === '16:9') {
+          // 16:9 裁剪框 - 宽屏模式
+          if (isLandscape) {
+            // 横图：确保高度适配裁剪框，宽度可以超出
+            scale = height / imgHeight;
+          } else {
+            // 竖图：确保宽度适配裁剪框，高度可以超出
+            scale = width / imgWidth;
+          }
+        } else {
+          // 1:1 裁剪框 - 正方形模式
+          if (isLandscape) {
+            // 横图：确保高度适配裁剪框，宽度可以超出
+            scale = height / imgHeight;
+          } else {
+            // 竖图：确保宽度适配裁剪框，高度可以超出
+            scale = width / imgWidth;
+          }
+        }
+        
+        // 应用缩放比例
+        const finalWidth = imgWidth * scale;
+        const finalHeight = imgHeight * scale;
+        
+        // 居中显示
+        const finalLeft = (width - finalWidth) / 2;
+        const finalTop = (height - finalHeight) / 2 + 60;
         
         this.setData({
-          imageWidth: imgWidth * scale,
-          imageHeight: imgHeight * scale,
-          imageLeft: (size - imgWidth * scale) / 2,
-          imageTop: (size - imgHeight * scale) / 2 + 60
+          imageWidth: finalWidth,
+          imageHeight: finalHeight,
+          imageLeft: finalLeft,
+          imageTop: finalTop
         });
       }
     });

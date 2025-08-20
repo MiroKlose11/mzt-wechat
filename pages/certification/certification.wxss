@@ -116,7 +116,7 @@ page {
 .name-gender-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20rpx;
+  margin-bottom: 15rpx;
 }
 
 .name-item {
@@ -191,7 +191,7 @@ page {
 }
 
 .form-item {
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
 }
 
 .form-label {
@@ -281,52 +281,174 @@ page {
   box-sizing: border-box;
 }
 
-/* 身份证上传样式 */
-.identity-upload {
-  margin-bottom: 30rpx;
+/* VIP嘉宾选项 */
+.vip-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 10rpx 0;
 }
 
-.upload-label {
+.vip-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #333333;
+  border-radius: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  background: #ffffff;
+}
+
+.vip-checkbox.checked {
+  background: #333333;
+  border-color: #333333;
+}
+
+.checkbox-icon {
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.vip-label {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-right: 20rpx;
+}
+
+.vip-code-input {
+  flex: 1;
+  height: 60rpx;
+  background: #ffffff;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
   font-size: 28rpx;
   color: #333333;
+}
+
+/* 证书上传区域 */
+.cert-upload-section {
+  margin-bottom: 20rpx;
+}
+
+.upload-section-title {
+  font-size: 30rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.upload-tip {
+  font-size: 24rpx;
+  color: #999999;
   margin-bottom: 20rpx;
   display: block;
 }
 
-.id-upload-area {
-  width: 100%;
-  height: 360rpx;
-  background: #f5f5f5;
-  border-radius: 8rpx;
+.cert-upload-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.cert-upload-item {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+}
+
+.cert-upload-area {
+  width: 50%; /* 资料上传页面保持原来大小 */
+  min-height: 20rpx;
+  padding-bottom: 35%; /* 资料上传页面保持原来大小 */
+  background: #f8f9fa;
+  border: 2rpx dashed #4A90E2;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+  /* 靠左对齐，移除居中 */
+}
+
+/* 法人认证页面专用的上传区域样式 */
+.legal-person-upload-area {
+  width: 90%; /* 法人认证页面增大宽度，更美观大气 */
+  min-height: 20rpx;
+  padding-bottom: 50%; /* 法人认证页面增大图片区域，适合身份证比例 */
+  background: #f8f9fa;
+  border: 2rpx dashed #4A90E2;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
   position: relative;
 }
 
-.id-uploaded-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 8rpx;
+/* 个人身份认证页面专用的上传区域样式 */
+.personal-id-upload-area {
+  width: 90%; /* 个人身份认证页面增大宽度，更美观大气 */
+  min-height: 20rpx;
+  padding-bottom: 50%; /* 个人身份认证页面增大图片区域，适合身份证比例 */
+  background: #f8f9fa;
+  border: 2rpx dashed #4A90E2;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  position: relative;
 }
 
-.id-upload-placeholder {
+/* 个人证书上传区域样式 */
+.personal-cert-upload-area {
+  width: 90%; /* 个人证书上传页面增大宽度，更美观大气 */
+  min-height: 20rpx;
+  padding-bottom: 50%; /* 个人证书上传页面增大图片区域，适合证书比例 */
+  background: #f8f9fa;
+  border: 2rpx dashed #4A90E2;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.cert-uploaded-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+  object-fit: cover; /* 保持原始比例，可能会裁剪 */
+}
+
+.cert-upload-placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.upload-icon {
-  font-size: 60rpx;
-  color: #999999;
-  margin-bottom: 10rpx;
+.cert-placeholder-icon {
+  width: 80rpx;
+  height: 80rpx;
+  opacity: 0.6;
 }
 
-.upload-text {
-  font-size: 28rpx;
+.cert-placeholder-text {
+  font-size: 24rpx;
   color: #999999;
+  text-align: center;
+}
+
+.cert-upload-label {
+  font-size: 24rpx;
+  color: #666666;
+  text-align: center;
 }  
 
 
@@ -334,7 +456,7 @@ page {
 .step-content {
   background: #ffffff;
   margin: 0;
-  padding: 40rpx 30rpx;
+  padding: 20rpx 30rpx 120rpx 30rpx;
   border-radius: 0;
 }
 
@@ -494,14 +616,138 @@ page {
   background: #3A7BC8;
 }
 
-/* 企业认证占位 */
+/* 企业认证 */
 .enterprise-cert {
-  padding: 200rpx 0;
-  text-align: center;
-  background: #ffffff;
+  background: #f8f9fa;
 }
 
 .coming-soon {
+  padding: 200rpx 0;
+  text-align: center;
   font-size: 32rpx;
   color: #999999;
+}
+
+/* 企业上传区域样式 */
+.enterprise-upload-area {
+  width: 100%;
+  height: 0;
+  padding-bottom: 42.86%; /* 21:9的比例 */
+  position: relative;
+  border-radius: 8rpx;
+  overflow: hidden;
+  margin-bottom: 30rpx;
+  border: 2rpx dashed #4A90E2;
+  background: #f8f9fa;
+}
+
+/* 企业上传后显示的图片 */
+.enterprise-uploaded-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  padding-bottom: 56.25%; /* 上传后显示16:9比例 */
+}
+
+
+
+.enterprise-upload-placeholder {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.enterprise-bg-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.upload-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50rpx;
+  color: #4A90E2;
+  margin-bottom: 20rpx;
+  z-index: 2;
+}
+
+.placeholder-text {
+  font-size: 28rpx;
+  color: #ffffff;
+  z-index: 2;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* 上传按钮样式 */
+.upload-btn {
+  width: 300rpx; /* 增加宽度避免文字换行 */
+  height: 60rpx;
+  line-height: 60rpx;
+  background: #4A90E2; /* 蓝色背景 */
+  border: 1rpx solid #4A90E2;
+  border-radius: 8rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #ffffff; /* 白色文字 */
+  margin-bottom: 30rpx;
+}
+
+/* 协议相关样式 */
+.agreement-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding: 20rpx 0;
+}
+
+.agreement-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  background: #fff;
+}
+
+.agreement-checkbox.checked {
+  background-color: #4A90E2;
+  border-color: #4A90E2;
+}
+
+.agreement-checkbox .checkbox-icon {
+  font-size: 24rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.agreement-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.agreement-link {
+  font-size: 28rpx;
+  color: #4A90E2;
+  text-decoration: underline;
 }

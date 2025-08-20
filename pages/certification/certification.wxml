@@ -130,26 +130,89 @@
     <!-- 步骤3: 身份认证 -->
     <view class="step-content" wx:if="{{currentStep === 'identity'}}">
       <view class="form-section">
-        <text class="section-title">身份认证</text>
+        <!-- VIP嘉宾选项 -->
+        <view class="vip-section">
+          <view class="vip-checkbox {{certData.isVip ? 'checked' : ''}}" bindtap="toggleVip">
+            <text class="checkbox-icon">{{certData.isVip ? '✓' : ''}}</text>
+          </view>
+          <text class="vip-label">我是VIP嘉宾</text>
+          <input class="vip-code-input" placeholder="请填写VIP嘉宾码" data-field="vipCode" bindinput="inputChange" value="{{certData.vipCode}}" />
+        </view>
         
-        <view class="identity-upload">
-          <text class="upload-label">上传身份证正面照片</text>
-          <view class="id-upload-area" bindtap="uploadIdFront">
-            <image wx:if="{{certData.idFrontImage}}" class="id-uploaded-image" src="{{certData.idFrontImage}}"></image>
-            <view wx:else class="id-upload-placeholder">
-              <text class="upload-icon">+</text>
-              <text class="upload-text">点击上传</text>
+        <!-- 身份证上传 -->
+        <view class="cert-upload-section">
+          <text class="upload-section-title">请上传身份证</text>
+          <text class="upload-tip">支持jpg/png格式，文件大小在2M以内</text>
+          
+          <view class="cert-upload-grid">
+            <view class="cert-upload-item">
+              <view class="personal-id-upload-area" bindtap="uploadIdFront">
+                <image wx:if="{{certData.idFrontImage}}" class="cert-uploaded-image" src="{{certData.idFrontImage}}"></image>
+                <view wx:else class="cert-upload-placeholder">
+                  <image class="cert-placeholder-icon" src="/images/id-front-icon.svg"></image>
+                </view>
+              </view>
+              <text class="cert-upload-label">上传正面</text>
+            </view>
+            
+            <view class="cert-upload-item">
+              <view class="personal-id-upload-area" bindtap="uploadIdBack">
+                <image wx:if="{{certData.idBackImage}}" class="cert-uploaded-image" src="{{certData.idBackImage}}"></image>
+                <view wx:else class="cert-upload-placeholder">
+                  <image class="cert-placeholder-icon" src="/images/id-back-icon.svg"></image>
+                </view>
+              </view>
+              <text class="cert-upload-label">上传反面</text>
             </view>
           </view>
         </view>
         
-        <view class="identity-upload">
-          <text class="upload-label">上传身份证背面照片</text>
-          <view class="id-upload-area" bindtap="uploadIdBack">
-            <image wx:if="{{certData.idBackImage}}" class="id-uploaded-image" src="{{certData.idBackImage}}"></image>
-            <view wx:else class="id-upload-placeholder">
-              <text class="upload-icon">+</text>
-              <text class="upload-text">点击上传</text>
+        <!-- 医师资格证和传资格证书 -->
+        <view class="cert-upload-section">
+          <view class="cert-upload-grid">
+            <view class="cert-upload-item">
+              <text class="upload-section-title">请上传医师资格证</text>
+              <view class="personal-cert-upload-area" bindtap="uploadDoctorCert">
+                <image wx:if="{{certData.doctorCertImage}}" class="cert-uploaded-image" src="{{certData.doctorCertImage}}"></image>
+                <view wx:else class="cert-upload-placeholder">
+                  <text class="cert-placeholder-text">医师资格证</text>
+                </view>
+              </view>
+            </view>
+            
+            <view class="cert-upload-item">
+              <text class="upload-section-title">请上传资格证书</text>
+              <view class="personal-cert-upload-area" bindtap="uploadQualificationCert">
+                <image wx:if="{{certData.qualificationCertImage}}" class="cert-uploaded-image" src="{{certData.qualificationCertImage}}"></image>
+                <view wx:else class="cert-upload-placeholder">
+                  <image class="cert-placeholder-icon" src="/images/cert-icon.svg"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 其他证书 -->
+        <view class="cert-upload-section">
+          <view class="cert-upload-grid">
+            <view class="cert-upload-item">
+              <text class="upload-section-title">请上传其他证书</text>
+              <view class="personal-cert-upload-area" bindtap="uploadOtherCert1">
+                <image wx:if="{{certData.otherCert1Image}}" class="cert-uploaded-image" src="{{certData.otherCert1Image}}"></image>
+                <view wx:else class="cert-upload-placeholder">
+                  <image class="cert-placeholder-icon" src="/images/cert-icon.svg"></image>
+                </view>
+              </view>
+            </view>
+            
+            <view class="cert-upload-item">
+              <text class="upload-section-title">请上传其他证书</text>
+              <view class="personal-cert-upload-area" bindtap="uploadOtherCert2">
+                <image wx:if="{{certData.otherCert2Image}}" class="cert-uploaded-image" src="{{certData.otherCert2Image}}"></image>
+                <view wx:else class="cert-upload-placeholder">
+                  <image class="cert-placeholder-icon" src="/images/cert-icon.svg"></image>
+                </view>
+              </view>
             </view>
           </view>
         </view>
@@ -161,10 +224,196 @@
     </view>
   </view>
 
-  <!-- 企业认证内容 (暂时占位) -->
+  <!-- 企业认证内容 -->
   <view class="enterprise-cert" wx:if="{{currentTab === 'enterprise'}}">
-    <view class="coming-soon">
-      <text>企业认证功能即将上线</text>
+    <!-- 认证步骤 -->
+    <view class="cert-steps">
+      <view class="step-item {{currentStep === 'photo' ? 'active' : ''}}" bindtap="goToStep" data-step="photo">
+        <view class="step-content-wrapper">
+          <view class="step-icon">🏢</view>
+          <text class="step-text">企业信息</text>
+        </view>
+      </view>
+      <view class="step-line"></view>
+      <view class="step-item {{currentStep === 'basic' ? 'active' : ''}}" bindtap="goToStep" data-step="basic">
+        <view class="step-content-wrapper">
+          <view class="step-icon">📄</view>
+          <text class="step-text">资料上传</text>
+        </view>
+      </view>
+      <view class="step-line"></view>
+      <view class="step-item {{currentStep === 'identity' ? 'active' : ''}}" bindtap="goToStep" data-step="identity">
+        <view class="step-content-wrapper">
+          <view class="step-icon">👤</view>
+          <text class="step-text">法人认证</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 步骤1: 企业信息 -->
+    <view class="step-content" wx:if="{{currentStep === 'photo'}}">
+      <view class="upload-section">
+        <text class="section-title">上传企业形象照片</text>
+        <view class="enterprise-upload-area" bindtap="uploadPhoto">
+          <image wx:if="{{enterpriseData.companyLogo}}" class="enterprise-uploaded-image" src="{{enterpriseData.companyLogo}}"></image>
+          <view wx:else class="enterprise-upload-placeholder">
+            <image class="enterprise-bg-image" src="https://meizhitong-1360563549.cos.ap-chengdu.myqcloud.com/images/uploads/11b9afd55ed8eb760380365b38d207d9.png"></image>
+            <view class="upload-icon">+</view>
+            <text class="placeholder-text">上传形象照片</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="form-section">
+        <view class="form-item">
+          <text class="form-label">企业名称</text>
+          <input class="form-input" placeholder="请输入企业名称" data-field="companyName" bindinput="inputEnterpriseChange" value="{{enterpriseData.companyName}}" />
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">所在地区</text>
+          <picker mode="region" bindchange="enterpriseRegionChange" value="{{enterpriseRegion}}">
+            <view class="picker-input {{!enterpriseRegion[0] ? 'placeholder' : ''}}">
+              {{enterpriseRegion[0] ? enterpriseRegion[0] + ' ' + enterpriseRegion[1] + ' ' + enterpriseRegion[2] : '请选择所在地区'}}
+              <view class="picker-arrow">▾</view>
+            </view>
+          </picker>
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">企业类型</text>
+          <picker bindchange="enterpriseTypeChange" value="{{enterpriseTypeIndex}}" range="{{enterpriseTypes}}">
+            <view class="picker-input {{!enterpriseTypes[enterpriseTypeIndex] ? 'placeholder' : ''}}">
+              {{enterpriseTypes[enterpriseTypeIndex] || '请选择企业类型'}}
+              <view class="picker-arrow">▾</view>
+            </view>
+          </picker>
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">所属领域</text>
+          <picker bindchange="enterpriseFieldChange" value="{{enterpriseFieldIndex}}" range="{{enterpriseFields}}">
+            <view class="picker-input {{!enterpriseFields[enterpriseFieldIndex] ? 'placeholder' : ''}}">
+              {{enterpriseFields[enterpriseFieldIndex] || '请选择所属领域'}}
+              <view class="picker-arrow">▾</view>
+            </view>
+          </picker>
+        </view>
+      </view>
+      
+      <view class="next-btn" bindtap="goToNextStep">
+        下一步
+      </view>
+    </view>
+
+    <!-- 步骤2: 资料上传 -->
+    <view class="step-content" wx:if="{{currentStep === 'basic'}}">
+      <view class="cert-upload-section">
+        <text class="upload-section-title">营业执照照片 *</text>
+        <text class="upload-tip">支持jpg/png格式，文件大小在2M以内</text>
+        
+        <view class="cert-upload-area" bindtap="uploadBusinessLicense">
+          <image wx:if="{{enterpriseData.businessLicense}}" class="cert-uploaded-image" src="{{enterpriseData.businessLicense}}"></image>
+          <view wx:else class="cert-upload-placeholder">
+            <text class="cert-placeholder-text">营业执照</text>
+          </view>
+        </view>
+        <view class="upload-btn" bindtap="uploadBusinessLicense">上传营业执照</view>
+      </view>
+      
+      <view class="cert-upload-section">
+        <text class="upload-section-title">医疗许可证照片 *</text>
+        <text class="upload-tip">支持jpg/png格式，文件大小在2M以内</text>
+        
+        <view class="cert-upload-area" bindtap="uploadMedicalLicense">
+          <image wx:if="{{enterpriseData.medicalLicense}}" class="cert-uploaded-image" src="{{enterpriseData.medicalLicense}}"></image>
+          <view wx:else class="cert-upload-placeholder">
+            <text class="cert-placeholder-text">医疗许可证</text>
+          </view>
+        </view>
+        <view class="upload-btn" bindtap="uploadMedicalLicense">上传医疗许可证</view>
+      </view>
+      
+      <view class="cert-upload-section">
+        <text class="upload-section-title">医疗器械经营许可证照片</text>
+        <text class="upload-tip">支持jpg/png格式，文件大小在2M以内</text>
+        
+        <view class="cert-upload-area" bindtap="uploadDeviceLicense">
+          <image wx:if="{{enterpriseData.deviceLicense}}" class="cert-uploaded-image" src="{{enterpriseData.deviceLicense}}"></image>
+          <view wx:else class="cert-upload-placeholder">
+            <text class="cert-placeholder-text">医疗器械经营许可证</text>
+          </view>
+        </view>
+        <view class="upload-btn" bindtap="uploadDeviceLicense">上传医疗器械经营许可证</view>
+      </view>
+      
+      <view class="next-btn" bindtap="goToNextStep">
+        下一步
+      </view>
+    </view>
+
+    <!-- 步骤3: 法人认证 -->
+    <view class="step-content" wx:if="{{currentStep === 'identity'}}">
+      <view class="cert-upload-section">
+        <text class="upload-section-title">法人证件照片 *</text>
+        <text class="upload-tip">请上传证件正反面照，支持jpg/png格式，文件大小在2M以内</text>
+        
+        <view class="cert-upload-grid">
+          <view class="cert-upload-item">
+            <view class="legal-person-upload-area" bindtap="uploadLegalPersonIdFront">
+              <image wx:if="{{enterpriseData.legalPersonIdFront}}" class="cert-uploaded-image" src="{{enterpriseData.legalPersonIdFront}}"></image>
+              <view wx:else class="cert-upload-placeholder">
+                <image class="cert-placeholder-icon" src="/images/id-front-icon.svg"></image>
+              </view>
+            </view>
+            <text class="cert-upload-label">上传正面照</text>
+          </view>
+          
+          <view class="cert-upload-item">
+            <view class="legal-person-upload-area" bindtap="uploadLegalPersonIdBack">
+              <image wx:if="{{enterpriseData.legalPersonIdBack}}" class="cert-uploaded-image" src="{{enterpriseData.legalPersonIdBack}}"></image>
+              <view wx:else class="cert-upload-placeholder">
+                <image class="cert-placeholder-icon" src="/images/id-back-icon.svg"></image>
+              </view>
+            </view>
+            <text class="cert-upload-label">上传反面照</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="form-section">
+        <view class="form-item">
+          <text class="form-label">法人姓名 *</text>
+          <input class="form-input" placeholder="请输入法人姓名" data-field="legalPersonName" bindinput="inputEnterpriseChange" value="{{enterpriseData.legalPersonName}}" />
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">法人证件号码 *</text>
+          <input class="form-input" placeholder="请输入法人证件号" data-field="legalPersonId" bindinput="inputEnterpriseChange" value="{{enterpriseData.legalPersonId}}" />
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">开户银行</text>
+          <input class="form-input" placeholder="请输入开户银行" data-field="bankName" bindinput="inputEnterpriseChange" value="{{enterpriseData.bankName}}" />
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">银行账户</text>
+          <input class="form-input" placeholder="请输入银行账户" data-field="bankAccount" bindinput="inputEnterpriseChange" value="{{enterpriseData.bankAccount}}" />
+        </view>
+      </view>
+      
+      <view class="agreement-section">
+          <view class="agreement-checkbox {{enterpriseData.agreeTerms ? 'checked' : ''}}" bindtap="toggleAgreeTerms">
+            <text class="checkbox-icon">{{enterpriseData.agreeTerms ? '✓' : ''}}</text>
+          </view>
+          <text class="agreement-text">我已阅读并同意 </text>
+          <text class="agreement-link">《企业认证用户协议》</text>
+        </view>
+      
+      <view class="next-btn" bindtap="goToNextStep">
+        提交认证
+      </view>
     </view>
   </view>
 </view>
