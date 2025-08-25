@@ -4,6 +4,7 @@ Page({
     phone: '',
     smsCode: '',
     password: '',
+    smsKey: '', // 短信验证码key
     agreed: false,
     showPassword: false,
     canGetCode: true,
@@ -46,7 +47,7 @@ Page({
     });
   },
 
-  // 获取验证码
+  // 获取短信验证码
   getSmsCode() {
     if (!this.data.canGetCode) return;
     
@@ -59,15 +60,21 @@ Page({
       return;
     }
 
-    // 发送验证码请求
     wx.request({
-      url: 'https://your-api.com/sms/send',
+      url: 'http://localhost:8080/auth/send-sms',
       method: 'POST',
+      header: {
+        'content-type': 'application/json'
+      },
       data: {
         phone: phone
       },
       success: (res) => {
-        if (res.data.success) {
+        if (res.data.code === '200') {
+          // 保存验证码key用于后续验证
+          this.setData({
+            smsKey: res.data.data
+          });
           wx.showToast({
             title: '验证码已发送',
             icon: 'success'
@@ -119,40 +126,98 @@ Page({
     wx.login({
       success: (res) => {
         if (res.code) {
-          // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          wx.request({
-            url: 'https://your-api.com/auth/wechat',
-            method: 'POST',
-            data: {
-              code: res.code
-            },
-            success: (result) => {
-              if (result.data.success) {
-                // 登录成功，保存用户信息
-                wx.setStorageSync('userInfo', result.data.userInfo);
-                wx.setStorageSync('token', result.data.token);
-                
-                wx.showToast({
-                  title: '登录成功',
-                  icon: 'success'
-                });
+          // 获取用户信息
+          wx.getUserProfile({
+            desc: '用于完善用户资料',
+            success: (userRes) => {
+              // 发送 res.code 到后台换取 openId, sessionKey, unionId
+              wx.request({
+                url: 'http://localhost:8080/auth/miniapp-login',
+                method: 'POST',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  loginType: 'wechat',
+                  code: res.code,
+                  nickName: userRes.userInfo.nickName,
+                  avatarUrl: userRes.userInfo.avatarUrl
+                },
+                success: (result) => {
+                  if (result.data.code === '200') {
+                    // 登录成功，保存token信息
+                    const tokenData = result.data.data;
+                    wx.setStorageSync('accessToken', tokenData.accessToken);
+                    wx.setStorageSync('refreshToken', tokenData.refreshToken);
+                    wx.setStorageSync('tokenType', tokenData.tokenType);
+                    
+                    wx.showToast({
+                      title: '登录成功',
+                      icon: 'success'
+                    });
 
-                setTimeout(() => {
-                  wx.switchTab({
-                    url: '/pages/index/index'
+                    setTimeout(() => {
+                      wx.switchTab({
+                        url: '/pages/index/index'
+                      });
+                    }, 1500);
+                  } else {
+                    wx.showToast({
+                      title: result.data.message || '登录失败',
+                      icon: 'none'
+                    });
+                  }
+                },
+                fail: () => {
+                  wx.showToast({
+                    title: '网络错误',
+                    icon: 'none'
                   });
-                }, 1500);
-              } else {
-                wx.showToast({
-                  title: result.data.message || '登录失败',
-                  icon: 'none'
-                });
-              }
+                }
+              });
             },
             fail: () => {
-              wx.showToast({
-                title: '网络错误',
-                icon: 'none'
+              // 用户拒绝授权，使用基础微信登录
+              wx.request({
+                url: 'http://localhost:8080/auth/miniapp-login',
+                method: 'POST',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  loginType: 'wechat',
+                  code: res.code
+                },
+                success: (result) => {
+                  if (result.data.code === '200') {
+                    const tokenData = result.data.data;
+                    wx.setStorageSync('accessToken', tokenData.accessToken);
+                    wx.setStorageSync('refreshToken', tokenData.refreshToken);
+                    wx.setStorageSync('tokenType', tokenData.tokenType);
+                    
+                    wx.showToast({
+                      title: '登录成功',
+                      icon: 'success'
+                    });
+
+                    setTimeout(() => {
+                      wx.switchTab({
+                        url: '/pages/index/index'
+                      });
+                    }, 1500);
+                  } else {
+                    wx.showToast({
+                      title: result.data.message || '登录失败',
+                      icon: 'none'
+                    });
+                  }
+                },
+                fail: () => {
+                  wx.showToast({
+                    title: '网络错误',
+                    icon: 'none'
+                  });
+                }
               });
             }
           });
@@ -199,10 +264,8 @@ Page({
 
   // 忘记密码
   forgotPassword() {
-    wx.showModal({
-      title: '忘记密码',
-      content: '请联系客服找回密码',
-      showCancel: false
+    wx.navigateTo({
+      url: '/pages/forgot-password/forgot-password'
     });
   },
 
@@ -210,33 +273,40 @@ Page({
   doLogin() {
     if (!this.canLogin()) return;
 
-    const { loginType, phone, smsCode, password } = this.data;
+    const { loginType, phone, smsCode, password, smsKey } = this.data;
     
     wx.showLoading({
       title: '登录中...'
     });
 
-    const loginData = {
-      phone: phone,
-      type: loginType
+    let loginData = {
+      loginType: loginType
     };
 
     if (loginType === 'sms') {
+      loginData.phone = phone;
       loginData.smsCode = smsCode;
+      loginData.smsKey = smsKey;
     } else {
+      loginData.username = phone; // 使用手机号作为用户名
       loginData.password = password;
     }
 
     wx.request({
-      url: 'https://your-api.com/auth/login',
+      url: 'http://localhost:8080/auth/miniapp-login',
       method: 'POST',
+      header: {
+        'content-type': 'application/json'
+      },
       data: loginData,
       success: (res) => {
         wx.hideLoading();
-        if (res.data.success) {
-          // 登录成功，保存用户信息
-          wx.setStorageSync('userInfo', res.data.userInfo);
-          wx.setStorageSync('token', res.data.token);
+        if (res.data.code === '200') {
+          // 登录成功，保存token信息
+          const tokenData = res.data.data;
+          wx.setStorageSync('accessToken', tokenData.accessToken);
+          wx.setStorageSync('refreshToken', tokenData.refreshToken);
+          wx.setStorageSync('tokenType', tokenData.tokenType);
           
           wx.showToast({
             title: '登录成功',

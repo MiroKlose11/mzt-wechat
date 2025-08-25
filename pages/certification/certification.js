@@ -512,12 +512,59 @@ Page({
   
   // 提交认证
   submitCertification() {
+     const api = require('../../utils/api');
+     
      wx.showLoading({
        title: '提交中...'
      });
      
-     // 模拟提交
-     setTimeout(() => {
+     const { currentTab, certData, enterpriseData } = this.data;
+     
+     let submitData = {};
+     
+     if (currentTab === 'personal') {
+       // 个人认证数据
+       submitData = {
+         type: 'personal',
+         name: this.data.name,
+         idNumber: this.data.idNumber,
+         phone: this.data.phone,
+         email: this.data.email,
+         gender: certData.gender,
+         region: this.data.region.join(','),
+         identityType: this.data.identityTypes[this.data.identityTypeIndex] || '',
+         isVip: certData.isVip,
+         vipCode: certData.vipCode,
+         photoImage: this.data.photoImage,
+         idFrontImage: certData.idFrontImage,
+         idBackImage: certData.idBackImage,
+         doctorCertImage: certData.doctorCertImage,
+         qualificationCertImage: certData.qualificationCertImage,
+         otherCert1Image: certData.otherCert1Image,
+         otherCert2Image: certData.otherCert2Image
+       };
+     } else {
+       // 企业认证数据
+       submitData = {
+         type: 'enterprise',
+         companyName: enterpriseData.companyName,
+         companyType: enterpriseData.companyType,
+         field: enterpriseData.field,
+         region: this.data.enterpriseRegion.join(','),
+         businessLicense: enterpriseData.businessLicense,
+         medicalLicense: enterpriseData.medicalLicense,
+         deviceLicense: enterpriseData.deviceLicense,
+         legalPersonName: enterpriseData.legalPersonName,
+         legalPersonId: enterpriseData.legalPersonId,
+         legalPersonIdFront: enterpriseData.legalPersonIdFront,
+         legalPersonIdBack: enterpriseData.legalPersonIdBack,
+         companyLogo: enterpriseData.companyLogo,
+         bankName: enterpriseData.bankName,
+         bankAccount: enterpriseData.bankAccount
+       };
+     }
+     
+     api.auth.submitCertification(submitData).then(result => {
        wx.hideLoading();
        wx.showToast({
          title: '认证提交成功',
@@ -533,7 +580,13 @@ Page({
            url: '/pages/index/index'
          });
        }, 1500);
-     }, 2000);
+     }).catch(error => {
+       wx.hideLoading();
+       wx.showToast({
+         title: error.message || '提交失败',
+         icon: 'none'
+       });
+     });
    },
 
   // 添加更多图片

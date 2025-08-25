@@ -1,5 +1,6 @@
 // index.js
 const { iconUrls } = require('../../utils/icons');
+const api = require('../../utils/api');
 
 Page({
   data: {
@@ -217,28 +218,20 @@ Page({
   },
   
   fetchBanner() {
-    wx.request({
-      url: 'http://localhost:8080/index/banner/top',
-      method: 'GET',
-      success: (res) => {
-        if (res.data && res.data.code === '00000') {
-          this.setData({ banners: res.data.data || [] });
-        }
-      }
+    api.index.getBanner().then(result => {
+      this.setData({ banners: result.data || [] });
+    }).catch(error => {
+      console.error('获取Banner失败:', error);
     });
   },
 
   fetchCourses() {
-    wx.request({
-      url: 'http://localhost:8080/course/list',
-      method: 'GET',
-      success: (res) => {
-        if (res.data && res.data.code === '00000') {
-          this.setData({
-            courses: (res.data.data || []).slice(0, 2)
-          });
-        }
-      }
+    api.course.getList().then(result => {
+      this.setData({
+        courses: (result.data || []).slice(0, 2)
+      });
+    }).catch(error => {
+      console.error('获取课程列表失败:', error);
     });
   },
 
@@ -266,61 +259,54 @@ Page({
   },
 
   fetchCategories() {
-    wx.request({
-      url: 'http://localhost:8080/index/categories',
-      method: 'GET',
-      success: (res) => {
-        if (res.data && res.data.code === '00000') {
-          let iconCategories = (res.data.data.icon || []).slice();
-          iconCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-          let quickCategories = (res.data.data.quick || []).slice();
-          quickCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-          const quickColors = ['#ff6b6b', '#1ecaff', '#2ecc71', '#b39ddb', '#1abc9c'];
-          quickCategories = quickCategories.map((item, idx) => ({
-            ...item,
-            iconBgColor: item.iconBgColor || quickColors[idx % quickColors.length]
-          }));
-          let eliteCategories = (res.data.data.elite || []).slice();
-          eliteCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-          let techCategories = (res.data.data.tech || []).slice();
-          techCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-          let smartCategories = (res.data.data.smart || []).slice();
-          smartCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-          let positionCategories = (res.data.data.position || []).slice();
-          positionCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-          this.setData({
-            iconCategories,
-            iconRows: [
-              iconCategories.slice(0, 5),
-              iconCategories.slice(5, 10)
-            ],
-            quickCategories,
-            eliteCategories,
-            techCategories,
-            smartCategories,
-            positionCategories,
-            _eliteReady: true
-          }, () => {
-            this.initEliteTabAndMembers();
-          });
-        }
-      }
+    api.index.getCategories().then(result => {
+      const data = result.data || {};
+      let iconCategories = (data.icon || []).slice();
+      iconCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+      let quickCategories = (data.quick || []).slice();
+      quickCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+      const quickColors = ['#ff6b6b', '#1ecaff', '#2ecc71', '#b39ddb', '#1abc9c'];
+      quickCategories = quickCategories.map((item, idx) => ({
+        ...item,
+        iconBgColor: item.iconBgColor || quickColors[idx % quickColors.length]
+      }));
+      let eliteCategories = (data.elite || []).slice();
+      eliteCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+      let techCategories = (data.tech || []).slice();
+      techCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+      let smartCategories = (data.smart || []).slice();
+      smartCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+      let positionCategories = (data.position || []).slice();
+      positionCategories.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+      this.setData({
+        iconCategories,
+        iconRows: [
+          iconCategories.slice(0, 5),
+          iconCategories.slice(5, 10)
+        ],
+        quickCategories,
+        eliteCategories,
+        techCategories,
+        smartCategories,
+        positionCategories,
+        _eliteReady: true
+      }, () => {
+        this.initEliteTabAndMembers();
+      });
+    }).catch(error => {
+      console.error('获取分类数据失败:', error);
     });
   },
   
   // 获取所有角色列表
   fetchRoleList() {
-    wx.request({
-      url: 'http://localhost:8080/role/list',
-      method: 'GET',
-      success: (res) => {
-        console.log('角色列表接口返回', res.data);
-        if (res.data && res.data.code === '00000') {
-          this.setData({ roleList: res.data.data || [], _roleReady: true }, () => {
-            this.initEliteTabAndMembers();
-          });
-        }
-      }
+    api.role.getList().then(result => {
+      console.log('角色列表接口返回', result);
+      this.setData({ roleList: result.data || [], _roleReady: true }, () => {
+        this.initEliteTabAndMembers();
+      });
+    }).catch(error => {
+      console.error('获取角色列表失败:', error);
     });
   },
   
@@ -340,27 +326,22 @@ Page({
   // 请求成员列表
   fetchEliteMembers(roleId) {
     console.log('请求成员列表，roleId:', roleId);
-    wx.request({
-      url: 'http://localhost:8080/member/page',
-      method: 'GET',
-      data: {
-        roleId: roleId,
-        status: 1,
-        size: 50, // 一次最多取50条
-        current: 1
-      },
-      success: (res) => {
-        console.log('成员接口返回', res.data);
-        if (res.data && res.data.code === '00000') {
-          let members = (res.data.data && res.data.data.records) ? res.data.data.records : [];
-          // 只显示isElite为1的成员，并按weight降序排列
-          members = members.filter(item => item.isElite === 1).sort((a, b) => (b.weight || 0) - (a.weight || 0));
-          this.setData({
-            eliteMembers: members,
-            eliteMembersTop8: members.slice(0, 8)
-          });
-        }
-      }
+    api.member.getPage({
+      roleId: roleId,
+      status: 1,
+      size: 50, // 一次最多取50条
+      current: 1
+    }).then(result => {
+      console.log('成员接口返回', result);
+      let members = (result.data && result.data.records) ? result.data.records : [];
+      // 只显示isElite为1的成员，并按weight降序排列
+      members = members.filter(item => item.isElite === 1).sort((a, b) => (b.weight || 0) - (a.weight || 0));
+      this.setData({
+        eliteMembers: members,
+        eliteMembersTop8: members.slice(0, 8)
+      });
+    }).catch(error => {
+      console.error('获取成员列表失败:', error);
     });
   },
 
@@ -372,20 +353,16 @@ Page({
   },
 
   fetchSchools() {
-    wx.request({
-      url: 'http://localhost:8080/organization/list',
-      method: 'GET',
-      success: (res) => {
-        if (res.data && res.data.code === '00000') {
-          let schools = (res.data.data || []).filter(item => item.typeId === 3);
-          schools = schools.sort((a, b) => (b.weight || 0) - (a.weight || 0));
-          this.setData({
-            schools,
-            schoolsFirstRow: schools.slice(0, 3),
-            schoolsSecondRow: schools.slice(3, 5)
-          });
-        }
-      }
+    api.organization.getList().then(result => {
+      let schools = (result.data || []).filter(item => item.typeId === 3);
+      schools = schools.sort((a, b) => (b.weight || 0) - (a.weight || 0));
+      this.setData({
+        schools,
+        schoolsFirstRow: schools.slice(0, 3),
+        schoolsSecondRow: schools.slice(3, 5)
+      });
+    }).catch(error => {
+      console.error('获取机构列表失败:', error);
     });
   },
 

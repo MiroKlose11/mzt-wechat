@@ -3,6 +3,7 @@ Page({
     phone: '',
     smsCode: '',
     password: '',
+    smsKey: '', // 短信验证码key
     showPassword: false,
     canGetCode: true,
     codeText: '发送验证码',
@@ -39,7 +40,7 @@ Page({
     });
   },
 
-  // 获取验证码
+  // 获取短信验证码
   getSmsCode() {
     if (!this.data.canGetCode) return;
     
@@ -52,16 +53,21 @@ Page({
       return;
     }
 
-    // 发送验证码请求
     wx.request({
-      url: 'https://your-api.com/sms/send',
+      url: 'http://localhost:8080/auth/send-sms',
       method: 'POST',
+      header: {
+        'content-type': 'application/json'
+      },
       data: {
-        phone: phone,
-        type: 'register'
+        phone: phone
       },
       success: (res) => {
-        if (res.data.success) {
+        if (res.data.code === '200') {
+          // 保存验证码key用于后续验证
+          this.setData({
+            smsKey: res.data.data
+          });
           wx.showToast({
             title: '验证码已发送',
             icon: 'success'
@@ -112,23 +118,27 @@ Page({
   doRegister() {
     if (!this.canRegister()) return;
 
-    const { phone, smsCode, password } = this.data;
+    const { phone, smsCode, password, smsKey } = this.data;
     
     wx.showLoading({
       title: '注册中...'
     });
 
     wx.request({
-      url: 'https://your-api.com/auth/register',
+      url: 'http://localhost:8080/auth/register',
       method: 'POST',
+      header: {
+        'content-type': 'application/json'
+      },
       data: {
         phone: phone,
         smsCode: smsCode,
-        password: password
+        password: password,
+        smsKey: smsKey
       },
       success: (res) => {
         wx.hideLoading();
-        if (res.data.success) {
+        if (res.data.code === '200') {
           wx.showToast({
             title: '注册成功',
             icon: 'success'
