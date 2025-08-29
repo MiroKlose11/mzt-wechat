@@ -10,15 +10,15 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/personnel/index",
-          "pathName": "pages/personnel/index",
+          "name": "测试",
+          "pathName": "pages/subject/subject",
           "query": "",
           "scene": null,
           "launchMode": "default"
         },
         {
-          "name": "pages/my/index",
-          "pathName": "pages/logs/logs",
+          "name": "pages/personnel/index",
+          "pathName": "pages/personnel/index",
           "query": "",
           "launchMode": "default",
           "scene": null

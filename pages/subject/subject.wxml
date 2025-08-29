@@ -1,0 +1,93 @@
+<view class="subject-page">
+  <!-- 自定义导航栏 -->
+  <view class="custom-header">
+    <view class="nav-bg"></view>
+    <view class="custom-nav-bar" style="padding-top: {{statusBarHeight}}px;">
+      <view class="nav-left">
+        <image class="back-btn" src="/images/nav/back.png" bindtap="goBack"></image>
+      </view>
+      <view class="nav-center">
+        <text class="page-title">学科榜</text>
+      </view>
+      <view class="nav-right">
+        <!-- 微信自带胶囊，无需自定义 -->
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面内容 -->
+  <view class="page-content" style="padding-top: calc({{statusBarHeight}}px + 44px);">
+    <!-- 左侧学科选择栏 -->
+    <view class="subject-sidebar">
+      <scroll-view class="subject-list" scroll-y="true">
+        <view 
+          class="subject-item {{selectedSubject === item.name ? 'active' : ''}}"
+          wx:for="{{subjects}}"
+          wx:key="id"
+          data-subject="{{item.name}}"
+          bindtap="selectSubject"
+        >
+          <text class="subject-name">{{item.name}}</text>
+          <view class="subject-indicator" wx:if="{{selectedSubject === item.name}}"></view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 右侧内容区域 -->
+    <view class="content-area">
+      <!-- 精选推荐 -->
+      <view class="featured-section">
+        <view class="section-header">
+          <text class="section-title">精选推荐</text>
+          <view class="more-btn" bindtap="onMoreTap">
+            <text class="more-text">查看更多</text>
+            <text class="more-arrow">></text>
+          </view>
+        </view>
+        
+        <!-- 轮播图 -->
+        <view class="carousel-container">
+          <swiper 
+            class="carousel-swiper"
+            indicator-dots="false"
+            autoplay="true"
+            interval="3000"
+            duration="500"
+            bindchange="onCarouselChange"
+          >
+            <swiper-item wx:for="{{carouselImages}}" wx:key="id">
+              <image class="carousel-image" src="{{item.image}}" mode="aspectFill"></image>
+            </swiper-item>
+          </swiper>
+          
+          <!-- 自定义指示器 -->
+          <view class="carousel-indicators">
+            <view 
+              class="indicator {{index === currentCarousel ? 'active' : ''}}"
+              wx:for="{{carouselImages}}"
+              wx:key="id"
+              wx:for-index="index"
+            ></view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 内容网格 -->
+      <view class="content-grid">
+        <view 
+          class="content-item"
+          wx:for="{{contentList}}"
+          wx:key="id"
+          data-item="{{item}}"
+          bindtap="onContentTap"
+        >
+          <image class="content-image" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="content-info">
+            <text class="content-title">{{item.title}}</text>
+            <text class="content-subtitle">{{item.subtitle}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

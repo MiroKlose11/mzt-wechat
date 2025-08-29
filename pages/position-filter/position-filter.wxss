@@ -1,0 +1,184 @@
+/* 岗位链高级筛选页面样式 */
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+/* 顶部导航栏 */
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  background-color: #ffffff;
+  border-bottom: 1rpx solid #e5e5e5;
+  height: 44px;
+  z-index: 999;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.back-btn {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.search-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background-color: #f8f8f8;
+  border-radius: 35rpx;
+  padding: 0 30rpx;
+  height: 70rpx;
+  margin-right: 180rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333333;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.search-input::placeholder {
+  color: #999999;
+}
+
+.clear-btn {
+  padding: 10rpx;
+}
+
+.clear-icon {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+
+
+/* 筛选内容区域 */
+.filter-content {
+  flex: 1;
+  padding-top: calc(44px + var(--status-bar-height) + 20rpx);
+  padding-left: 58rpx;
+  padding-right: 0rpx;
+  padding-bottom: 30rpx;
+  background-color: #ffffff;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-section {
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 16rpx;
+  padding-top: 16rpx;
+}
+
+.filter-section:first-child .section-title {
+  padding-top: 20rpx;
+}
+
+.filter-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.filter-item {
+  min-width: 120rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  border: 2rpx solid #f8f8f8;
+  border-radius: 6rpx;
+  font-size: 26rpx;
+  color: #666666;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.filter-item.selected {
+  background-color: #1976D2;
+  border-color: #1976D2;
+  color: #ffffff;
+}
+
+.filter-item:active {
+  opacity: 0.7;
+}
+
+/* 底部按钮 */
+.bottom-buttons {
+  display: flex;
+  padding: 30rpx;
+  background-color: #ffffff;
+  border-top: 1rpx solid #e5e5e5;
+  gap: 30rpx;
+}
+
+.reset-btn {
+  flex: 1;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #666666;
+  font-weight: 500;
+}
+
+.complete-btn {
+  flex: 1;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4CAF50;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.reset-btn:active {
+  opacity: 0.7;
+}
+
+.complete-btn:active {
+  opacity: 0.8;
+}
+
+/* 响应式布局 */
+@media (max-width: 750rpx) {
+  .filter-item {
+    min-width: 120rpx;
+    font-size: 26rpx;
+  }
+  
+  .section-title {
+    font-size: 30rpx;
+  }
+}

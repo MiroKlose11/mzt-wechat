@@ -76,7 +76,7 @@
     <view class="search-bar">
       <icon type="search" size="14" color="#999999"></icon>
       <input class="search-input" placeholder="搜输入关键词搜索" confirm-type="search" bindconfirm="onSearch"/>
-      <view class="search-filter">
+      <view class="search-filter" bindtap="openAdvancedFilter">
         <text>高级筛选</text>
         <image class="filter-icon" src="/images/icons/filter.png"></image>
       </view>
@@ -186,4 +186,4 @@
       <button class="doctor-btn apply-btn" catchtap="applyPosition" data-id="{{item.id}}">委培</button>
     </view>
   </view>
-</block> 
+</block>

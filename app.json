@@ -10,7 +10,10 @@
     "pages/logs/logs",
     "pages/personnel/index",
     "pages/my/index",
-    "pages/position/index"
+    "pages/position/index",
+    "pages/position-filter/position-filter",
+    "pages/region/region",
+    "pages/subject/subject"
   ],
   "window": {
     "backgroundTextStyle": "light",

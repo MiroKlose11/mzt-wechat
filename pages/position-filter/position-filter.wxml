@@ -1,0 +1,148 @@
+<view class="filter-container" style="--status-bar-height: {{statusBarHeight}}px;">
+  <!-- 顶部导航栏 -->
+  <view class="nav-header" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-left" bindtap="onClosePage">
+      <image class="back-btn" src="/images/nav/back.png"></image>
+    </view>
+    <view class="search-box">
+      <input class="search-input" 
+             placeholder="请输入关键词" 
+             value="{{searchValue}}"
+             bindinput="onSearchInput" />
+      <view class="clear-btn" wx:if="{{searchValue}}" bindtap="onClearSearch">
+        <image class="clear-icon" src="/images/clear-icon.svg" mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 筛选内容区域 -->
+  <scroll-view class="filter-content" scroll-y="true" enhanced="true" show-scrollbar="false">
+    
+    <!-- 姓名首字母 -->
+    <view class="filter-section">
+      <view class="section-title">姓名首字母</view>
+      <view class="filter-grid">
+        <view class="filter-item {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{filterData.nameInitials}}" 
+              wx:key="id"
+              data-category="nameInitials"
+              data-index="{{index}}"
+              bindtap="onFilterItemTap">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 职业地区 -->
+    <view class="filter-section">
+      <view class="section-title">职业地区</view>
+      <view class="filter-grid">
+        <view class="filter-item {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{filterData.regions}}" 
+              wx:key="id"
+              data-category="regions"
+              data-index="{{index}}"
+              bindtap="onFilterItemTap">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 职称评定 -->
+    <view class="filter-section">
+      <view class="section-title">职称评定</view>
+      <view class="filter-grid">
+        <view class="filter-item {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{filterData.titles}}" 
+              wx:key="id"
+              data-category="titles"
+              data-index="{{index}}"
+              bindtap="onFilterItemTap">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 增长学科 -->
+    <view class="filter-section">
+      <view class="section-title">增长学科</view>
+      <view class="filter-grid">
+        <view class="filter-item {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{filterData.subjects}}" 
+              wx:key="id"
+              data-category="subjects"
+              data-index="{{index}}"
+              bindtap="onFilterItemTap">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 职业岗位 -->
+    <view class="filter-section">
+      <view class="section-title">职业岗位</view>
+      <view class="filter-grid">
+        <view class="filter-item {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{filterData.positions}}" 
+              wx:key="id"
+              data-category="positions"
+              data-index="{{index}}"
+              bindtap="onFilterItemTap">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 头衔评定 -->
+    <view class="filter-section">
+      <view class="section-title">头衔评定</view>
+      <view class="filter-grid">
+        <view class="filter-item {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{filterData.headTitles}}" 
+              wx:key="id"
+              data-category="headTitles"
+              data-index="{{index}}"
+              bindtap="onFilterItemTap">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 主讲课程 -->
+    <view class="filter-section">
+      <view class="section-title">主讲课程</view>
+      <view class="filter-grid">
+        <view class="filter-item {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{filterData.courses}}" 
+              wx:key="id"
+              data-category="courses"
+              data-index="{{index}}"
+              bindtap="onFilterItemTap">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 技术成果 -->
+    <view class="filter-section">
+      <view class="section-title">技术成果</view>
+      <view class="filter-grid">
+        <view class="filter-item {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{filterData.achievements}}" 
+              wx:key="id"
+              data-category="achievements"
+              data-index="{{index}}"
+              bindtap="onFilterItemTap">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+  </scroll-view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-buttons">
+    <view class="reset-btn" bindtap="onReset">重置</view>
+    <view class="complete-btn" bindtap="onComplete">完成</view>
+  </view>
+</view>

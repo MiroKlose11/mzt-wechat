@@ -121,6 +121,13 @@ Page({
     this.loadPositionData();
   },
 
+  // 打开高级筛选页面
+  openAdvancedFilter() {
+    wx.navigateTo({
+      url: '/pages/position-filter/position-filter'
+    });
+  },
+
   // 切换顶部标签页
   switchTab(e) {
     const tab = e.currentTarget.dataset.tab;
@@ -209,4 +216,4 @@ Page({
       wx.stopPullDownRefresh();
     }, 1500);
   }
-}) 
+})

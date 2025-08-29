@@ -238,13 +238,6 @@ module.exports = {
     getCaptcha: () => request({
       url: '/auth/captcha',
       method: 'GET'
-    }),
-    
-    // 重置密码
-    resetPassword: (resetData) => request({
-      url: '/auth/reset-password',
-      method: 'POST',
-      data: resetData
     })
   },
   

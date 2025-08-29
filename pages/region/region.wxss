@@ -1,0 +1,272 @@
+/* 页面容器 */
+.region-page {
+  width: 100%;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* 自定义导航栏 */
+.custom-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.nav-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.custom-nav-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 16px;
+}
+
+.nav-left {
+  width: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.back-btn {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.nav-right {
+  width: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* 微信自带胶囊，无需自定义样式 */
+
+/* 页面内容 */
+.page-content {
+  display: flex;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+/* 左侧地区选择栏 */
+.region-sidebar {
+  width: 160rpx;
+  background-color: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+}
+
+.region-list {
+  height: 100%;
+}
+
+.region-item {
+  position: relative;
+  padding: 32rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.region-item.active {
+  background-color: #ffffff;
+  color: #1890ff;
+}
+
+.region-name {
+  font-size: 28rpx;
+  color: #333333;
+  text-align: center;
+}
+
+.region-item.active .region-name {
+  color: #1890ff;
+  font-weight: 500;
+}
+
+.region-indicator {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6rpx;
+  height: 40rpx;
+  background-color: #1890ff;
+  border-radius: 3rpx 0 0 3rpx;
+}
+
+/* 右侧内容区域 */
+.content-area {
+  flex: 1;
+  padding: 32rpx;
+  overflow-y: auto;
+}
+
+/* 精选推荐区域 */
+.featured-section {
+  margin-bottom: 40rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.more-btn {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.more-text {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.more-arrow {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+/* 轮播图 */
+.carousel-container {
+  position: relative;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.carousel-swiper {
+  width: 100%;
+  height: 300rpx;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12rpx;
+}
+
+.indicator {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background-color: #ffffff;
+}
+
+/* 内容网格 */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+  padding: 0 8rpx;
+}
+
+.content-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.content-item:active {
+  transform: scale(0.95);
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+.content-image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 8rpx;
+  margin-bottom: 8rpx;
+  object-fit: cover;
+  background-color: #ffffff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.content-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rpx;
+  width: 100%;
+}
+
+.content-title {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #333333;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.content-subtitle {
+  font-size: 20rpx;
+  color: #999999;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .content-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .region-sidebar {
+    width: 140rpx;
+  }
+}
