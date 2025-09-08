@@ -125,14 +125,14 @@ Page({
 
   // 点击内容项
   onContentTap(e) {
-    const item = e.currentTarget.dataset.item
-    console.log('点击内容项:', item)
-    // 这里可以跳转到详情页
+    const item = e.currentTarget.dataset.item;
+    console.log('点击内容项:', item);
+    // TODO: 跳转到详情页面
   },
 
   // 点击更多
-  onMoreTap() {
-    console.log('查看更多')
-    // 这里可以跳转到更多页面或加载更多内容
+  onMoreTap(e) {
+    console.log('点击更多');
+    // TODO: 跳转到更多页面
   }
 })

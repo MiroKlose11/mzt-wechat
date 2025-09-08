@@ -1,0 +1,135 @@
+<view class="academic-page">
+  <!-- 顶部头部区域（青色背景到轮播图中间） -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px; padding-bottom: {{headerPadBottomPx}}px;">
+    <view class="nav" style="height: {{navBarHeightPx}}px;">
+      <view class="nav-left" bindtap="goBack" hover-class="none" hover-stop-propagation="true">
+        <image class="back-icon" src="/images/nav/back.png"></image>
+      </view>
+      <view class="nav-title">学术链</view>
+    </view>
+
+    <!-- 搜索框 -->
+    <view class="search-bar">
+      <image class="search-icon" src="/images/search-icon.svg"></image>
+      <input class="search-input" placeholder="请输入内容查找" placeholder-class="ph" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearchConfirm"/>
+    </view>
+  </view>
+
+  <!-- 内容区（灰底） -->
+  <view class="content">
+    <!-- 16:9 Banner，向上重叠一半，让绿色恰好到中线 -->
+    <view class="banner-wrapper" style="height: {{bannerHeightPx}}px; margin-top: -{{bannerOverlapPx}}px;">
+      <view class="banner">
+        <text class="banner-text">Banner</text>
+        <view class="banner-dots">
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+        </view>
+      </view>
+    </view>
+    <!-- 移除外部的指示点容器（已移入 Banner 内部） -->
+
+    <view class="grid">
+      <!-- 左侧两块大卡片 -->
+      <view class="left-col">
+        <view class="big-card orange">
+          <text class="big-title">学术承接</text>
+          <view class="big-illustration"></view>
+        </view>
+        <view class="big-card cyan">
+          <text class="big-title">入驻宣传</text>
+        </view>
+      </view>
+
+      <!-- 右侧六个宫格（移除 icon 占位，文本绝对居中） -->
+      <view class="right-col">
+        <view class="small-card">
+          <text class="small-text">学术动态</text>
+        </view>
+        <view class="small-card">
+          <text class="small-text">学术会议</text>
+        </view>
+        <view class="small-card">
+          <text class="small-text">学术大赛</text>
+        </view>
+        <view class="small-card">
+          <text class="small-text">学术著作</text>
+        </view>
+        <view class="small-card">
+          <text class="small-text">学术课程</text>
+        </view>
+        <view class="small-card">
+          <text class="small-text">学术组织</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 学术动态 -->
+    <view class="section news-section">
+      <view class="section-head teal">
+         <view class="head-left">
+           <image class="head-icon" src="/images/academic/chat.svg"></image>
+           <text class="head-title">学术动态</text>
+         </view>
+        <image class="head-more" src="/images/academic/chevron-right-white.svg" bindtap="onTapSectionMore" data-type="news"></image>
+       </view>
+      <view class="news-list card">
+        <block wx:for="{{newsList}}" wx:key="id">
+          <view class="news-item" bindtap="onTapNewsItem" data-id="{{item.id}}">
+            <view class="news-text">
+              <text class="news-title">{{item.title}}</text>
+              <text class="news-desc">{{item.summary}}</text>
+            </view>
+            <image class="news-thumb" src="{{item.img || '/images/academic/photo-gray.svg'}}"></image>
+          </view>
+          <view class="divider" wx:if="{{index < newsList.length - 1}}"></view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 学术会议 -->
+    <view class="section conf-section">
+      <!-- 标题栏去背景：使用 plain 修饰符，并恢复深色箭头图标 -->
+      <view class="section-head plain">
+        <view class="head-left">
+          <image class="head-icon" src="/images/academic/group.svg"></image>
+          <text class="head-title">学术会议</text>
+        </view>
+        <image class="head-more" src="/images/academic/chevron-right.svg" bindtap="onTapSectionMore" data-type="conf"></image>
+      </view>
+       <view class="conf-list">
+         <block wx:for="{{confList}}" wx:key="id">
+          <view class="conf-card" bindtap="onTapConfItem" data-id="{{item.id}}">
+            <view class="conf-top">
+              <view class="conf-left">
+                <view class="conf-thumb">
+                  <image wx:if="{{item.img}}" class="thumb-img" src="{{item.img}}"></image>
+                  <image wx:else class="thumb-icon" src="/images/academic/photo-white.svg"></image>
+                </view>
+              </view>
+              <view class="conf-body">
+                <text class="conf-title">{{item.title}}</text>
+                <view class="meta-row">
+                  <view class="meta meta-date">
+                    <image class="meta-icon" src="/images/academic/calendar.svg"></image>
+                    <text class="meta-text">{{item.date}}</text>
+                  </view>
+                  <view class="meta meta-loc">
+                    <image class="meta-icon" src="/images/academic/location.svg"></image>
+                    <text class="meta-text">{{item.location}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="org-row">
+              <text class="org-text">主办单位：{{item.host}}</text>
+              <text class="org-text">承办单位：{{item.organizer}}</text>
+            </view>
+          </view>
+         </block>
+       </view>
+     </view>
+  </view>
+</view>

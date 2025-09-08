@@ -1,0 +1,136 @@
+page { background: #f5f5f5; }
+
+.academic-page { background: #f5f5f5; min-height: 100vh; }
+
+/* 头部区域 */
+/* 头部与层级 */
+.header { background: #14c8c8; position: relative; z-index: 1; }
+.content { position: relative; z-index: 2; }
+.banner-wrapper { position: relative; z-index: 3; padding: 0 30rpx; }
+
+/* 网格区域 */
+.grid { display: flex; gap: 20rpx; align-items: flex-start; padding: 0 24rpx; }
+.left-col { width: 220rpx; display: flex; flex-direction: column; gap: 20rpx; }
+
+/* 右侧卡片：不显示icon，占位隐藏，文字单行且水平垂直居中 */
+.right-col { flex: 1; display: flex; flex-wrap: wrap; margin: -10rpx; }
+.small-card { width: calc(50% - 20rpx); margin: 10rpx; height: 120rpx; background: #fff; border: 0; border-radius: 12rpx; display: flex; align-items: center; justify-content: center; padding: 0 20rpx; box-sizing: border-box; box-shadow: 0 6rpx 12rpx rgba(0,0,0,0.06); }
+.icon-space { display: none; }
+.small-text { font-size: 28rpx; color: #333; white-space: nowrap; text-align: center; }
+/* 导航区域：与系统胶囊对齐（高度由 WXML 内联 style 控制） */
+.nav { /* height 由内联 style 控制 */ display: flex; align-items: center; justify-content: center; padding: 0 30rpx; position: relative; }
+.nav-left { position: absolute; left: 30rpx; top: 0; bottom: 0; display: flex; align-items: center; }
+.back-icon { width: 40rpx; height: 40rpx; }
+.nav-title { color: #fff; font-size: 34rpx; font-weight: 600; }
+
+/* 搜索框 */
+.search-bar { margin: 16rpx 30rpx 24rpx; height: 64rpx; background: #fff; border-radius: 64rpx; display: flex; align-items: center; padding: 0 20rpx; box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.06); }
+.search-icon { width: 32rpx; height: 32rpx; margin-right: 16rpx; opacity: 0.8; }
+.search-input { flex: 1; font-size: 26rpx; color: #333; }
+.ph { color: #bfbfbf; }
+
+/* Banner 16:9 放在内容区，向上重叠一半 */
+.banner-wrapper { padding: 0 30rpx; margin-bottom: 30rpx; }
+.banner { width: 100%; height: 100%; background: #f45b6a; border-radius: 24rpx; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 48rpx; font-weight: 600; box-shadow: 0 8rpx 16rpx rgba(228,79,95,0.25); position: relative; overflow: hidden; }
+.banner-dots { position: absolute; left: 50%; transform: translateX(-50%); bottom: 10rpx; margin: 0; display: flex; justify-content: center; gap: 14rpx; }
+.banner-dots .dot { width: 28rpx; height: 8rpx; background: rgba(255,255,255,0.85); border-radius: 8rpx; }
+
+/* 内容区灰底，顶部直角与头部直接衔接（不使用圆角过渡） */
+.content { background: #efefef; margin-top: 0; padding: 24rpx 0 40rpx; }
+.big-card { border-radius: 16rpx; padding: 20rpx; color: #fff; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6rpx 12rpx rgba(0,0,0,0.06); }
+.big-card.orange { background: #ff9800; height: 200rpx; }
+.big-card.cyan { background: #51d5e0; height: 100rpx; }
+.big-title { font-size: 28rpx; font-weight: 600; }
+.big-illustration { height: 96rpx; border-radius: 12rpx; background: rgba(255,255,255,0.9); opacity: 0.95; }
+/* 更紧凑的整体排版（再收一点） */
+.search-bar { margin: 10rpx 30rpx 12rpx; height: 56rpx; }
+.banner-wrapper { padding: 0 30rpx; margin-bottom: 16rpx; }
+.grid { display: flex; gap: 12rpx; align-items: flex-start; padding: 0 18rpx; }
+.left-col { width: 206rpx; display: flex; flex-direction: column; gap: 12rpx; }
+.big-card.orange { height: 172rpx; }
+.big-card.cyan { height: 88rpx; }
+.right-col { flex: 1; display: flex; flex-wrap: wrap; margin: -6rpx; }
+.small-card { width: calc(50% - 12rpx); margin: 6rpx; height: 104rpx; padding: 0 12rpx; }
+.small-text { font-size: 28rpx; color: #333; white-space: nowrap; text-align: center; }
+.right-col { flex: 1; display: flex; flex-wrap: wrap; margin: -8rpx; }
+.small-card { width: calc(50% - 16rpx); margin: 8rpx; height: 112rpx; padding: 0 14rpx; }
+.left-col { width: 216rpx; gap: 16rpx; }
+.big-card.orange { height: 188rpx; }
+.big-card.cyan { height: 96rpx; }
+.grid { gap: 16rpx; padding: 0 20rpx; }
+
+/* ===== 学术动态 & 学术会议 ===== */
+.section { padding: 14rpx 18rpx 0; }
+
+/* 头部标签（左侧色块+图标+文字，右侧箭头） */
+/* ===== 模块标题行：整行背景（修复对齐） ===== */
+.section-head { display: flex; align-items: center; justify-content: space-between; margin: 0 18rpx 14rpx; padding: 14rpx 16rpx; border-radius: 16rpx; }
+.section-head .head-left { display: inline-flex; align-items: center; gap: 12rpx; padding: 0; background: transparent; color: #fff; }
+.section-head .head-icon { width: 28rpx; height: 28rpx; filter: brightness(0) invert(1); }
+.section-head .head-title { font-size: 28rpx; font-weight: 600; color: #fff; }
+.section-head .head-more { width: 28rpx; height: 28rpx; opacity: 1; }
+.section-head.teal { background: #0a7d87; }
+ .section-head.blue { background: #177da6; }
+ /* 移除了误加到 head-left 的背景规则，保留整行着色 */
+
+/* 学术动态 列表卡片 */
+.card { background: #fff; border-radius: 16rpx; box-shadow: 0 8rpx 18rpx rgba(0,0,0,.06); }
+/* ===== 学术动态（根据图2优化） ===== */
+.news-list { padding: 10rpx 16rpx; margin-bottom: 16rpx; }
+.news-item { display: flex; gap: 18rpx; padding: 22rpx 16rpx; align-items: center; }
+.news-text { flex: 1; display: flex; flex-direction: column; gap: 12rpx; }
+.news-title { font-size: 32rpx; font-weight: 700; color: #2e2e2e; line-height: 1.4; }
+.news-desc { font-size: 24rpx; color: #8f99a3; line-height: 1.6; }
+.news-thumb { width: 168rpx; height: 120rpx; border-radius: 10rpx; background: #e9f0f6; object-fit: cover; }
+.divider { height: 2rpx; background: #eef2f6; margin: 12rpx 16rpx; border-radius: 2rpx; }
+/* 移除旧版分隔线定义，统一使用上方新版样式 */
+/* .divider { height: 1px; background: #e9edf2; margin: 0 12rpx; } */
+
+/* 标题栏去背景方案 */
+.section-head.plain { background: transparent !important; margin: 0 18rpx 10rpx; padding: 0 4rpx; }
+.section-head.plain .head-title { color: #2e2e2e; }
+.section-head.plain .head-icon { filter: none; }
+.section-head.plain .head-more { opacity: .9; }
+
+/* 学术会议 模块（更新） */
+.conf-list { display: flex; flex-direction: column; gap: 16rpx; padding: 0 12rpx 14rpx; }
+.conf-card { display: flex; flex-direction: column; background: #fff; border-radius: 16rpx; padding: 18rpx; border: 1rpx solid #eef2f6; box-shadow: 0 6rpx 16rpx rgba(0,0,0,.04); overflow: hidden; }
+.conf-top {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 12rpx;
+}
+/* 左侧区：图片 + 主办单位 */
+.conf-left { width: 180rpx; display: flex; flex-direction: column; align-items: flex-start; }
+.conf-thumb { width: 160rpx; height: 120rpx; border-radius: 12rpx; background: linear-gradient(135deg, #2787e5 0%, #2b86ff 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.thumb-img { width: 100%; height: 100%; object-fit: cover; }
+.thumb-icon { width: 60rpx; height: 60rpx; opacity: 1; }
+/* 移除 host-text，因为主/承办单位在一行展示 */
+/* .host-text { margin-top: 8rpx; font-size: 22rpx; color: #6b7785; max-width: 160rpx; line-height: 1.4; } */
+
+/* 右侧区保持 */
+.conf-body { flex: 1; display: flex; flex-direction: column; gap: 12rpx; }
+.conf-title { font-size: 30rpx; font-weight: 700; color: #2b2f33; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-all; }
+.meta-row { display: flex; gap: 12rpx; align-items: center; flex-wrap: wrap; }
+.meta { display: inline-flex; align-items: center; gap: 8rpx; padding: 6rpx 12rpx; border-radius: 999rpx; background: #f3f6f9; }
+.meta-icon { width: 22rpx; height: 22rpx; opacity: .95; }
+.meta-text { font-size: 24rpx; color: #6b7785; }
+.meta-date { background: #e6f3ff; }
+.meta-date .meta-text { color: #177da6; }
+.meta-loc { background: #f5f7fa; }
+.meta-loc .meta-text { color: #667285; }
+.org-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-top: 12rpx;
+  margin-left: 0;
+  border-top: 2rpx solid #eef2f6;
+  padding-top: 12rpx;
+  padding-left: 0;
+}
+.org-text { font-size: 22rpx; color: #9aa4ae; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; }
+/* 删除以下旧版重复定义，避免覆盖新版样式 */
+/* .org-text { font-size: 24rpx; color: #a3aab3; } */

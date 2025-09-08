@@ -1,0 +1,69 @@
+<!-- 顶部导航栏 -->
+<view class="nav-header" style="padding-top: {{statusBarHeight}}px;">
+  <view class="nav-content">
+    <image class="back-icon" src="/images/nav/back.png" bindtap="goBack"></image>
+    <text class="nav-title">所有岗位</text>
+    <image class="search-icon" src="/images/search-icon.svg"></image>
+  </view>
+</view>
+
+<!-- 主体内容 -->
+<view class="page-body" style="margin-top: {{44 + statusBarHeight}}px;">
+  <view class="layout">
+    <!-- 左侧分组分类 -->
+    <scroll-view class="sidebar" scroll-y>
+      <view class="side-item all {{selectedPosition === '全部岗位' ? 'active' : ''}}" data-position="全部岗位" bindtap="selectPosition">全部岗位</view>
+
+      <view class="side-group">
+        <view class="group-header">按专业职能</view>
+        <view class="side-sub {{selectedPosition === '临床医疗' ? 'active' : ''}}" data-position="临床医疗" bindtap="selectPosition">临床医疗</view>
+        <view class="side-sub {{selectedPosition === '技术服务' ? 'active' : ''}}" data-position="技术服务" bindtap="selectPosition">技术服务</view>
+        <view class="side-sub {{selectedPosition === '销售咨询' ? 'active' : ''}}" data-position="销售咨询" bindtap="selectPosition">销售咨询</view>
+        <view class="side-sub {{selectedPosition === '运营管理' ? 'active' : ''}}" data-position="运营管理" bindtap="selectPosition">运营管理</view>
+      </view>
+
+      <view class="side-group">
+        <view class="group-header">按部门设置</view>
+        <view class="side-sub {{selectedDept === '临床医疗' ? 'active' : ''}}" data-dept="临床医疗" bindtap="selectDept">临床医疗</view>
+        <view class="side-sub {{selectedDept === '技术服务' ? 'active' : ''}}" data-dept="技术服务" bindtap="selectDept">技术服务</view>
+        <view class="side-sub {{selectedDept === '销售咨询' ? 'active' : ''}}" data-dept="销售咨询" bindtap="selectDept">销售咨询</view>
+        <view class="side-sub {{selectedDept === '运营管理' ? 'active' : ''}}" data-dept="运营管理" bindtap="selectDept">运营管理</view>
+      </view>
+    </scroll-view>
+
+    <!-- 右侧内容 -->
+    <scroll-view class="content" scroll-y>
+      <!-- 精选推荐区块标题 -->
+      <view class="section-header">
+        <text class="section-title">精选推荐</text>
+        <text class="section-more" bindtap="onMoreTap">查看更多 ></text>
+      </view>
+
+      <!-- 轮播图 -->
+      <swiper class="banner" circular indicator-dots autoplay interval="3000" duration="500">
+        <swiper-item>
+          <image mode="aspectFill" class="banner-img" src="/images/nav/position-bg.png"></image>
+        </swiper-item>
+        <swiper-item>
+          <image mode="aspectFill" class="banner-img" src="/images/nav/position-bg.png"></image>
+        </swiper-item>
+        <swiper-item>
+          <image mode="aspectFill" class="banner-img" src="/images/nav/position-bg.png"></image>
+        </swiper-item>
+      </swiper>
+
+      <!-- 职位卡片列表 -->
+      <view class="card" wx:for="{{jobList}}" wx:key="id">
+        <view class="card-avatar"></view>
+        <view class="card-main">
+          <view class="card-title">{{item.title}}</view>
+          <view class="card-sub">{{item.subtitle}}</view>
+        </view>
+        <button class="card-btn" catchtap="viewDetail" data-id="{{item.id}}">
+          <view>查看</view>
+          <view>详情</view>
+        </button>
+      </view>
+    </scroll-view>
+  </view>
+</view>

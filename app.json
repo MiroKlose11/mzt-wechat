@@ -13,7 +13,9 @@
     "pages/position/index",
     "pages/position-filter/position-filter",
     "pages/region/region",
-    "pages/subject/subject"
+    "pages/subject/subject",
+    "pages/position-rank/position-rank",
+    "pages/academic-chain/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

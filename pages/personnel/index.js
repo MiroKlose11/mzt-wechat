@@ -62,15 +62,14 @@ Page({
     ]
   },
 
-  onLoad() {
-    console.log('人员页面加载');
-    // 获取状态栏高度和胶囊按钮位置
+  onLoad(options) {
+    // 获取系统信息
     const systemInfo = wx.getSystemInfoSync();
-    const menuButton = wx.getMenuButtonBoundingClientRect();
+    const menuButtonInfo = wx.getMenuButtonBoundingClientRect();
     
     this.setData({
       statusBarHeight: systemInfo.statusBarHeight,
-      capsuleLeft: menuButton.left - 10 // 减去10是为了让标题更贴近左侧
+      capsuleLeft: menuButtonInfo.left
     });
     
     this.loadPersonnelData();
@@ -119,6 +118,31 @@ Page({
   switchCategory(e) {
     const categoryId = e.currentTarget.dataset.id;
     console.log('切换分类:', categoryId);
+    
+    // 如果点击地区榜，跳转到地区榜页面
+    if (categoryId == 2) {
+      wx.navigateTo({
+        url: '/pages/region/region'
+      });
+      return;
+    }
+    
+    // 如果点击学科榜，跳转到学科榜页面
+    if (categoryId == 3) {
+      wx.navigateTo({
+        url: '/pages/subject/subject'
+      });
+      return;
+    }
+    
+    // 如果点击岗位榜，跳转到岗位榜页面
+    if (categoryId == 4) {
+      wx.navigateTo({
+        url: '/pages/position-rank/position-rank'
+      });
+      return;
+    }
+    
     this.setData({
       currentCategory: categoryId
     });
@@ -197,4 +221,4 @@ Page({
       // 加载更多数据
     }
   }
-}) 
+})
