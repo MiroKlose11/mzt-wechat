@@ -27,6 +27,33 @@ Page({
     confList: [
       { id: 'c1', title: '第三届鲁脂道医生集团学术年会暨第三届脂肪整形手术演示大会', date: '2025年9月26—29日', location: '湖北武汉', host: '鲁脂道医生集团', organizer: '仁爱时光医疗美容', img: '' },
       { id: 'c2', title: '第三届鲁脂道医生集团学术年会暨第三届脂肪整形手术演示大会', date: '2025年9月26—29日', location: '湖北武汉', host: '鲁脂道医生集团', organizer: '仁爱时光医疗美容', img: '' }
+    ],
+
+    // 学术组织示例数据
+    orgList: [
+      { id: 'o1', title: '中国整形美容协会损失治疗与康复分会鼻整形及鼻修复专业委员会', subject: '鼻整形', type: '社会团体', img: '' },
+      { id: 'o2', title: '中国整形美容协会损失治疗与康复分会鼻整形及鼻修复专业委员会', subject: '鼻整形', type: '医生集团', img: '' },
+      { id: 'o3', title: '中国整形美容协会损失治疗与康复分会鼻整形及鼻修复专业委员会', subject: '鼻整形', type: '医生集团', img: '' }
+    ],
+
+    // 学术大赛示例数据
+    contestList: [
+      { id: 'ct1', title: '第三届鲁脂道医生集团学术年会暨第三届脂肪整形手术演示大会', date: '2025年9月26—29日', location: '湖北武汉', host: '鲁脂道医生集团', organizer: '仁爱时光医疗美容', img: '' },
+      { id: 'ct2', title: '第三届鲁脂道医生集团学术年会暨第三届脂肪整形手术演示大会', date: '2025年9月26—29日', location: '湖北武汉', host: '鲁脂道医生集团', organizer: '仁爱时光医疗美容', img: '' }
+    ],
+
+    // 学术著作示例数据
+    worksList: [
+      { id: 'w1', title: '鼻整形高阶技术', author: '曾高', img: '' },
+      { id: 'w2', title: '鼻整形高阶技术', author: '曾高', img: '' },
+      { id: 'w3', title: '鼻整形高阶技术', author: '曾高', img: '' },
+      { id: 'w4', title: '鼻整形高阶技术', author: '曾高', img: '' }
+    ],
+
+    // 学术课程示例数据
+    courseList: [
+      { id: 'cs1', title: '鼻整形高阶技术', lecturer: '曾高', isFree: true, organization: '中国整形美容协会美容医学教育与管理分会专委会', img: '', tags: ['系列课', '论坛讲座'] },
+      { id: 'cs2', title: '医生IP打造', lecturer: '龙承万', isFree: false, organization: '中国整形美容协会美容医学教育与管理分会专委会', img: '', tags: ['系列课'] }
     ]
   },
 
@@ -47,8 +74,31 @@ Page({
     this.setData({
       statusBarHeight: sys.statusBarHeight || 0,
       bannerHeightPx: bannerH,
-      bannerOverlapPx: Math.round(bannerH / 2),
-      headerPadBottomPx: Math.round(bannerH / 2),
+      bannerOverlapPx: Math.round(bannerH / 3),
+      headerPadBottomPx: Math.round(bannerH / 3),
+      navBarHeightPx
+    });
+  },
+  onShow() {
+    // 热编译或从其他页面返回时，重新计算一次，确保样式更新立即生效
+    const sys = wx.getSystemInfoSync();
+    const winW = sys.windowWidth;
+    const rpx2px = winW / 750;
+    const bannerW = winW - 60 * rpx2px;
+    const bannerH = Math.round((bannerW * 9) / 16);
+
+    let navBarHeightPx = this.data.navBarHeightPx || 44;
+    try {
+      const rect = wx.getMenuButtonBoundingClientRect();
+      const gap = Math.max(0, rect.top - (sys.statusBarHeight || 0));
+      navBarHeightPx = Math.round(rect.height + gap * 2);
+    } catch (e) {}
+
+    this.setData({
+      statusBarHeight: sys.statusBarHeight || 0,
+      bannerHeightPx: bannerH,
+      bannerOverlapPx: Math.round(bannerH / 3),
+      headerPadBottomPx: Math.round(bannerH / 3),
       navBarHeightPx
     });
   },
@@ -57,6 +107,13 @@ Page({
   onTapSectionMore(e) {
     const type = e.currentTarget.dataset.type;
     console.log('more:', type);
+    
+    // 跳转到学术动态页面
+    if (type === 'news') {
+      wx.navigateTo({
+        url: '/pages/academic-news/index'
+      });
+    }
   },
   onTapNewsItem(e) {
     const id = e.currentTarget.dataset.id;
@@ -65,6 +122,41 @@ Page({
   onTapConfItem(e) {
     const id = e.currentTarget.dataset.id;
     console.log('conf item:', id);
+  },
+  onTapOrgItem(e) {
+    const id = e.currentTarget.dataset.id;
+    console.log('org item:', id);
+  },
+  onTapContestItem(e) {
+    const id = e.currentTarget.dataset.id;
+    console.log('contest item:', id);
+  },
+
+  // 学术著作项目点击
+  onTapWorkItem(e) {
+    const { id } = e.currentTarget.dataset;
+    console.log('点击学术著作:', id);
+    // TODO: 跳转到学术著作详情页
+  },
+
+  // 学术课程项目点击
+  onTapCourseItem(e) {
+    const { id } = e.currentTarget.dataset;
+    console.log('点击学术课程:', id);
+    // TODO: 跳转到学术课程详情页
+  },
+
+  // 宫格按钮点击
+  onTapGridItem(e) {
+    const type = e.currentTarget.dataset.type;
+    console.log('grid item:', type);
+    
+    // 跳转到学术动态页面
+    if (type === 'news') {
+      wx.navigateTo({
+        url: '/pages/academic-news/index'
+      });
+    }
   },
 
   goBack() {

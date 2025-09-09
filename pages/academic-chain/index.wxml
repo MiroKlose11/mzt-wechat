@@ -45,7 +45,7 @@
 
       <!-- 右侧六个宫格（移除 icon 占位，文本绝对居中） -->
       <view class="right-col">
-        <view class="small-card">
+        <view class="small-card" bindtap="onTapGridItem" data-type="news">
           <text class="small-text">学术动态</text>
         </view>
         <view class="small-card">
@@ -68,24 +68,26 @@
 
     <!-- 学术动态 -->
     <view class="section news-section">
-      <view class="section-head teal">
-         <view class="head-left">
-           <image class="head-icon" src="/images/academic/chat.svg"></image>
-           <text class="head-title">学术动态</text>
+      <view class="news-container card">
+        <view class="section-head teal">
+           <view class="head-left">
+             <image class="head-icon" src="/images/academic/chat.svg"></image>
+             <text class="head-title">学术动态</text>
+           </view>
+          <image class="head-more" src="/images/academic/chevron-right-white.svg" bindtap="onTapSectionMore" data-type="news"></image>
          </view>
-        <image class="head-more" src="/images/academic/chevron-right-white.svg" bindtap="onTapSectionMore" data-type="news"></image>
-       </view>
-      <view class="news-list card">
-        <block wx:for="{{newsList}}" wx:key="id">
-          <view class="news-item" bindtap="onTapNewsItem" data-id="{{item.id}}">
-            <view class="news-text">
-              <text class="news-title">{{item.title}}</text>
-              <text class="news-desc">{{item.summary}}</text>
+        <view class="news-list">
+          <block wx:for="{{newsList}}" wx:key="id">
+            <view class="news-item" bindtap="onTapNewsItem" data-id="{{item.id}}">
+              <view class="news-text">
+                <text class="news-title">{{item.title}}</text>
+                <text class="news-desc">{{item.summary}}</text>
+              </view>
+              <image class="news-thumb" src="{{item.img || '/images/academic/photo-gray.svg'}}"></image>
             </view>
-            <image class="news-thumb" src="{{item.img || '/images/academic/photo-gray.svg'}}"></image>
-          </view>
-          <view class="divider" wx:if="{{index < newsList.length - 1}}"></view>
-        </block>
+            <view class="divider" wx:if="{{index < newsList.length - 1}}"></view>
+          </block>
+        </view>
       </view>
     </view>
 
@@ -131,5 +133,151 @@
          </block>
        </view>
      </view>
+
+    <!-- 学术组织 -->
+    <view class="section org-section">
+      <view class="section-head plain">
+        <view class="head-left">
+          <image class="head-icon" src="/images/academic/group.svg"></image>
+          <text class="head-title">学术组织</text>
+        </view>
+        <image class="head-more" src="/images/academic/chevron-right.svg" bindtap="onTapSectionMore" data-type="org"></image>
+      </view>
+      <view class="org-list">
+        <block wx:for="{{orgList}}" wx:key="id">
+          <view class="org-card" bindtap="onTapOrgItem" data-id="{{item.id}}">
+            <view class="org-left">
+              <view class="org-thumb">
+                <image wx:if="{{item.img}}" class="thumb-img" src="{{item.img}}"></image>
+                <image wx:else class="thumb-icon" src="/images/academic/photo-white.svg"></image>
+              </view>
+            </view>
+            <view class="org-body">
+               <text class="org-title">{{item.title}}</text>
+               <view class="org-meta-row">
+                 <view class="org-meta">
+                   <text class="org-meta-label">学科：</text>
+                   <text class="org-meta-text">{{item.subject}}</text>
+                 </view>
+                 <view class="org-meta">
+                   <text class="org-meta-label">组织类型：</text>
+                   <text class="org-meta-text">{{item.type}}</text>
+                 </view>
+               </view>
+             </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 学术大赛 -->
+    <view class="section contest-section">
+      <view class="section-head plain">
+        <view class="head-left">
+          <image class="head-icon" src="/images/academic/group.svg"></image>
+          <text class="head-title">学术大赛</text>
+        </view>
+        <image class="head-more" src="/images/academic/chevron-right.svg" bindtap="onTapSectionMore" data-type="contest"></image>
+      </view>
+      <view class="contest-list">
+        <block wx:for="{{contestList}}" wx:key="id">
+          <view class="contest-card" bindtap="onTapContestItem" data-id="{{item.id}}">
+            <view class="contest-top">
+              <view class="contest-left">
+                <view class="contest-thumb">
+                  <image wx:if="{{item.img}}" class="thumb-img" src="{{item.img}}"></image>
+                  <image wx:else class="thumb-icon" src="/images/academic/photo-white.svg"></image>
+                </view>
+              </view>
+              <view class="contest-body">
+                <text class="contest-title">{{item.title}}</text>
+                <view class="meta-row">
+                  <view class="meta meta-date">
+                    <image class="meta-icon" src="/images/academic/calendar.svg"></image>
+                    <text class="meta-text">{{item.date}}</text>
+                  </view>
+                  <view class="meta meta-loc">
+                    <image class="meta-icon" src="/images/academic/location.svg"></image>
+                    <text class="meta-text">{{item.location}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="org-row">
+              <text class="org-text">主办单位：{{item.host}}</text>
+              <text class="org-text">承办单位：{{item.organizer}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 学术著作 -->
+    <view class="section works-section">
+      <view class="works-container card">
+        <view class="section-head teal">
+          <view class="head-left">
+            <image class="head-icon" src="/images/academic/chat.svg"></image>
+            <text class="head-title">学术著作</text>
+          </view>
+          <image class="head-more" src="/images/academic/chevron-right-white.svg" bindtap="onTapSectionMore" data-type="works"></image>
+        </view>
+        <view class="works-grid">
+          <block wx:for="{{worksList}}" wx:key="id">
+            <view class="work-card" bindtap="onTapWorkItem" data-id="{{item.id}}">
+              <view class="work-thumb">
+                <image wx:if="{{item.img}}" class="thumb-img" src="{{item.img}}"></image>
+                <image wx:else class="thumb-icon" src="/images/academic/photo-white.svg"></image>
+              </view>
+              <text class="work-title">{{item.title}}</text>
+              <text class="work-author">主编：{{item.author}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 学术课程 -->
+    <view class="section course-section">
+      <view class="course-container card">
+        <view class="section-head teal">
+          <view class="head-left">
+            <image class="head-icon" src="/images/academic/chat.svg"></image>
+            <text class="head-title">学术课程</text>
+          </view>
+          <image class="head-more" src="/images/academic/chevron-right-white.svg" bindtap="onTapSectionMore" data-type="course"></image>
+        </view>
+        <view class="course-list">
+          <block wx:for="{{courseList}}" wx:key="id">
+            <view class="course-item" bindtap="onTapCourseItem" data-id="{{item.id}}">
+              <view class="course-left">
+                <view class="course-thumb">
+                  <image wx:if="{{item.img}}" class="thumb-img" src="{{item.img}}"></image>
+                  <image wx:else class="thumb-icon" src="/images/academic/photo-white.svg"></image>
+                </view>
+              </view>
+              <view class="course-body">
+                <view class="course-body-top">
+                  <text class="course-title">{{item.title}}</text>
+                  <text class="course-lecturer">主讲人：{{item.lecturer}}</text>
+                </view>
+                <view class="course-tags">
+                  <block wx:if="{{item.tags && item.tags.length}}">
+                    <block wx:for="{{item.tags}}" wx:key="*this">
+                      <text class="course-tag course-tag-accent">{{item}}</text>
+                    </block>
+                  </block>
+                  <block wx:elif="{{item.isFree !== undefined}}">
+                    <text class="course-tag {{item.isFree ? 'course-tag-free' : 'course-tag-paid'}}">{{item.isFree ? '免费课' : '付费课'}}</text>
+                  </block>
+                </view>
+              </view>
+              <view class="course-inner-divider"></view>
+              <text class="course-org">{{item.organization}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
   </view>
 </view>
