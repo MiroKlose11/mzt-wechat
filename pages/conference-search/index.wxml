@@ -1,0 +1,154 @@
+<view class="conference-search-page">
+  <!-- 顶部头部区域（蓝色背景到轮播图中间） -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px; padding-bottom: {{headerPadBottomPx}}px;">
+    <view class="nav" style="height: {{navBarHeightPx}}px;">
+      <view class="nav-left" bindtap="goBack" hover-class="none" hover-stop-propagation="true">
+        <image class="back-icon" src="/images/nav/back.png"></image>
+      </view>
+      <view class="nav-title">会议检索</view>
+      <view class="nav-right">
+        <image class="more-icon" src="/images/nav/more.png"></image>
+        <image class="share-icon" src="/images/nav/share.png"></image>
+      </view>
+    </view>
+
+    <!-- 搜索框 -->
+    <view class="search-bar">
+      <image class="search-icon" src="/images/search-icon.svg"></image>
+      <input class="search-input" placeholder="请输入内容查找" placeholder-class="ph" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearchConfirm"/>
+    </view>
+  </view>
+
+  <!-- 内容区（灰底） -->
+  <view class="content">
+    <!-- 16:9 Banner，向上重叠一半，让蓝色恰好到中线 -->
+    <view class="banner-wrapper" style="height: {{bannerHeightPx}}px; margin-top: -{{bannerOverlapPx}}px;">
+      <view class="banner">
+        <text class="banner-text">Banner</text>
+        <view class="banner-dots">
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 主要内容区域 -->
+    <view class="main-content">
+      <!-- 左侧分类导航 -->
+      <view class="category-nav">
+      <view class="nav-item {{currentCategory === 'medical' ? 'active' : ''}}" bindtap="switchCategory" data-category="medical">
+        <text class="nav-text">医生集团</text>
+      </view>
+      <view class="nav-item {{currentCategory === 'surgery' ? 'active' : ''}}" bindtap="switchCategory" data-category="surgery">
+        <text class="nav-text">美容外科</text>
+      </view>
+      <view class="nav-item {{currentCategory === 'dermatology' ? 'active' : ''}}" bindtap="switchCategory" data-category="dermatology">
+        <text class="nav-text">美容皮肤科</text>
+      </view>
+      <view class="nav-item {{currentCategory === 'oral' ? 'active' : ''}}" bindtap="switchCategory" data-category="oral">
+        <text class="nav-text">美容口腔科</text>
+      </view>
+      <view class="nav-item {{currentCategory === 'tcm' ? 'active' : ''}}" bindtap="switchCategory" data-category="tcm">
+        <text class="nav-text">美容中医科</text>
+      </view>
+      <view class="nav-item {{currentCategory === 'management' ? 'active' : ''}}" bindtap="switchCategory" data-category="management">
+        <text class="nav-text">运营管理</text>
+      </view>
+      <view class="nav-item {{currentCategory === 'calendar' ? 'active' : ''}}" bindtap="switchCategory" data-category="calendar">
+        <text class="nav-text">会议日历</text>
+      </view>
+      <view class="nav-item {{currentCategory === 'international' ? 'active' : ''}}" bindtap="switchCategory" data-category="international">
+        <text class="nav-text">国际交流</text>
+      </view>
+    </view>
+
+    <!-- 右侧内容区域 -->
+    <view class="content-area">
+      <!-- 专业领域 -->
+      <view class="section" wx:if="{{currentCategory === 'medical' || currentCategory === 'surgery' || currentCategory === 'dermatology' || currentCategory === 'oral' || currentCategory === 'tcm'}}">
+        <view class="section-title">专业领域</view>
+        <view class="tag-grid">
+          <view class="tag-item {{selectedTags.includes('all') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="all">
+            <text class="tag-text">全部</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('nose') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="nose">
+            <text class="tag-text">鼻整形</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('fat') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="fat">
+            <text class="tag-text">脂肪整形</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('breast') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="breast">
+            <text class="tag-text">乳房整形</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('eye') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="eye">
+            <text class="tag-text">眼整形</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('private') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="private">
+            <text class="tag-text">私密整形</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('jaw') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="jaw">
+            <text class="tag-text">颌面整形</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('anti-aging') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="anti-aging">
+            <text class="tag-text">抗衰老</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('regenerative') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="regenerative">
+            <text class="tag-text">再生医学</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('tag2') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="tag2">
+            <text class="tag-text">标签2</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('tag3') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="tag3">
+            <text class="tag-text">标签3</text>
+          </view>
+          <view class="tag-item {{selectedTags.includes('tag4') ? 'selected' : ''}}" bindtap="toggleTag" data-tag="tag4">
+            <text class="tag-text">标签4</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 会议地区 -->
+      <view class="section">
+        <view class="section-title">会议地区</view>
+        <view class="tag-grid">
+          <view class="tag-item {{selectedRegions.includes('all') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="all">
+            <text class="tag-text">全部</text>
+          </view>
+          <view class="tag-item {{selectedRegions.includes('beijing') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="beijing">
+            <text class="tag-text">北京</text>
+          </view>
+          <view class="tag-item {{selectedRegions.includes('shanghai') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="shanghai">
+            <text class="tag-text">上海</text>
+          </view>
+          <view class="tag-item {{selectedRegions.includes('guangzhou') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="guangzhou">
+            <text class="tag-text">广州</text>
+          </view>
+          <view class="tag-item {{selectedRegions.includes('hangzhou') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="hangzhou">
+            <text class="tag-text">杭州</text>
+          </view>
+          <view class="tag-item {{selectedRegions.includes('chengdu') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="chengdu">
+            <text class="tag-text">成都</text>
+          </view>
+          <view class="tag-item {{selectedRegions.includes('wuhan') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="wuhan">
+            <text class="tag-text">武汉</text>
+          </view>
+          <view class="tag-item {{selectedRegions.includes('nanjing') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="nanjing">
+            <text class="tag-text">南京</text>
+          </view>
+          <view class="tag-item {{selectedRegions.includes('changsha') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="changsha">
+            <text class="tag-text">长沙</text>
+          </view>
+          <view class="tag-item {{selectedRegions.includes('tag2') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="tag2">
+            <text class="tag-text">标签2</text>
+          </view>
+          <view class="tag-item {{selectedRegions.includes('tag3') ? 'selected' : ''}}" bindtap="toggleRegion" data-region="tag3">
+            <text class="tag-text">标签3</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    </view>
+  </view>
+</view>

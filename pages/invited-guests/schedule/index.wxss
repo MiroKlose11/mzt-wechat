@@ -1,0 +1,67 @@
+.page { background: #e9e6fb; min-height: 100vh; overflow-x: hidden; }
+.hero-bg {
+  height: 220rpx;
+  background: #ffffff;
+}
+
+/* 导航 */
+.nav-bar { background: #4b99ff; }
+.nav-inner {
+  height: 88rpx; display: flex; align-items: center; justify-content: center;
+  padding: 0 30rpx; position: relative;
+}
+.back-wrap { position: absolute; left: 24rpx; top: 0; bottom: 0; display: flex; align-items: center; }
+.back-icon { width: 40rpx; height: 40rpx; filter: brightness(0) invert(1); }
+.nav-title { color: #fff; font-size: 32rpx; font-weight: 600; text-align: center; }
+
+/* 灰色顶部圆角帽（露在白色底下） */
+.grey-cap {
+  height: 40rpx;
+  background: #e9e6fb;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
+  margin-top: -20rpx; /* 让灰色圆角与白色区域重叠，圆角显露 */
+}
+
+/* 顶部嘉宾卡 */
+.guest-top {
+  margin: 20rpx; margin-top: -220rpx;
+  background: transparent; border-radius: 44rpx;
+  padding: 26rpx 24rpx; display: flex; flex-direction: column; align-items: center; gap: 16rpx;
+  position: relative;
+  box-shadow: none;
+}
+.top-avatar { width: 200rpx; height: 200rpx; border-radius: 50%; background: #d8d8d8; }
+.top-info { flex: none; text-align: center; }
+.top-name { font-size: 36rpx; font-weight: 900; color: #111; line-height: 48rpx; text-align: center; }
+.top-desc { font-size: 26rpx; color: #666; line-height: 38rpx; text-align: center; }
+.top-btn {
+  position: absolute; right: 24rpx; top: 64rpx;
+  background: linear-gradient(90deg,#ff7b7b,#ff4b4b); color: #fff; font-size: 26rpx; font-weight: 700;
+  padding: 10rpx 42rpx; border-radius: 34rpx;
+  box-shadow: 0 6rpx 12rpx rgba(255,75,75,0.28);
+}
+
+/* 列表滚动区 */
+.schedule-scroll { padding: 0 20rpx 24rpx; box-sizing: border-box; }
+
+/* 学术安排卡 */
+.schedule-card {
+  background: #fff; border-radius: 26rpx; padding: 18rpx; margin: 14rpx 0;
+  border: 1rpx solid #e7e6fb;
+  box-shadow: 0 6rpx 12rpx rgba(75,153,255,0.10);
+  overflow: hidden; box-sizing: border-box; width: 100%;
+}
+.row { display: flex; align-items: center; }
+.time-row {
+  display: inline-flex; max-width: 100%;
+  background: #f6f8ff; border-radius: 22rpx; padding: 10rpx 16rpx; gap: 10rpx;
+  justify-content: flex-start; border: 1rpx solid #dcdcf7;
+}
+.clock { margin-right: 8rpx; }
+.date { color: #2f6cff; font-size: 26rpx; font-weight: 900; }
+.time { color: #2f6cff; font-size: 26rpx; font-weight: 900; margin-left: 12rpx; }
+
+.title { margin-top: 14rpx; color: #222; font-size: 30rpx; font-weight: 800; line-height: 42rpx; }
+.meta { margin-top: 10rpx; color: #a8aec2; font-size: 22rpx; line-height: 32rpx; display: flex; align-items: center; }
+.sep { margin: 0 8rpx; color: #c9cbd2; }

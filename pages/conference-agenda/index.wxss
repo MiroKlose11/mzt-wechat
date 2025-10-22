@@ -1,0 +1,369 @@
+.page {
+  background: #f2f3f8;
+  min-height: 100vh;
+}
+
+/* 自定义导航 */
+.nav-bar {
+  background: #4b99ff;
+}
+.nav-inner {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 标题居中 */
+  padding: 0 30rpx;
+  position: relative;
+}
+.back-wrap {
+  position: absolute;
+  left: 24rpx;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+.back-icon {
+  width: 40rpx;
+  height: 40rpx;
+  filter: brightness(0) invert(1); /* 与会议详情页一致的白色图标效果 */
+}
+.nav-title {
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* 搜索框 */
+.search-section {
+  padding: 20rpx 24rpx 16rpx;
+  background: #4b99ff;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 40rpx;
+  padding: 12rpx 20rpx;
+}
+.search-input {
+  flex: 1;
+  padding: 8rpx 12rpx;
+  font-size: 26rpx;
+}
+.search-btn {
+  width: 48rpx;
+  text-align: right;
+  color: #4b99ff;
+  font-size: 28rpx;
+}
+
+/* 顶部日期标签 */
+.date-tabs {
+  background: #f2f3f8;
+  padding: 8rpx 0 16rpx;
+}
+.date-tabs-inner {
+  display: flex;
+  align-items: stretch;
+  padding: 0 16rpx;
+}
+.date-tab {
+  width: 120rpx;
+  background: #e9f0ff;
+  border-radius: 12rpx;
+  margin-right: 12rpx;
+  text-align: center;
+  padding: 12rpx 0;
+  color: #4b99ff;
+}
+.date-tab .date-top {
+  font-weight: 700;
+  font-size: 26rpx;
+}
+.date-tab .date-bottom {
+  font-size: 22rpx;
+}
+.date-tab.active {
+  background: #4b99ff;
+  color: #fff;
+}
+
+/* 主体布局 */
+.content {
+  display: flex;
+  padding: 0 16rpx 24rpx;
+  box-sizing: border-box;
+}
+
+/* 左侧会场竖向标签 */
+.venue-sider {
+  width: 170rpx;
+  height: calc(100vh - 320rpx);
+  background: #fff;
+  border-radius: 12rpx 0 0 12rpx;
+  overflow: hidden;
+}
+.venue-tab {
+  height: 120rpx;
+  padding: 0 12rpx;
+  border-left: 8rpx solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* 水平居中 */
+  justify-content: center;   /* 垂直居中 */
+  color: #666;
+  background: #fff;
+  text-align: center;
+}
+.venue-tab + .venue-tab {
+  border-top: 1rpx solid #f2f2f2;
+}
+.venue-floor {
+  font-size: 22rpx;
+  line-height: 30rpx;
+}
+.venue-name {
+  font-size: 24rpx;
+  line-height: 34rpx;
+  font-weight: 600;
+}
+.venue-tab.active {
+  background: #e6f5eb;
+  border-left-color: #20c05c;
+  color: #20c05c;
+}
+
+/* 右侧议程列表 */
+.agenda-list {
+  flex: 1;
+  height: calc(100vh - 320rpx);
+  padding-left: 16rpx;
+}
+.agenda-list.full {
+  padding-left: 0;
+  height: auto; /* 内容不足时不滚动 */
+}
+.empty {
+  text-align: center;
+  color: #999;
+  margin-top: 60rpx;
+  font-size: 26rpx;
+}
+
+/* 议程卡片 */
+.agenda-card {
+  position: relative;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 8rpx 20rpx rgba(75,153,255,0.18);
+}
+.agenda-time {
+  display: inline-flex;
+  align-items: center;
+  color: #5b67ff;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+.clock {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 8rpx;
+  font-size: 28rpx;
+}
+.time-text {
+  font-size: 28rpx;
+}
+.agenda-title {
+  color: #333;
+  font-size: 26rpx;
+  line-height: 40rpx;
+  padding-right: 56rpx; /* 预留箭头位置 */
+}
+.arrow {
+  position: absolute;
+  right: 20rpx;
+  top: 24rpx;
+  width: 40rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 40rpx;
+  color: #333;
+  font-size: 28rpx;
+}
+
+/* —— 详情视图 —— */
+.detail-header {
+  background: transparent;
+  padding: 0 0 18rpx;
+  margin-bottom: 10rpx;
+}
+.detail-title {
+  color: #ffffff;
+  background: #4b99ff;
+  border-radius: 60rpx;
+  padding: 18rpx 24rpx;
+  text-align: center;
+  font-weight: 800;
+  margin: 0 16rpx 16rpx;
+  box-shadow: 0 10rpx 22rpx rgba(75,153,255,.35);
+}
+.detail-badges {
+  display: flex;
+  justify-content: space-between;
+  gap: 12rpx;
+  padding: 0 16rpx;
+}
+.detail-badge {
+  flex: 1;
+  background: #ffffff;
+  color: #4b99ff;
+  border-radius: 999rpx;
+  text-align: center;
+  padding: 12rpx 0;
+  font-size: 24rpx;
+  box-shadow: 0 8rpx 18rpx rgba(75,153,255,0.12);
+  border: 1rpx solid #eaf2ff;
+}
+
+/* 胶囊头部（标题 + 信息条） */
+.capsule {
+  margin: 24rpx 16rpx 16rpx; /* 增大与标题的间距 */
+  border-radius: 60rpx;
+  background: #4b99ff;
+  box-shadow: 0 12rpx 24rpx rgba(75,153,255,0.28);
+  overflow: hidden;
+}
+.capsule-title {
+  color: #fff;
+  font-weight: 900;
+  font-size: 28rpx;
+  text-align: center;
+  padding: 18rpx 24rpx 16rpx;
+}
+.capsule-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+  background: #eef3ff;
+  color: #4b99ff;
+  padding: 12rpx 24rpx;
+  font-size: 24rpx;
+  box-shadow: inset 0 6rpx 12rpx rgba(0,0,0,0.04);
+}
+.capsule-info-item { flex: 1; text-align: center; }
+.capsule-sep { flex: none; color: #b7c7ff; }
+
+/* 时间轴 */
+.timeline {
+  position: relative;
+  padding-left: 0; /* 去掉左侧缩进，使卡片居中 */
+}
+/* 时间行：左对齐绿点与时间，且与卡片内容左缘对齐 */
+.time-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16rpx;
+  width: calc(100% - 32rpx);     /* 与 .timeline-card 相同宽度 */
+  margin: 0 auto 10rpx;           /* 与卡片相同居中方式 */
+  padding-left: 22rpx;            /* 与 .timeline-card 的内边距对齐 */
+}
+.time-dot {
+  width: 18rpx;
+  height: 18rpx;
+  background: #27ae60;
+  border-radius: 50%;
+  box-shadow: 0 4rpx 8rpx rgba(39,174,96,.25);
+}
+.timeline-item {
+  position: relative;
+  margin: 22rpx 0 30rpx;
+}
+.timeline-line { display: none; } /* 删除绿色虚线 */
+.timeline-dot { display: none; }
+.timeline-card {
+  background: #fff;
+  border-radius: 18rpx;
+  padding: 22rpx;
+  box-shadow: 0 10rpx 22rpx rgba(75,153,255,0.15);
+  border: 1rpx solid #eef2ff;
+  width: calc(100% - 32rpx);   /* 居中显示，左右留边 */
+  margin: 0 auto;
+  position: relative;
+}
+.tl-time {
+  color: #4b6bff;
+  font-weight: 900;
+  font-size: 28rpx;
+  margin: 0; /* 居中行，无需左缩进 */
+}
+.tl-title {
+  color: #333;
+  font-size: 26rpx;
+  margin-bottom: 12rpx;
+}
+.tl-speaker {
+  display: flex;
+  gap: 14rpx;
+  align-items: center;
+  padding-top: 12rpx;
+  border-top: 1rpx solid #eef0f6;
+}
+.tl-avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: #f2f2f2;
+}
+.tl-info .tl-name {
+  font-weight: 900;
+  font-size: 26rpx;
+}
+.tl-info .tl-desc {
+  color: #6b6f7a;
+  font-size: 22rpx;
+}
+
+/* 主持人样式（按图二：整块白底等宽、无卡片阴影/圆角） */
+.host-section {
+  background: #fff;
+  width: calc(100% + 32rpx);
+  position: relative;
+  left: -16rpx;
+  box-sizing: border-box;
+  padding: 24rpx 30rpx;
+  margin: 0 0 16rpx;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+.host-title {
+  display: flex;
+  align-items: center;      /* 垂直居中 */
+  gap: 12rpx;
+  margin-bottom: 20rpx;
+  font-weight: 900;
+  font-size: 34rpx;         /* 更大 */
+  line-height: 46rpx;       /* 行距更大 */
+  color: #111;
+}
+.host-bar { width: 8rpx; height: 46rpx; background: #2d8bdc; border-radius: 8rpx; }
+.host-card {
+  display: flex;
+  gap: 20rpx;
+  align-items: center;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  border: none;
+}
+.host-avatar { width: 96rpx; height: 96rpx; border-radius: 50%; background: #f2f2f2; }
+.host-name { font-weight: 900; font-size: 36rpx; color: #111; }
+.host-desc { color: #6b6f7a; font-size: 26rpx; }
+.host-title text { padding-left: 10rpx; }

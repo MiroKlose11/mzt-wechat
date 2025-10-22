@@ -48,7 +48,7 @@
         <view class="small-card" bindtap="onTapGridItem" data-type="news">
           <text class="small-text">学术动态</text>
         </view>
-        <view class="small-card">
+        <view class="small-card" bindtap="onTapGridItem" data-type="conference">
           <text class="small-text">学术会议</text>
         </view>
         <view class="small-card">

@@ -1,0 +1,57 @@
+<view class="page">
+  <!-- 自定义导航 -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-inner">
+      <view class="back-wrap" bindtap="goBack" hover-class="none" hover-stop-propagation="true">
+        <image class="back-icon" src="/images/nav/back.png"></image>
+      </view>
+      <view class="nav-title">特邀嘉宾</view>
+    </view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-section">
+    <view class="search-bar">
+      <icon type="search" size="16" color="#999999"></icon>
+      <input class="search-input" placeholder="搜索" confirm-type="search" value="{{keyword}}" bindinput="onKeywordInput" bindconfirm="doSearch" />
+    </view>
+  </view>
+
+  <!-- 内容 -->
+  <view class="content">
+    <scroll-view class="guest-scroll" scroll-y scroll-into-view="{{currentAnchor}}">
+      <block wx:for="{{sections}}" wx:key="letter">
+        <!-- 分组头 -->
+        <view class="group-header" id="sec-{{item.letter}}">
+          <text class="group-tag">{{item.letter}}</text>
+        </view>
+
+        <!-- 列表卡片 -->
+        <block wx:for="{{item.items}}" wx:key="id">
+          <view class="guest-card" bindtap="openGuest" data-id="{{item.id}}">
+            <image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+            <view class="info">
+              <view class="name">{{item.name}}</view>
+              <view class="desc">{{item.desc}}</view>
+            </view>
+            <view class="arrange" catchtap="openSchedule" data-id="{{item.id}}">
+              学术安排
+              <text class="chev">›</text>
+            </view>
+          </view>
+        </block>
+      </block>
+
+      <block wx:if="{{sections.length===0}}">
+        <view class="empty">暂无嘉宾</view>
+      </block>
+    </scroll-view>
+
+    <!-- 右侧字母索引 -->
+    <view class="alpha-index">
+      <block wx:for="{{alpha}}" wx:key="*this">
+        <view class="alpha-item {{availableLetters[item] ? (selectedLetter===item ? 'selected' : '') : 'disabled'}}" data-letter="{{item}}" bindtap="tapAlpha">{{item}}</view>
+      </block>
+    </view>
+  </view>
+</view>

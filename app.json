@@ -1,5 +1,9 @@
 {
   "pages": [
+    "pages/invited-guests/index",
+    "pages/invited-guests/schedule/index",
+    "pages/conference-agenda/index",
+    "pages/conference-detail/index",
     "pages/login/login",
     "pages/register/register",
     "pages/forgot-password/forgot-password",
@@ -16,7 +20,9 @@
     "pages/subject/subject",
     "pages/position-rank/position-rank",
     "pages/academic-chain/index",
-    "pages/academic-news/index"
+    "pages/academic-news/index",
+    "pages/academic-conference/index",
+    "pages/conference-search/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -113,6 +113,11 @@ Page({
       wx.navigateTo({
         url: '/pages/academic-news/index'
       });
+    } else if (type === 'conf') {
+      // 跳转到学术会议列表
+      wx.navigateTo({
+        url: '/pages/academic-conference/index'
+      });
     }
   },
   onTapNewsItem(e) {
@@ -122,6 +127,10 @@ Page({
   onTapConfItem(e) {
     const id = e.currentTarget.dataset.id;
     console.log('conf item:', id);
+    // 跳转到学术会议列表（暂无详情页，先进入列表，可根据 id 做预选）
+    wx.navigateTo({
+      url: `/pages/academic-conference/index?from=academic&id=${id}`
+    });
   },
   onTapOrgItem(e) {
     const id = e.currentTarget.dataset.id;
@@ -155,6 +164,11 @@ Page({
     if (type === 'news') {
       wx.navigateTo({
         url: '/pages/academic-news/index'
+      });
+    } else if (type === 'conference') {
+      // 跳转到学术会议列表
+      wx.navigateTo({
+        url: '/pages/academic-conference/index'
       });
     }
   },

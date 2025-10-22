@@ -1,0 +1,121 @@
+<view class="page">
+  <!-- 自定义导航 -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-inner">
+      <view class="back-wrap" bindtap="goBack" hover-class="none" hover-stop-propagation="true">
+        <image class="back-icon" src="/images/nav/back.png"></image>
+      </view>
+      <view class="nav-title">鲁脂道第三届年会</view>
+    </view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-section" wx:if="{{!showDetail}}">
+    <view class="search-bar">
+      <icon type="search" size="16" color="#999999"></icon>
+      <input class="search-input" placeholder="搜索" confirm-type="search" value="{{keyword}}" bindinput="onKeywordInput" bindconfirm="doSearch" />
+      <view class="search-btn" bindtap="doSearch">🔍</view>
+    </view>
+  </view>
+
+  <!-- 顶部横向日期标签 -->
+  <scroll-view class="date-tabs" scroll-x enhanced show-scrollbar="{{false}}" wx:if="{{!showDetail}}">
+    <view class="date-tabs-inner">
+      <block wx:for="{{dates}}" wx:key="id">
+        <view class="date-tab {{item.id===activeDateId?'active':''}}" data-id="{{item.id}}" bindtap="onTapDate">
+          <view class="date-top">{{item.mmdd}}</view>
+          <view class="date-bottom">{{item.week}}</view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <view class="content">
+    <!-- 左侧会场纵向标签 -->
+    <scroll-view class="venue-sider" scroll-y wx:if="{{!showDetail}}">
+      <block wx:for="{{venues}}" wx:key="id">
+        <view class="venue-tab {{item.id===activeVenueId?'active':''}}" data-id="{{item.id}}" bindtap="onTapVenue">
+          <view class="venue-floor">{{item.floor}}</view>
+          <view class="venue-name">{{item.name}}</view>
+        </view>
+      </block>
+    </scroll-view>
+
+    <!-- 右侧：列表/详情 视图切换 -->
+    <scroll-view class="agenda-list {{showDetail ? 'full' : ''}}" scroll-y="{{(!showDetail && filteredSessions.length > 0) || (showDetail && sessionDetail.nodes.length > 3)}}">
+      <!-- 列表视图 -->
+      <block wx:if="{{!showDetail}}">
+        <block wx:if="{{filteredSessions.length===0}}">
+          <view class="empty">暂无日程</view>
+        </block>
+        <block wx:for="{{filteredSessions}}" wx:key="id">
+          <view class="agenda-card" bindtap="openSession" data-id="{{item.id}}">
+            <view class="agenda-time">
+              <view class="clock">⏰</view>
+              <text class="time-text">{{item.time}}</text>
+            </view>
+            <view class="agenda-title">{{item.title}}</view>
+            <view class="arrow">➔</view>
+          </view>
+        </block>
+      </block>
+
+      <!-- 详情视图（时间轴） -->
+      <block wx:if="{{showDetail}}">
+        <!-- 顶部信息胶囊（标题 + 同胶囊内信息条） -->
+        <view class="capsule">
+          <view class="capsule-title">{{sessionDetail.title}}</view>
+          <view class="capsule-info">
+            <text class="capsule-info-item">{{sessionDetail.date}}</text>
+            <text class="capsule-sep">｜</text>
+            <text class="capsule-info-item">{{sessionDetail.time}}</text>
+            <text class="capsule-sep">｜</text>
+            <text class="capsule-info-item">{{sessionDetail.venue}}</text>
+          </view>
+        </view>
+
+        <!-- 主持人（可选显示） -->
+        <block wx:if="{{sessionDetail.host}}">
+          <view class="host-section">
+            <view class="host-title">
+              <view class="host-bar"></view>
+              <text>开幕式主持人</text>
+            </view>
+            <view class="host-card">
+              <image class="host-avatar" src="{{sessionDetail.host.avatar}}" mode="aspectFill"></image>
+              <view class="host-info">
+                <view class="host-name">{{sessionDetail.host.name}}</view>
+                <view class="host-desc">{{sessionDetail.host.desc}}</view>
+              </view>
+            </view>
+          </view>
+        </block>
+
+        <!-- 时间轴 -->
+        <view class="timeline">
+          <block wx:for="{{sessionDetail.nodes}}" wx:key="time">
+            <view class="timeline-item">
+              <view class="timeline-line"></view>
+              <view class="time-row">
+                <view class="time-dot"></view>
+                <text class="tl-time">{{item.time}}</text>
+              </view>
+              <view class="timeline-card">
+                <view class="tl-title">{{item.title}}</view>
+                <block wx:if="{{item.speaker}}">
+                  <view class="tl-speaker">
+                    <image class="tl-avatar" src="{{item.speaker.avatar}}" mode="aspectFill"></image>
+                    <view class="tl-info">
+                      <view class="tl-name">{{item.speaker.name}}</view>
+                      <view class="tl-desc">{{item.speaker.desc}}</view>
+                    </view>
+                  </view>
+                </block>
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>

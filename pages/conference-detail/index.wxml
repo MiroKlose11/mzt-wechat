@@ -1,0 +1,163 @@
+<view class="conference-detail-page">
+  <!-- 顶部头部区域（蓝色背景到轮播图中间） -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px; padding-bottom: {{headerPadBottomPx}}px;">
+    <view class="nav" style="height: {{navBarHeightPx}}px;">
+      <view class="nav-left" bindtap="goBack" hover-class="none" hover-stop-propagation="true">
+        <image class="back-icon" src="/images/nav/back.png"></image>
+      </view>
+
+
+      <view class="nav-title">{{title}}</view>
+      <view class="nav-right">
+        <image class="more-icon" src="/images/nav/more.png" bindtap="onMore"></image>
+        <image class="share-icon" src="/images/nav/share.png" bindtap="onShare"></image>
+      </view>
+    </view>
+
+
+  </view>
+
+  <!-- 内容区（灰底） -->
+  <view class="content">
+    <!-- 16:9 Banner，向上重叠一半，让蓝色恰好到中线 -->
+    <view class="banner-wrapper" style="height: {{bannerHeightPx}}px; margin-top: -{{bannerOverlapPx}}px;">
+      <view class="banner">
+        <text class="banner-text">Banner</text>
+        <view class="banner-dots">
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 顶部操作按钮（4个） -->
+    <view class="action-row">
+      <view class="pill-btn" bindtap="onAction" data-type="register">参会报名</view>
+      <view class="pill-btn" bindtap="onAction" data-type="exhibit">我要参展</view>
+      <view class="pill-btn" bindtap="onAction" data-type="speech">演讲报名</view>
+      <view class="pill-btn" bindtap="onAction" data-type="sign">大会签到</view>
+    </view>
+
+
+    <!-- 大会主题卡片（仅在 showIntro 为 true 时显示） -->
+    <block wx:if="{{showIntro}}">
+      <view class="theme-section">
+        <view class="theme-card">
+          <view class="theme-badge-wrap">
+            <view class="theme-badge">大会主题</view>
+          </view>
+
+          <view class="theme-list">
+            <view class="theme-item">放眼国际医美领域</view>
+            <view class="theme-item">预测行业发展趋势</view>
+            <view class="theme-item">传承学术核心价值</view>
+            <view class="theme-item">展示前沿医美技术</view>
+            <view class="theme-item">推进管理改革升级</view>
+            <view class="theme-item">助力人才职业发展</view>
+            <view class="theme-item">创新产业发展模式</view>
+            <view class="theme-item">共建医美智慧未来</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 组织机构 -->
+      <view class="theme-section">
+        <view class="theme-card">
+          <view class="theme-badge-wrap">
+            <view class="theme-badge">组织机构</view>
+          </view>
+          <view class="module-body">
+            <view class="module-row">
+              <text class="module-label">主办单位：</text>
+              <text class="module-value">鲁脂道医生集团</text>
+            </view>
+            <view class="module-row">
+              <text class="module-label">协办单位：</text>
+              <text class="module-value">中国整形美容协会</text>
+            </view>
+            <view class="module-row">
+              <text class="module-label">承办单位：</text>
+              <text class="module-value">西安高一生医疗美容医院</text>
+            </view>
+            <view class="module-row">
+              <text class="module-label"></text>
+              <text class="module-value">西安米兰巷羽医疗美容医院</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 时间地点 -->
+      <view class="theme-section">
+        <view class="theme-card">
+          <view class="theme-badge-wrap">
+            <view class="theme-badge">时间地点</view>
+          </view>
+          <view class="module-body">
+            <view class="module-row">
+              <text class="module-label">时间：</text>
+              <text class="module-value">2025年8月15—17日</text>
+            </view>
+            <view class="module-row">
+              <text class="module-label">地点：</text>
+              <text class="module-value">中国·西安国际会展中心</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 简要议程 -->
+      <view class="theme-section">
+        <view class="theme-card">
+          <view class="theme-badge-wrap">
+            <view class="theme-badge">简要议程</view>
+          </view>
+          <view class="module-body">
+            <view class="module-row">
+              <text class="module-label">时间：</text>
+              <text class="module-value">2025年8月15—17日</text>
+            </view>
+            <view class="module-row">
+              <text class="module-label">地点：</text>
+              <text class="module-value">中国·西安国际会展中心</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 大会简介 -->
+      <view class="theme-section">
+        <view class="theme-card">
+          <view class="theme-badge-wrap">
+            <view class="theme-badge">大会简介</view>
+          </view>
+
+          <view class="module-body intro-text">
+            <text class="paragraph">美沃斯国际医学美容大会遵循“研究探讨思考团结交流进步”的指导思想，立足“国际化、全产业链、跨界”的总体定位，以继承、创新、传承行业优秀文化为宗旨，汇集海内外知名医美学术管理领袖，探讨国际技术与学术前沿科学进展，研究行业权威领域的优秀医生成功思维模式，传播世界管理与创新互联先进思想，呈全面覆盖客户学研、集学术、技术、艺术、管理、时间、文化于一身的综合性医学美容产业大会。</text>
+            <text class="paragraph">大会致力于研究和发现全球医学美容领域的产品、技术、从业人员、行业等全方位的发展走向预测和发布未来发展趋势。一方面，展示整形美容、皮肤病与皮肤光电美容、注射与线雕美容、私密美容、口腔美容、毛发、甲皮美容、抗衰老疗法等热门门类的国际前沿学术理论和最新技术；</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 功能九宫格 / 大会简介内容（切换显示） -->
+    <block wx:if="{{!showIntro}}">
+      <view class="grid">
+        <block wx:for="{{gridList}}" wx:key="type">
+          <view class="grid-item" bindtap="onGridTap" data-type="{{item.type}}">
+            <image class="grid-icon" src="{{item.icon}}" mode="aspectFit"></image>
+            <view class="grid-texts">
+              <text class="grid-title">{{item.title}}</text>
+              <text class="grid-sub">{{item.sub}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+
+
+
+
+  </view>
+</view>

@@ -1,0 +1,45 @@
+<view class="page">
+  <!-- 自定义导航 -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-inner">
+      <view class="back-wrap" bindtap="goBack" hover-class="none" hover-stop-propagation="true">
+        <image class="back-icon" src="/images/nav/back.png"></image>
+      </view>
+      <view class="nav-title">特邀嘉宾</view>
+    </view>
+  </view>
+
+  <!-- 顶部白色背景 -->
+  <view class="hero-bg"></view>
+  <!-- 下方灰色圆角帽，使灰色顶部圆角露出 -->
+  <view class="grey-cap"></view>
+
+  <!-- 顶部嘉宾信息卡 -->
+  <view class="guest-top">
+    <image class="top-avatar" src="{{guest.avatar}}" mode="aspectFill"></image>
+    <view class="top-info">
+      <view class="top-name">{{guest.name}}</view>
+      <view class="top-desc">{{guest.desc}}</view>
+    </view>
+    <view class="top-btn" bindtap="openHomepage">个人主页</view>
+  </view>
+
+  <!-- 学术安排列表 -->
+  <view class="schedule-scroll">
+    <block wx:for="{{schedules}}" wx:key="id">
+      <view class="schedule-card">
+        <view class="row time-row">
+          <icon class="clock" type="waiting" size="24" color="#ff9f43"></icon>
+          <text class="date">{{item.date}}</text>
+          <text class="time">{{item.time}}</text>
+        </view>
+        <view class="title">{{item.title}}</view>
+        <view class="meta">
+          <text class="place">{{item.place}}</text>
+          <text class="sep">｜</text>
+          <text class="hall">{{item.hall}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

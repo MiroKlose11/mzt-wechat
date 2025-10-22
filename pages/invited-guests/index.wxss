@@ -1,0 +1,66 @@
+ .page { background: #f2f3f8; min-height: 100vh; }
+
+/* 导航 */
+.nav-bar { background: #4b99ff; }
+.nav-inner {
+  height: 88rpx; display: flex; align-items: center; justify-content: center;
+  padding: 0 30rpx; position: relative;
+}
+.back-wrap { position: absolute; left: 24rpx; top: 0; bottom: 0; display: flex; align-items: center; }
+.back-icon { width: 40rpx; height: 40rpx; filter: brightness(0) invert(1); }
+.nav-title { color: #fff; font-size: 32rpx; font-weight: 600; text-align: center; }
+
+/* 搜索 */
+.search-section { padding: 20rpx 24rpx 10rpx; background: #4b99ff; }
+.search-bar {
+  display: flex; align-items: center; background: #fff; border-radius: 40rpx; padding: 12rpx 20rpx;
+}
+.search-input { flex: 1; padding: 8rpx 12rpx; font-size: 26rpx; }
+
+/* 布局 */
+.content { position: relative; padding: 0 80rpx 24rpx 16rpx; }
+.guest-scroll { height: calc(100vh - 240rpx); }
+
+/* 分组头 */
+.group-header { padding: 20rpx 10rpx 12rpx; }
+.group-tag {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 8rpx 16rpx; color: #fff; background: #4b99ff; border-radius: 12rpx;
+  font-size: 28rpx; font-weight: 800; width: 64rpx; text-align: center;
+}
+
+/* 卡片 */
+.guest-card {
+  display: flex; align-items: center; position: relative;
+  background: #fff; border-radius: 20rpx; padding: 28rpx; margin: 20rpx 0;
+  box-shadow: 0 10rpx 22rpx rgba(75,153,255,0.18);
+}
+.avatar { width: 108rpx; height: 108rpx; border-radius: 50%; background: #f0f0f0; flex: none; }
+.info { flex: 1; padding: 0 20rpx; }
+.name { font-size: 32rpx; font-weight: 900; color: #111; line-height: 44rpx; }
+.desc { font-size: 24rpx; color: #6b6f7a; line-height: 34rpx; }
+.arrange {
+  flex: none; color: #b0b7c3; font-size: 24rpx; display: flex; align-items: center; gap: 8rpx;
+}
+.chev { color: #b0b7c3; font-size: 34rpx; line-height: 34rpx; }
+
+/* 空态 */
+.empty { text-align: center; color: #999; margin-top: 60rpx; font-size: 26rpx; }
+
+/* 右侧索引栏 */
+.alpha-index {
+  position: absolute; right: 12rpx; top: 120rpx; bottom: 20rpx;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  width: 44rpx;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.alpha-item {
+  color: #4b99ff; font-size: 28rpx; font-weight: 800;
+  padding: 10rpx 0; width: 44rpx; text-align: center; line-height: 28rpx;
+}
+.alpha-item.selected { color: #2a66e9; }
+.alpha-item.disabled { color: #4b99ff; opacity: 0.45; }
+.alpha-item.disabled { color: #c7cde0; }

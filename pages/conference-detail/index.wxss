@@ -1,0 +1,119 @@
+page { background: linear-gradient(180deg, #2f3b63 0, #2f3b63 200rpx, #2d8bdc 200rpx); }
+ 
+
+
+.conference-detail-page { min-height: 100vh; background: linear-gradient(180deg, #2f3b63 0, #2f3b63 200rpx, #2d8bdc 200rpx); }
+
+/* 头部区域（蓝色） 与项目统一 */
+.header { background: #2f3b63; position: relative; z-index: 1; }
+.content { position: relative; z-index: 2; background: #2d8bdc; border-radius: 32rpx 32rpx 0 0; padding-top: 24rpx; padding-bottom: calc(24rpx + env(safe-area-inset-bottom)); }
+.banner-wrapper { position: relative; z-index: 3; padding: 0 30rpx; }
+
+/* 导航区域 */
+.nav { display: flex; align-items: center; justify-content: center; padding: 0 30rpx; position: relative; }
+.nav-left { position: absolute; left: 30rpx; top: 0; bottom: 0; display: flex; align-items: center; }
+.back-icon { width: 40rpx; height: 40rpx; filter: brightness(0) invert(1); }
+.nav-title { color: #fff; font-size: 34rpx; font-weight: 600; }
+.nav-right { position: absolute; right: 30rpx; top: 0; bottom: 0; display: flex; align-items: center; gap: 20rpx; }
+.more-icon, .share-icon { width: 40rpx; height: 40rpx; }
+
+/* 搜索框已移除 */
+
+/* Banner */
+.banner-wrapper { padding: 0 30rpx; margin-bottom: 24rpx; }
+.banner { width: 100%; height: 100%; background: #f45b6a; border-radius: 24rpx; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 48rpx; font-weight: 600; box-shadow: 0 8rpx 16rpx rgba(228,79,95,.25); position: relative; overflow: hidden; }
+.banner-dots { position: absolute; left: 50%; transform: translateX(-50%); bottom: 10rpx; margin: 0; display: flex; justify-content: center; gap: 14rpx; }
+.banner-dots .dot { width: 28rpx; height: 8rpx; background: rgba(255, 255, 255, 0.85); border-radius: 8rpx; }
+
+/* 顶部操作按钮 */
+.action-row {
+  display: flex;
+  gap: 16rpx;
+  justify-content: space-between;
+  align-items: center;
+  /* 拉通色带背景（更深） */
+  background: #1f66c1;
+  border-radius: 0;
+  /* 拉通：去左右外边距，改为左右内边距与页面对齐 */
+  margin: 0 0 24rpx;
+  padding: 12rpx 30rpx;
+  /* 去卡片化外阴影，仅保留轻微内阴影 */
+  box-shadow: inset 0 -4rpx 8rpx rgba(0,0,0,0.06);
+}
+.pill-btn { background: #eef2f7; border: none; color: #2c3e50; border-radius: 26rpx; padding: 12rpx 22rpx; font-size: 24rpx; box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.18); }
+
+/* —— 大会主题卡片（按图还原） —— */
+.theme-section { padding: 0 30rpx 40rpx; }
+.theme-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 28rpx;
+  box-shadow: 0 24rpx 48rpx rgba(0,0,0,0.22);
+  padding: 0 40rpx 36rpx; /* 顶部与徽章齐平 */
+}
+
+/* 徽章与左右装饰标签 */
+.theme-badge-wrap { position: relative; top: 0; left: auto; right: auto; height: auto; display: flex; justify-content: center; }
+.theme-badge {
+  display: inline-block;
+  padding: 20rpx 92rpx; /* 更宽 */
+  background: linear-gradient(180deg, #FF9F43 0%, #FF6F00 100%);
+  color: #fff;
+  font-size: 32rpx; font-weight: 900;
+  border-radius: 0 0 28rpx 28rpx; /* 下方圆角更小 */
+  box-shadow: 0 12rpx 22rpx rgba(255,111,0,.36);
+  white-space: nowrap;
+  margin: 0 auto 20rpx;
+  z-index: 2;
+}
+/* 左右小标签，模拟截图里的橙色侧耳 */
+.theme-tab { display: none; }
+.theme-tab.left { left: calc(50% - 160rpx); }
+.theme-tab.right { right: calc(50% - 160rpx); }
+
+/* 白色椭圆托底造型，位于徽章下方 */
+.theme-notch { display: none; }
+
+/* 两列主题文案 */
+.theme-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -4rpx; /* 通过负边距抵消子项左右padding，形成约8rpx的中缝 */
+}
+.theme-item {
+  width: 50%;
+  padding: 0 4rpx; /* 控制两列中缝 */
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 30rpx;
+  color: #0f1f3a;
+  font-weight: 900;
+  line-height: 1.8;
+}
+
+/* 功能九宫格 */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20rpx; padding: 0 30rpx 40rpx; }
+.grid-item { background: #fff; border-radius: 0; padding: 20rpx 12rpx; box-shadow: 0 10rpx 24rpx rgba(0,0,0,0.18); display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; aspect-ratio: 1 / 1; overflow: hidden; }
+.grid-icon { width: 80rpx; height: 80rpx; margin-bottom: 24rpx; }
+.grid-texts { display: flex; flex-direction: column; align-items: center; }
+.grid-title { font-size: 28rpx; color: #333; margin-bottom: 6rpx; }
+.grid-sub { font-size: 22rpx; color: #999; }
+
+/* 正方形降级兼容：当不支持 aspect-ratio 时，用等宽高计算保证正方 */
+@supports not (aspect-ratio: 1 / 1) {
+  /* 页面左右内边距 30rpx，共 60rpx；两列间隙 20rpx*2，共 40rpx；三等分 */
+  .grid-item { height: calc((100vw - 60rpx - 40rpx) / 3); }
+}
+
+/* —— 模块正文样式（组织机构/时间地点/简要议程/大会简介） —— */
+.module-body { padding: 8rpx 0 4rpx; }
+.module-row { display: flex; align-items: flex-start; gap: 10rpx; margin-bottom: 12rpx; }
+.module-label { flex: none; min-width: 160rpx; color: #0f1f3a; font-size: 28rpx; font-weight: 900; line-height: 1.9; text-align: left; }
+.module-value { flex: 1; color: #1a2a45; font-size: 28rpx; font-weight: 500; line-height: 1.9; text-align: left; }
+
+/* 简介段落 */
+.intro-text { padding-top: 6rpx; max-width: 600rpx; margin: 0 auto; }
+.intro-text .paragraph { display: block; color: #1a2a45; font-size: 28rpx; line-height: 1.9; text-align: left; margin-bottom: 12rpx; text-indent: 2em; }
+
+
+

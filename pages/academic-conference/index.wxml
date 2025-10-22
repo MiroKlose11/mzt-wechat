@@ -1,0 +1,182 @@
+<view class="conference-page">
+  <!-- 顶部头部区域（蓝色背景到轮播图中间） -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px; padding-bottom: {{headerPadBottomPx}}px;">
+    <view class="nav" style="height: {{navBarHeightPx}}px;">
+      <view class="nav-left" bindtap="goBack" hover-class="none" hover-stop-propagation="true">
+        <image class="back-icon" src="/images/nav/back.png"></image>
+      </view>
+      <view class="nav-title">学术会议</view>
+    </view>
+
+    <!-- 搜索框 -->
+    <view class="search-bar">
+      <image class="search-icon" src="/images/search-icon.svg"></image>
+      <input class="search-input" placeholder="请输入内容查找" placeholder-class="ph" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearchConfirm"/>
+    </view>
+  </view>
+
+  <!-- 内容区（灰底） -->
+  <view class="content">
+    <!-- 16:9 Banner，向上重叠一半，让蓝色恰好到中线 -->
+    <view class="banner-wrapper" style="height: {{bannerHeightPx}}px; margin-top: -{{bannerOverlapPx}}px;">
+      <view class="banner">
+        <text class="banner-text">Banner</text>
+        <view class="banner-dots">
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 快捷模块：美链体 / 学术链 / 会议检索 -->
+    <view class="quick-links">
+      <view class="quick-link" bindtap="onQuickLinkTap" data-type="home"><text class="quick-text">美链体</text></view>
+      <view class="quick-link" bindtap="onQuickLinkTap" data-type="academic"><text class="quick-text">学术链</text></view>
+      <view class="quick-link" bindtap="onQuickLinkTap" data-type="conference"><text class="quick-text">会议检索</text></view>
+    </view>
+
+    <!-- 分类网格 -->
+    <view class="category-grid">
+      <view class="category-row">
+        <view class="category-item" bindtap="onCategoryTap" data-category="超市">
+          <view class="category-icon" style="background-color: #FF4444;">
+            <text class="category-text">超市</text>
+          </view>
+          <text class="category-label">免疫形</text>
+        </view>
+        <view class="category-item" bindtap="onCategoryTap" data-category="数码">
+          <view class="category-icon" style="background-color: #8A2BE2;">
+            <text class="category-text">数码</text>
+          </view>
+          <text class="category-label">脂肪整形</text>
+        </view>
+        <view class="category-item" bindtap="onCategoryTap" data-category="服饰">
+          <view class="category-icon" style="background-color: #FF6B35;">
+            <text class="category-text">服饰</text>
+          </view>
+          <text class="category-label">抗衰美容</text>
+        </view>
+        <view class="category-item" bindtap="onCategoryTap" data-category="生鲜">
+          <view class="category-icon" style="background-color: #4CAF50;">
+            <text class="category-text">生鲜</text>
+          </view>
+          <text class="category-label">私密整形</text>
+        </view>
+        <view class="category-item" bindtap="onCategoryTap" data-category="科学">
+          <view class="category-icon" style="background-color: #00BCD4;">
+            <text class="category-text">科学</text>
+          </view>
+          <text class="category-label">颜面整形</text>
+        </view>
+      </view>
+      <view class="category-row">
+        <view class="category-item" bindtap="onCategoryTap" data-category="整容">
+          <view class="category-icon" style="background-color: #2196F3;">
+            <text class="category-text">整容</text>
+          </view>
+          <text class="category-label">注射美容</text>
+        </view>
+        <view class="category-item" bindtap="onCategoryTap" data-category="其他">
+          <view class="category-icon" style="background-color: #FF9800;">
+            <text class="category-text">其他</text>
+          </view>
+          <text class="category-label">美容牙科</text>
+        </view>
+        <view class="category-item" bindtap="onCategoryTap" data-category="美容">
+          <view class="category-icon" style="background-color: #FFC107;">
+            <text class="category-text">美容</text>
+          </view>
+          <text class="category-label">中医美容</text>
+        </view>
+        <view class="category-item" bindtap="onCategoryTap" data-category="销售">
+          <view class="category-icon" style="background-color: #FF5722;">
+            <text class="category-text">销售</text>
+          </view>
+          <text class="category-label">皮肤美容</text>
+        </view>
+        <view class="category-item" bindtap="onCategoryTap" data-category="会员">
+          <view class="category-icon" style="background-color: #3F51B5;">
+            <text class="category-text">会员</text>
+          </view>
+          <text class="category-label">运营管理</text>
+        </view>
+      </view>
+     </view>
+
+  </view>
+
+  <!-- 最新会议标题 -->
+  <view class="section-header">
+    <view class="section-title-bar"></view>
+    <text class="section-title">最新会议</text>
+  </view>
+
+  <!-- 会议列表 -->
+  <view class="conference-list">
+    <block wx:for="{{conferenceList}}" wx:key="id">
+      <view class="conference-card" bindtap="onConferenceItemTap" data-id="{{item.id}}">
+        <view class="conference-content">
+          <text class="conference-title">{{item.title}}</text>
+          <text class="conference-time">{{item.time}}</text>
+          <text class="conference-location">{{item.location}}</text>
+        </view>
+        <image class="conference-image" src="{{item.image}}" mode="aspectFill"></image>
+      </view>
+    </block>
+  </view>
+
+  <!-- 推荐会议标题 -->
+  <view class="section-header">
+    <view class="section-title-bar"></view>
+    <text class="section-title">推荐会议</text>
+  </view>
+
+  <!-- 推荐会议列表 -->
+  <view class="conference-list">
+    <block wx:for="{{recommendedConferences}}" wx:key="id">
+      <view class="conference-card" bindtap="onConferenceItemTap" data-id="{{item.id}}">
+        <view class="conference-content">
+          <text class="conference-title">{{item.title}}</text>
+          <text class="conference-time">{{item.time}}</text>
+          <text class="conference-location">{{item.location}}</text>
+        </view>
+        <image class="conference-image" src="{{item.image}}" mode="aspectFill"></image>
+      </view>
+    </block>
+  </view>
+
+  <!-- 热门会议标题 -->
+  <view class="section-header">
+    <view class="section-title-bar"></view>
+    <text class="section-title">热门会议</text>
+  </view>
+
+  <!-- 热门会议列表 -->
+  <view class="conference-list">
+    <block wx:for="{{hotConferences}}" wx:key="id">
+      <view class="conference-card" bindtap="onConferenceItemTap" data-id="{{item.id}}">
+        <view class="conference-content">
+          <text class="conference-title">{{item.title}}</text>
+          <text class="conference-time">{{item.time}}</text>
+          <text class="conference-location">{{item.location}}</text>
+        </view>
+        <image class="conference-image" src="{{item.image}}" mode="aspectFill"></image>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部文章列表（样式同会议动态） -->
+  <view class="news-list">
+    <block wx:for="{{conferenceList}}" wx:key="id">
+      <view class="news-card" bindtap="onConferenceItemTap" data-id="{{item.id}}">
+        <view class="news-card__left">
+          <text class="news-card__title">{{item.title}}</text>
+          <text class="news-card__time">{{item.time}}</text>
+        </view>
+        <image class="news-card__thumb" src="{{item.image}}" mode="aspectFill"></image>
+      </view>
+    </block>
+  </view>
+</view>
